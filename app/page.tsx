@@ -5,7 +5,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Users, MapPin, Bus, Award, ArrowRight, Play } from "lucide-react"
-import { motion } from "framer-motion"
+import { motion, easeOut } from "framer-motion"
 import { useEffect, useState } from "react"
 
 export default function HomePage() {
@@ -139,7 +139,7 @@ export default function HomePage() {
       opacity: 1,
       transition: {
         duration: 0.6,
-        ease: "easeOut",
+        ease: easeOut,
       },
     },
   }

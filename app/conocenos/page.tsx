@@ -1,9 +1,17 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import { Card, CardContent } from "@/components/ui/card"
-import { Users, Target, History, Award, Shield, Lightbulb, Leaf } from "lucide-react"
-import { motion } from "framer-motion"
+import Image from "next/image";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  Users,
+  Target,
+  History,
+  Award,
+  Shield,
+  Lightbulb,
+  Leaf,
+} from "lucide-react";
+import { motion, easeOut } from "framer-motion";
 
 export default function ConocenosPage() {
   const values = [
@@ -32,7 +40,7 @@ export default function ConocenosPage() {
       icon: Lightbulb,
       color: "bg-blue-600 dark:bg-blue-500",
     },
-  ]
+  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -42,7 +50,7 @@ export default function ConocenosPage() {
         staggerChildren: 0.1,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
@@ -51,16 +59,21 @@ export default function ConocenosPage() {
       opacity: 1,
       transition: {
         duration: 0.6,
-        ease: "easeOut",
+        ease: easeOut,
       },
     },
-  }
+  };
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
       {/* Hero Section */}
       <section className="relative h-64">
-        <Image src="/placeholder.svg?height=300&width=1200" alt="Conductoras de Tandem" fill className="object-cover" />
+        <Image
+          src="/placeholder.svg?height=300&width=1200"
+          alt="Conductoras de Tandem"
+          fill
+          className="object-cover"
+        />
         <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-700/60 dark:from-gray-900/90 dark:to-blue-900/70" />
       </section>
 
@@ -80,7 +93,9 @@ export default function ConocenosPage() {
             >
               <Users className="w-6 h-6 text-white" />
             </motion.div>
-            <h2 className="text-3xl font-bold text-blue-600 dark:text-blue-400">Quienes Somos</h2>
+            <h2 className="text-3xl font-bold text-blue-600 dark:text-blue-400">
+              Quienes Somos
+            </h2>
           </div>
 
           <motion.p
@@ -89,12 +104,16 @@ export default function ConocenosPage() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}
           >
-            Somos Tandem Industrial, empresa líder en el transporte privado de pasajeros, somos parte del Grupo de
-            Empresas Pullman, con más de 35 años de experiencia en el transporte de personas. Nos sentimos orgullosos de
-            pertenecer y adherir a Pacto Global Chile, estamos comprometidos con el transporte responsable y sustentable
-            impulsando con fuerza la inclusión femenina en la industria del transporte. Nuestro firme compromiso con la
-            electromovilidad nos impulsa a trabajar hacia una flota completamente eléctrica para el año 2030. Además,
-            promovemos activamente la inclusión laboral en todas nuestras operaciones.
+            Somos Tandem Industrial, empresa líder en el transporte privado de
+            pasajeros, somos parte del Grupo de Empresas Pullman, con más de 35
+            años de experiencia en el transporte de personas. Nos sentimos
+            orgullosos de pertenecer y adherir a Pacto Global Chile, estamos
+            comprometidos con el transporte responsable y sustentable impulsando
+            con fuerza la inclusión femenina en la industria del transporte.
+            Nuestro firme compromiso con la electromovilidad nos impulsa a
+            trabajar hacia una flota completamente eléctrica para el año 2030.
+            Además, promovemos activamente la inclusión laboral en todas
+            nuestras operaciones.
           </motion.p>
         </motion.section>
 
@@ -114,7 +133,9 @@ export default function ConocenosPage() {
             >
               <Target className="w-6 h-6 text-white" />
             </motion.div>
-            <h2 className="text-3xl font-bold text-blue-600 dark:text-blue-400">Nuestro Propósito</h2>
+            <h2 className="text-3xl font-bold text-blue-600 dark:text-blue-400">
+              Nuestro Propósito
+            </h2>
           </div>
 
           <motion.div
@@ -123,9 +144,10 @@ export default function ConocenosPage() {
             transition={{ duration: 0.3 }}
           >
             <p className="text-blue-700 dark:text-blue-300 text-center font-medium text-lg leading-relaxed">
-              Proteger la propuesta de valor de nuestros clientes, orientando nuestros esfuerzos en la entrega de un
-              servicio de transporte de excelencia, brindando así una experiencia de viaje de alto estándar centrada en
-              la seguridad de las personas.
+              Proteger la propuesta de valor de nuestros clientes, orientando
+              nuestros esfuerzos en la entrega de un servicio de transporte de
+              excelencia, brindando así una experiencia de viaje de alto
+              estándar centrada en la seguridad de las personas.
             </p>
           </motion.div>
         </motion.section>
@@ -146,7 +168,9 @@ export default function ConocenosPage() {
             >
               <History className="w-6 h-6 text-white" />
             </motion.div>
-            <h2 className="text-3xl font-bold text-blue-600 dark:text-blue-400">Nuestra Historia</h2>
+            <h2 className="text-3xl font-bold text-blue-600 dark:text-blue-400">
+              Nuestra Historia
+            </h2>
           </div>
 
           <motion.p
@@ -156,15 +180,20 @@ export default function ConocenosPage() {
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 0.8 }}
           >
-            Nuestra trayectoria se remonta a 1986 en El Salvador, cuando la división industrial de Pullman Bus formalizó
-            sus operaciones, marcando el inicio de nuestra especialización en servicios de transporte de personal
-            minero. Desde entonces, hemos transportado al personal de las principales compañías de la industria de la
-            minería, manteniendo estas sólidas colaboraciones hasta el día de hoy. A lo largo de los años, hemos
-            consolidado como socios de confianza para empresas reconocidas como: AngloAmerican, BHP Billiton, Minera
-            Escondida, Antofagasta Minerals, entre otras destacadas organizaciones. En el presente, nos distinguimos por
-            nuestro firme compromiso con la electromovilidad, aspirando a tener una flota completamente eléctrica para
-            el año 2030. Además, impulsamos activamente la inclusión laboral, forjando un ambiente donde la diversidad
-            es no solo valorada, sino también promovida.
+            Nuestra trayectoria se remonta a 1986 en El Salvador, cuando la
+            división industrial de Pullman Bus formalizó sus operaciones,
+            marcando el inicio de nuestra especialización en servicios de
+            transporte de personal minero. Desde entonces, hemos transportado al
+            personal de las principales compañías de la industria de la minería,
+            manteniendo estas sólidas colaboraciones hasta el día de hoy. A lo
+            largo de los años, hemos consolidado como socios de confianza para
+            empresas reconocidas como: AngloAmerican, BHP Billiton, Minera
+            Escondida, Antofagasta Minerals, entre otras destacadas
+            organizaciones. En el presente, nos distinguimos por nuestro firme
+            compromiso con la electromovilidad, aspirando a tener una flota
+            completamente eléctrica para el año 2030. Además, impulsamos
+            activamente la inclusión laboral, forjando un ambiente donde la
+            diversidad es no solo valorada, sino también promovida.
           </motion.p>
         </motion.section>
 
@@ -183,7 +212,9 @@ export default function ConocenosPage() {
             >
               <Award className="w-6 h-6 text-white" />
             </motion.div>
-            <h2 className="text-3xl font-bold text-blue-600 dark:text-blue-400">Nuestros Valores</h2>
+            <h2 className="text-3xl font-bold text-blue-600 dark:text-blue-400">
+              Nuestros Valores
+            </h2>
           </div>
 
           <motion.div
@@ -203,7 +234,9 @@ export default function ConocenosPage() {
                     >
                       <value.icon className="w-8 h-8 text-white" />
                     </motion.div>
-                    <h3 className="font-semibold text-sm text-gray-800 dark:text-gray-200">{value.title}</h3>
+                    <h3 className="font-semibold text-sm text-gray-800 dark:text-gray-200">
+                      {value.title}
+                    </h3>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -212,5 +245,5 @@ export default function ConocenosPage() {
         </motion.section>
       </div>
     </div>
-  )
+  );
 }

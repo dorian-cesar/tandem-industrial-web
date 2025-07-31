@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Users, MapPin, Bus, Award, ArrowRight, Play } from "lucide-react"
-import { motion, easeOut } from "framer-motion"
-import { useEffect, useState } from "react"
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Users, MapPin, Bus, Award, ArrowRight, Play } from "lucide-react";
+import { motion, easeOut } from "framer-motion";
+import { useEffect, useState } from "react";
 
 export default function HomePage() {
   const [counters, setCounters] = useState({
@@ -16,7 +16,7 @@ export default function HomePage() {
     vehicles: 0,
     centers: 0,
     experience: 0,
-  })
+  });
 
   const services = [
     {
@@ -47,80 +47,101 @@ export default function HomePage() {
       active: false,
       gradient: "from-blue-600 to-blue-700",
     },
-  ]
+  ];
 
   const stats = [
-    { key: "passengers", number: 13000000, label: "Pasajeros transportados anualmente", icon: Users },
-    { key: "kilometers", number: 40000000, label: "Kilómetros recorridos anualmente", icon: MapPin },
+    {
+      key: "passengers",
+      number: 13000000,
+      label: "Pasajeros transportados anualmente",
+      icon: Users,
+    },
+    {
+      key: "kilometers",
+      number: 40000000,
+      label: "Kilómetros recorridos anualmente",
+      icon: MapPin,
+    },
     { key: "collaborators", number: 2500, label: "Colaboradores", icon: Users },
     { key: "vehicles", number: 300, label: "Equipos (buses - van)", icon: Bus },
-    { key: "centers", number: 10, label: "Centros operacionales", icon: MapPin },
-    { key: "experience", number: 35, label: "Años de experiencia", icon: Award },
-  ]
+    {
+      key: "centers",
+      number: 10,
+      label: "Centros operacionales",
+      icon: MapPin,
+    },
+    {
+      key: "experience",
+      number: 35,
+      label: "Años de experiencia",
+      icon: Award,
+    },
+  ];
 
   const fleet = [
     {
       title: "Buses Convencionales",
-      image: "/placeholder.svg?height=200&width=300",
+      image: "/img/busConve.png",
       href: "/nuestra-flota",
     },
     {
       title: "Buses Eléctricos",
-      image: "/placeholder.svg?height=200&width=300",
+      image: "/img/busElectrico.png",
       href: "/nuestra-flota",
-      badge: "ECO",
+      badge: "/img/btnVerde.png",
     },
     {
       title: "Mini Buses y Van",
-      image: "/placeholder.svg?height=200&width=300",
+      image: "/img/miniVanBuses.png",
       href: "/nuestra-flota",
     },
     {
       title: "Vehículos menores",
-      image: "/placeholder.svg?height=200&width=300",
+      image: "/img/vehiMenores.png",
       href: "/nuestra-flota",
-      badge: "ECO",
+      badge: "/img/btnVerde.png",
     },
-  ]
+  ];
 
   const clients = [
-    "CODELCO",
-    "ANTOFAGASTA MINERALS",
-    "ANGLOAMERICAN",
-    "ASMAR",
-    "LATAM",
-    "CENTINELA",
-    "ORBIT GARANT",
-    "SPENCE BHP",
-    "GUANACO",
-  ]
+    "codelco2",
+    "minralsAntofa",
+    "angloAmerica",
+    "asmar",
+    "latam-3",
+    "centinela",
+    "lasCondes",
+    "orbit_garant",
+    // "SPENCE BHP",
+    // "GUANACO",
+  ];
 
   // Counter animation effect
   useEffect(() => {
     const animateCounters = () => {
       stats.forEach((stat) => {
-        let start = 0
-        const end = stat.number
-        const duration = 2000
-        const increment = end / (duration / 16)
+        let start = 0;
+        const end = stat.number;
+        const duration = 2000;
+        const increment = end / (duration / 16);
 
         const timer = setInterval(() => {
-          start += increment
+          start += increment;
           if (start >= end) {
-            start = end
-            clearInterval(timer)
+            start = end;
+            clearInterval(timer);
           }
           setCounters((prev) => ({
             ...prev,
             [stat.key]: Math.floor(start),
-          }))
-        }, 16)
-      })
-    }
+          }));
+        }, 16);
+      });
+    };
 
-    const timer = setTimeout(animateCounters, 1000)
-    return () => clearTimeout(timer)
-  }, [])
+    const timer = setTimeout(animateCounters, 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -130,7 +151,7 @@ export default function HomePage() {
         staggerChildren: 0.1,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
@@ -142,7 +163,7 @@ export default function HomePage() {
         ease: easeOut,
       },
     },
-  }
+  };
 
   return (
     <div className="min-h-screen">
@@ -150,10 +171,10 @@ export default function HomePage() {
       <section className="relative h-[70vh] bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 dark:from-gray-900 dark:via-blue-900 dark:to-gray-800 overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/placeholder.svg?height=600&width=1200"
-            alt="Bus en paisaje montañoso"
+            src="/img/bannerIndex.png"
+            alt="Bus Tandem en paisaje montañoso"
             fill
-            className="object-cover opacity-20"
+            className="object-contain opacity-100"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-transparent" />
         </div>
@@ -221,12 +242,20 @@ export default function HomePage() {
         <motion.div
           className="absolute top-20 right-20 w-20 h-20 bg-orange-500/20 rounded-full blur-xl"
           animate={{ y: [-10, 10, -10] }}
-          transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+          transition={{
+            duration: 4,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "easeInOut",
+          }}
         />
         <motion.div
           className="absolute bottom-32 left-32 w-32 h-32 bg-blue-500/20 rounded-full blur-xl"
           animate={{ y: [10, -10, 10] }}
-          transition={{ duration: 6, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+          transition={{
+            duration: 6,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "easeInOut",
+          }}
         />
       </section>
 
@@ -246,11 +275,11 @@ export default function HomePage() {
                   <CardContent className="p-0">
                     <div className="relative overflow-hidden">
                       <Image
-                        src={`/placeholder.svg?height=200&width=300&query=news-${item}`}
+                        src={`/img/newsC${item}.png`}
                         alt={`Noticia ${item}`}
                         width={300}
                         height={200}
-                        className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700"
+                        className="w-full h-48 object-contain group-hover:scale-110 transition-transform duration-700"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       <motion.div
@@ -262,9 +291,12 @@ export default function HomePage() {
                     </div>
                     <div className="p-6">
                       <h3 className="text-sm font-semibold text-blue-600 group-hover:text-orange-500 transition-colors duration-300">
-                        {index === 0 && "Premiación conductores Tandem Ventanas"}
-                        {index === 1 && "Bus eléctrico Codelco El Salvador logra un éxito en homologación"}
-                        {index === 2 && "Felicitamos a las egresadas de la escuela de conductores Tandem"}
+                        {index === 0 &&
+                          "Premiación conductores Tandem Ventanas"}
+                        {index === 1 &&
+                          "Bus eléctrico Codelco El Salvador logra un éxito en homologación"}
+                        {index === 2 &&
+                          "Felicitamos a las egresadas de la escuela de conductores Tandem"}
                       </h3>
                     </div>
                   </CardContent>
@@ -320,7 +352,9 @@ export default function HomePage() {
                         className={`bg-gradient-to-r ${service.gradient} text-white p-6 rounded-2xl relative overflow-hidden`}
                       >
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                        <h3 className="font-semibold text-sm mb-4 relative z-10">{service.title}</h3>
+                        <h3 className="font-semibold text-sm mb-4 relative z-10">
+                          {service.title}
+                        </h3>
                         <Button
                           size="sm"
                           className="bg-orange-500 hover:bg-orange-600 text-xs font-semibold px-6 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 relative z-10 group/btn"
@@ -364,9 +398,15 @@ export default function HomePage() {
 
                 <div className="text-4xl font-bold mb-3">
                   <span className="text-orange-500">+</span>
-                  <span className="text-blue-600">{counters[stat.key as keyof typeof counters].toLocaleString()}</span>
+                  <span className="text-blue-600">
+                    {counters[
+                      stat.key as keyof typeof counters
+                    ].toLocaleString()}
+                  </span>
                 </div>
-                <p className="text-sm text-gray-600 font-medium">{stat.label}</p>
+                <p className="text-sm text-gray-600 font-medium">
+                  {stat.label}
+                </p>
               </motion.div>
             ))}
           </motion.div>
@@ -402,12 +442,18 @@ export default function HomePage() {
                   <Card className="cursor-pointer hover:shadow-2xl transition-all duration-500 relative group border-0 shadow-lg overflow-hidden bg-white dark:bg-gray-800 dark:border-gray-700">
                     {vehicle.badge && (
                       <motion.div
-                        className="absolute top-4 right-4 bg-gradient-to-r from-green-500 to-green-600 text-white px-3 py-1 rounded-full text-xs z-10 font-semibold shadow-lg"
+                        className="absolute top-4 right-4 z-10 shadow-lg"
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         transition={{ delay: index * 0.1 + 0.5 }}
                       >
-                        {vehicle.badge}
+                        <Image
+                          src={vehicle.badge}
+                          alt="Ícono de vehículo eléctrico"
+                          width={54}
+                          height={54}
+                          className="rounded-full bg-white p-1"
+                        />
                       </motion.div>
                     )}
                     <CardContent className="p-0">
@@ -424,7 +470,9 @@ export default function HomePage() {
                       <div className="p-6">
                         <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 rounded-xl text-center relative overflow-hidden">
                           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                          <h3 className="font-semibold mb-3 relative z-10">{vehicle.title}</h3>
+                          <h3 className="font-semibold mb-3 relative z-10">
+                            {vehicle.title}
+                          </h3>
                           <Button
                             size="sm"
                             className="bg-orange-500 hover:bg-orange-600 font-semibold px-6 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 relative z-10 group/btn"
@@ -474,7 +522,7 @@ export default function HomePage() {
                 whileHover={{ scale: 1.05, y: -5 }}
               >
                 <Image
-                  src={`/placeholder.svg?height=60&width=120&query=${client} logo`}
+                  src={`/img/${client}.png`}
                   alt={`Logo ${client}`}
                   width={120}
                   height={60}
@@ -489,7 +537,7 @@ export default function HomePage() {
       {/* Bottom Image Section */}
       <section className="relative h-80 overflow-hidden">
         <Image
-          src="/placeholder.svg?height=300&width=1200"
+          src="/img/bannerfooter.png"
           alt="Bus en paisaje desértico"
           fill
           className="object-cover"
@@ -503,7 +551,9 @@ export default function HomePage() {
           transition={{ duration: 1 }}
         >
           <div className="text-center text-white">
-            <h3 className="text-2xl font-bold mb-4">¿Listo para viajar con nosotros?</h3>
+            <h3 className="text-2xl font-bold mb-4">
+              ¿Listo para viajar con nosotros?
+            </h3>
             <Button
               size="lg"
               className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
@@ -515,5 +565,5 @@ export default function HomePage() {
         </motion.div>
       </section>
     </div>
-  )
+  );
 }

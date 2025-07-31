@@ -69,7 +69,7 @@ export default function ConocenosPage() {
       {/* Hero Section */}
       <section className="relative h-64">
         <Image
-          src="/placeholder.svg?height=300&width=1200"
+          src="/img/bannersuperior.png"
           alt="Conductoras de Tandem"
           fill
           className="object-cover"

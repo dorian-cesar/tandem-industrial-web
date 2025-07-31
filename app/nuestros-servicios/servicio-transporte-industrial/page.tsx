@@ -1,8 +1,8 @@
-import Image from "next/image"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Bus } from "lucide-react"
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Bus } from "lucide-react";
 
 export default function TransporteIndustrialPage() {
   const services = [
@@ -30,14 +30,14 @@ export default function TransporteIndustrialPage() {
       href: "/nuestros-servicios/servicio-radio-taxi",
       active: false,
     },
-  ]
+  ];
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative h-64">
         <Image
-          src="/placeholder.svg?height=300&width=1200"
+          src="/img/bannerNuestroServiciosIndustrial.png"
           alt="Trabajadores industriales con chalecos de seguridad"
           fill
           className="object-cover"
@@ -50,13 +50,15 @@ export default function TransporteIndustrialPage() {
           <div className="flex items-center gap-3 mb-4">
             <Bus className="w-8 h-8 text-orange-500" />
             <h1 className="text-2xl font-bold text-blue-600">
-              Nuestros Servicios / <span className="text-orange-500">Transporte Industrial</span>
+              Nuestros Servicios /{" "}
+              <span className="text-orange-500">Transporte Industrial</span>
             </h1>
           </div>
 
           <p className="text-gray-700">
-            Con más de cuarenta años de experiencia, nos hemos especializado en satisfacer las demandas de clientes
-            institucionales, incluyendo empresas de renombre e instituciones gubernamentales.
+            Con más de cuarenta años de experiencia, nos hemos especializado en
+            satisfacer las demandas de clientes institucionales, incluyendo
+            empresas de renombre e instituciones gubernamentales.
           </p>
         </div>
 
@@ -65,13 +67,19 @@ export default function TransporteIndustrialPage() {
           {services.map((service, index) => (
             <Link key={index} href={service.href}>
               <Card
-                className={`cursor-pointer hover:shadow-lg transition-all duration-300 ${service.active ? "ring-2 ring-blue-600" : ""}`}
+                className={`cursor-pointer hover:shadow-lg transition-all duration-300 ${
+                  service.active ? "ring-2 ring-blue-600" : ""
+                }`}
               >
                 <CardContent className="p-6 text-center">
                   <div className="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-lg flex items-center justify-center">
                     <div className="text-2xl">{service.icon}</div>
                   </div>
-                  <div className={`${service.active ? "bg-blue-800" : "bg-blue-600"} text-white p-3 rounded-lg`}>
+                  <div
+                    className={`${
+                      service.active ? "bg-blue-800" : "bg-blue-600"
+                    } text-white p-3 rounded-lg`}
+                  >
                     <h3 className="font-medium text-sm">{service.title}</h3>
                   </div>
                 </CardContent>
@@ -83,26 +91,35 @@ export default function TransporteIndustrialPage() {
         {/* Content */}
         <div className="grid md:grid-cols-2 gap-12 items-start">
           <div className="space-y-6">
-            <h2 className="text-xl font-bold text-blue-600">Servicio de Transporte Industrial</h2>
+            <h2 className="text-xl font-bold text-blue-600">
+              Servicio de Transporte Industrial
+            </h2>
 
             <p className="text-gray-700">
-              Explora una solución completa para tus requerimientos de transporte de pasajeros. Nos enfocamos en
-              servicios de transporte interurbano y urbano para agilizar la logística de los trabajadores.
+              Explora una solución completa para tus requerimientos de
+              transporte de pasajeros. Nos enfocamos en servicios de transporte
+              interurbano y urbano para agilizar la logística de los
+              trabajadores.
             </p>
 
             <div>
-              <h3 className="font-semibold text-blue-600 mb-2">Servicios interurbanos:</h3>
+              <h3 className="font-semibold text-blue-600 mb-2">
+                Servicios interurbanos:
+              </h3>
               <p className="text-gray-700 mb-4">
-                Conectamos ciudades mediante nuestro eficiente servicio de transporte de pasajeros en buses de doble
-                piso y de un piso.
+                Conectamos ciudades mediante nuestro eficiente servicio de
+                transporte de pasajeros en buses de doble piso y de un piso.
               </p>
             </div>
 
             <div>
-              <h3 className="font-semibold text-blue-600 mb-2">Servicios urbanos:</h3>
+              <h3 className="font-semibold text-blue-600 mb-2">
+                Servicios urbanos:
+              </h3>
               <p className="text-gray-700 mb-6">
-                Simplificamos el desplazamiento de pasajeros dentro de la ciudad con nuestra amplia gama de opciones de
-                transporte, que incluyen buses.
+                Simplificamos el desplazamiento de pasajeros dentro de la ciudad
+                con nuestra amplia gama de opciones de transporte, que incluyen
+                buses.
               </p>
             </div>
 
@@ -110,12 +127,16 @@ export default function TransporteIndustrialPage() {
               ¡Contáctanos hoy mismo para comenzar a optimizar tus operaciones!
             </p>
 
-            <Button className="bg-orange-500 hover:bg-orange-600 text-white">Contacto Comercial</Button>
+            <Link href="/contacto">
+              <Button className="bg-orange-500 hover:bg-orange-600 text-white">
+                Contacto Comercial
+              </Button>
+            </Link>
           </div>
 
           <div>
             <Image
-              src="/placeholder.svg?height=400&width=500"
+              src="/img/foto-bus-tandem-foto-industrial.png"
               alt="Bus industrial Tandem en puerto"
               width={500}
               height={400}
@@ -125,5 +146,5 @@ export default function TransporteIndustrialPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

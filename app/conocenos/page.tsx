@@ -54,7 +54,7 @@ export default function ConocenosPage() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
       {/* Hero Section */}
-      <section className="relative h-80">
+      <section className="relative h-100">
         <Image
           src="/img/bannersuperior.png"
           alt="Conductoras de Tandem"

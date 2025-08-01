@@ -1,46 +1,88 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Bus } from "lucide-react";
+import { motion, easeOut } from "framer-motion";
+import { Bus, ArrowRight } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 export default function RadioTaxiPage() {
+  const pathname = usePathname();
+
   const services = [
     {
       title: "Servicio de transporte minero",
-      icon: "🚌",
+      images: [
+        { src: "../img/busChofer.png", width: 80, height: 58 },
+        { src: "../img/dosFlechas.png", width: 40, height: 40 },
+        { src: "../img/volteo.png", width: 80, height: 80 },
+      ],
       href: "/nuestros-servicios",
       active: false,
+      gradient: "from-blue-600 to-blue-600",
     },
     {
       title: "Servicio de transporte Industrial",
-      icon: "🚌",
+      images: [
+        { src: "../img/busChofer.png", width: 80, height: 58 },
+        { src: "../img/dosFlechas.png", width: 40, height: 40 },
+        { src: "../img/industria.png", width: 70, height: 70 },
+      ],
       href: "/nuestros-servicios/servicio-transporte-industrial",
       active: false,
+      gradient: "from-blue-600 to-blue-600",
     },
     {
       title: "Servicio de transporte particular",
-      icon: "🚌",
+      images: [
+        { src: "../img/busSolo.png", width: 58, height: 58 },
+        { src: "../img/ninos.png", width: 50, height: 58 },
+        { src: "../img/dosFlechas.png", width: 40, height: 40 },
+        { src: "../img/montain.png", width: 58, height: 58 },
+      ],
       href: "/nuestros-servicios/servicio-transporte-particular",
       active: false,
+      gradient: "from-blue-600 to-blue-600",
     },
     {
       title: "Servicio de Radio Taxi",
-      icon: "🚗",
+      images: [
+        { src: "../img/taxi.png", width: 60, height: 60 },
+        { src: "../img/usuarioMaleta.png", width: 45, height: 40 },
+        { src: "../img/dosFlechas.png", width: 40, height: 40 },
+        { src: "../img/house.png", width: 58, height: 58 },
+      ],
       href: "/nuestros-servicios/servicio-radio-taxi",
-      active: true,
+      active: false,
+      gradient: "from-blue-600 to-blue-600",
     },
   ];
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: easeOut,
+      },
+    },
+  };
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-64">
+      <section className="relative h-100">
         <Image
           src="/img/bannerNuestroServiciosRadioTaxis.png"
           alt="Ejecutivo en taxi usando teléfono"
-          fill
-          className="object-cover"
+          width={1920}
+          height={480}
+          className="w-full h-full object-cover"
+          priority={true}
         />
       </section>
 
@@ -65,31 +107,53 @@ export default function RadioTaxiPage() {
         {/* Services Navigation */}
         <div className="grid md:grid-cols-4 gap-6 mb-12">
           {services.map((service, index) => (
-            <Link key={index} href={service.href}>
-              <Card
-                className={`cursor-pointer hover:shadow-lg transition-all duration-300 ${
-                  service.active ? "ring-2 ring-blue-600" : ""
-                }`}
-              >
-                <CardContent className="p-6 text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <div className="text-2xl">{service.icon}</div>
-                  </div>
-                  <div
-                    className={`${
-                      service.active ? "bg-blue-800" : "bg-blue-600"
-                    } text-white p-3 rounded-lg`}
-                  >
-                    <h3 className="font-medium text-sm">{service.title}</h3>
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
+            <motion.div key={index} variants={itemVariants}>
+              <Link href={service.href}>
+                <Card
+                  className={`h-full flex flex-col justify-between cursor-pointer hover:shadow-2xl transition-all duration-500 group shadow-lg overflow-hidden bg-white dark:bg-gray-800 dark:border-gray-700 ${
+                    pathname === service.href
+                      ? "border-2 border-blue-500"
+                      : "border-0"
+                  }`}
+                >
+                  <CardContent className="flex flex-col flex-grow p-8 text-center relative">
+                    <div className="mx-auto mb-6 inline-flex items-center justify-center gap-2 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl p-4 transition-transform duration-300 group-hover:scale-105 overflow-hidden">
+                      {service.images.map((img, idx) => (
+                        <Image
+                          key={idx}
+                          src={img.src}
+                          alt={service.title}
+                          width={img.width}
+                          height={img.height}
+                          className="object-contain max-w-[80px] max-h-[80px]"
+                        />
+                      ))}
+                    </div>
+
+                    <div
+                      className={`flex flex-col justify-between flex-grow bg-gradient-to-r ${service.gradient} text-white p-6 rounded-2xl relative overflow-hidden`}
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                      <h3 className="font-semibold mb-4 relative z-10">
+                        {service.title}
+                      </h3>
+                      <Button
+                        size="sm"
+                        className="mt-auto bg-orange-500 hover:bg-orange-600 text-xs font-semibold px-10 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 relative z-10 group/btn w-max mx-auto"
+                      >
+                        Conoce más
+                        <ArrowRight className="ml-2 w-3 h-3 group-hover/btn:translate-x-1 transition-transform" />
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            </motion.div>
           ))}
         </div>
 
         {/* Content */}
-        <div className="grid md:grid-cols-2 gap-12 items-start">
+        <div className="grid md:grid-cols-2 gap-12">
           <div className="space-y-6">
             <h2 className="text-xl font-bold text-blue-600">
               Servicio de Radio Taxi
@@ -121,19 +185,19 @@ export default function RadioTaxiPage() {
             </p>
 
             <Link href="/contacto">
-              <Button className="bg-orange-500 hover:bg-orange-600 text-white">
+              <Button className="bg-orange-500 hover:bg-orange-600 text-white mt-3">
                 Contacto Comercial
               </Button>
             </Link>
           </div>
 
-          <div>
+          <div className="flex justify-center items-center">
             <Image
               src="/img/foto-bus-tandem-foto-radio-taxi.png"
               alt="Conductor profesional de taxi ejecutivo"
               width={500}
               height={400}
-              className="w-full rounded-lg shadow-lg"
+              className="rounded-lg shadow-lg"
             />
           </div>
         </div>

@@ -52,7 +52,7 @@ export default function NuestrosClientesPage() {
                 className="flex items-center justify-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
               >
                 <Image
-                  src={client.logo || "/placeholder.svg"}
+                  src={client.logo}
                   alt={`Logo ${client.name}`}
                   width={160}
                   height={80}

@@ -73,7 +73,7 @@ export default function NuestraFlotaPage() {
                 )}
                 <CardContent className="p-0">
                   <Image
-                    src={vehicle.image || "/placeholder.svg"}
+                    src={vehicle.image}
                     alt={vehicle.title}
                     width={400}
                     height={300}

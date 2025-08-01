@@ -81,7 +81,7 @@ export default function HomePage() {
       icon: MapPin,
     },
     { key: "collaborators", number: 2500, label: "Colaboradores", icon: Users },
-    { key: "vehicles", number: 300, label: "Equipos (buses - van)", icon: Bus },
+    { key: "vehicles", number: 300, label: "Equipos (Buses - Van)", icon: Bus },
     {
       key: "centers",
       number: 10,

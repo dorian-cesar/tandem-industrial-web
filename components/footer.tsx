@@ -115,6 +115,15 @@ export default function Footer() {
                 <span className="text-lg font-medium">Canal de denuncias</span>
               </Link>
             </motion.div>
+
+            <motion.div whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+              <Link
+                href="/politica"
+                className="flex items-center space-x-4 hover:text-orange-300 transition-colors duration-300 group p-4 rounded-xl hover:bg-white/10"
+              >
+                <span className="text-lg font-medium">Pólitica de Calidad</span>
+              </Link>
+            </motion.div>
           </motion.div>
 
           {/* Logo and Social */}

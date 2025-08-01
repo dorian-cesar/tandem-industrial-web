@@ -4,7 +4,7 @@ import * as React from "react"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, easeInOut } from "framer-motion"
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme()
@@ -32,7 +32,7 @@ export function ThemeToggle() {
             initial={{ rotate: -90, opacity: 0, scale: 0.5 }}
             animate={{ rotate: 0, opacity: 1, scale: 1 }}
             exit={{ rotate: 90, opacity: 0, scale: 0.5 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.3, ease: easeInOut }}
           >
             <Moon className="h-5 w-5 text-blue-600 dark:text-blue-400" />
           </motion.div>
@@ -42,7 +42,7 @@ export function ThemeToggle() {
             initial={{ rotate: 90, opacity: 0, scale: 0.5 }}
             animate={{ rotate: 0, opacity: 1, scale: 1 }}
             exit={{ rotate: -90, opacity: 0, scale: 0.5 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.3, ease: easeInOut }}
           >
             <Sun className="h-5 w-5 text-orange-500" />
           </motion.div>

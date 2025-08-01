@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Users, MapPin, Bus, Award, ArrowRight, Play } from "lucide-react";
-import { motion, easeOut } from "framer-motion";
+import { motion, easeOut, easeInOut } from "framer-motion";
 import { useEffect, useState } from "react";
 
 export default function HomePage() {
@@ -21,28 +21,46 @@ export default function HomePage() {
   const services = [
     {
       title: "Servicio de transporte minero",
-      icon: "🚌",
+      images: [
+        { src: "img/busChofer.png", width: 80, height: 58 },
+        { src: "img/dosFlechas.png", width: 40, height: 40 },
+        { src: "img/volteo.png", width: 80, height: 80 },
+      ],
       href: "/nuestros-servicios",
       active: false,
       gradient: "from-blue-600 to-blue-700",
     },
     {
       title: "Servicio de transporte Industrial",
-      icon: "🚌",
+      images: [
+        { src: "img/busChofer.png", width: 80, height: 58 },
+        { src: "img/dosFlechas.png", width: 40, height: 40 },
+        { src: "img/industria.png", width: 70, height: 70 },
+      ],
       href: "/nuestros-servicios/servicio-transporte-industrial",
       active: false,
       gradient: "from-blue-600 to-blue-700",
     },
     {
       title: "Servicio de transporte particular",
-      icon: "🚌",
+      images: [
+        { src: "img/busSolo.png", width: 58, height: 58 },
+        { src: "img/ninos.png", width: 50, height: 58 },
+        { src: "img/dosFlechas.png", width: 40, height: 40 },
+        { src: "img/montain.png", width: 58, height: 58 },
+      ],
       href: "/nuestros-servicios/servicio-transporte-particular",
       active: false,
       gradient: "from-blue-600 to-blue-700",
     },
     {
       title: "Servicio de Radio Taxi",
-      icon: "🚗",
+      images: [
+        { src: "img/taxi.png", width: 60, height: 60 },
+        { src: "img/usuarioMaleta.png", width: 45, height: 40 },
+        { src: "img/dosFlechas.png", width: 40, height: 40 },
+        { src: "img/house.png", width: 58, height: 58 },
+      ],
       href: "/nuestros-servicios/servicio-radio-taxi",
       active: false,
       gradient: "from-blue-600 to-blue-700",
@@ -240,7 +258,7 @@ export default function HomePage() {
           transition={{
             duration: 4,
             repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
+            ease: easeInOut,
           }}
         />
         <motion.div
@@ -249,7 +267,7 @@ export default function HomePage() {
           transition={{
             duration: 6,
             repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
+            ease: easeInOut,
           }}
         />
       </section>
@@ -266,26 +284,20 @@ export default function HomePage() {
           >
             {[1, 2, 3].map((item, index) => (
               <motion.div key={index} variants={itemVariants}>
-                <Card className="cursor-pointer hover:shadow-2xl transition-all duration-500 group overflow-hidden border-0 shadow-lg bg-white dark:bg-gray-800 dark:border-gray-700">
-                  <CardContent className="p-0">
+                <Card className="h-full flex flex-col hover:shadow-2xl transition-all duration-500 group overflow-hidden border-0 shadow-lg bg-white dark:bg-gray-800 dark:border-gray-700">
+                  <CardContent className="flex flex-col flex-grow p-0">
                     <div className="relative overflow-hidden">
                       <Image
                         src={`/img/newsC${item}.png`}
                         alt={`Noticia ${item}`}
-                        width={300}
-                        height={200}
-                        className="w-full h-48 object-contain group-hover:scale-110 transition-transform duration-700"
+                        width={592}
+                        height={366}
+                        className="w-full h-auto object-contain"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      <motion.div
-                        className="absolute top-4 right-4 bg-orange-500 text-white p-2 rounded-full opacity-0 group-hover:opacity-100"
-                        whileHover={{ scale: 1.1 }}
-                      >
-                        <Play className="w-4 h-4" />
-                      </motion.div>
+                      <div className="absolute inset-0" />
                     </div>
-                    <div className="p-6">
-                      <h3 className="text-sm font-semibold text-blue-600 group-hover:text-orange-500 transition-colors duration-300">
+                    <div className="p-6 mt-auto">
+                      <h3 className="text-sm font-semibold text-blue-600">
                         {index === 0 &&
                           "Premiación conductores Tandem Ventanas"}
                         {index === 1 &&
@@ -334,17 +346,23 @@ export default function HomePage() {
             {services.map((service, index) => (
               <motion.div key={index} variants={itemVariants}>
                 <Link href={service.href}>
-                  <Card className="cursor-pointer hover:shadow-2xl transition-all duration-500 group border-0 shadow-lg overflow-hidden bg-white dark:bg-gray-800 dark:border-gray-700">
-                    <CardContent className="p-8 text-center relative">
-                      <motion.div
-                        className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
-                        whileHover={{ rotate: 5 }}
-                      >
-                        <div className="text-3xl">{service.icon}</div>
-                      </motion.div>
+                  <Card className="h-full flex flex-col justify-between cursor-pointer hover:shadow-2xl transition-all duration-500 group border-0 shadow-lg overflow-hidden bg-white dark:bg-gray-800 dark:border-gray-700">
+                    <CardContent className="flex flex-col flex-grow p-8 text-center relative">
+                      <div className="mx-auto mb-6 inline-flex items-center justify-center gap-2 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl p-4 transition-transform duration-300 group-hover:scale-105 overflow-hidden">
+                        {service.images.map((img, idx) => (
+                          <Image
+                            key={idx}
+                            src={img.src}
+                            alt={service.title}
+                            width={img.width}
+                            height={img.height}
+                            className="object-contain max-w-[80px] max-h-[80px]"
+                          />
+                        ))}
+                      </div>
 
                       <div
-                        className={`bg-gradient-to-r ${service.gradient} text-white p-6 rounded-2xl relative overflow-hidden`}
+                        className={`flex flex-col justify-between flex-grow bg-gradient-to-r ${service.gradient} text-white p-6 rounded-2xl relative overflow-hidden`}
                       >
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                         <h3 className="font-semibold text-sm mb-4 relative z-10">
@@ -352,7 +370,7 @@ export default function HomePage() {
                         </h3>
                         <Button
                           size="sm"
-                          className="bg-orange-500 hover:bg-orange-600 text-xs font-semibold px-6 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 relative z-10 group/btn"
+                          className="mt-auto bg-orange-500 hover:bg-orange-600 text-xs font-semibold px-10 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 relative z-10 group/btn w-max mx-auto"
                         >
                           Conoce más
                           <ArrowRight className="ml-2 w-3 h-3 group-hover/btn:translate-x-1 transition-transform" />

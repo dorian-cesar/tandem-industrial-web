@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion, easeOut } from "framer-motion";
-import { Bus, ArrowRight } from "lucide-react";
+import { Bus, ArrowDown } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 export default function NuestrosServiciosPage() {
@@ -142,7 +142,7 @@ export default function NuestrosServiciosPage() {
                         className="mt-auto bg-orange-500 hover:bg-orange-600 text-xs font-semibold px-10 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 relative z-10 group/btn w-max mx-auto"
                       >
                         Conoce más
-                        <ArrowRight className="ml-2 w-3 h-3 group-hover/btn:translate-x-1 transition-transform" />
+                        <ArrowDown className="ml-2 w-3 h-3 group-hover/btn:translate-x-1 transition-transform" />
                       </Button>
                     </div>
                   </CardContent>
@@ -205,11 +205,13 @@ export default function NuestrosServiciosPage() {
               ¡Optimiza tu logística con nuestros servicios especializados!
             </p>
 
-            <Link href="/contacto">
-              <Button className="bg-orange-500 hover:bg-orange-600 text-white mt-3">
-                Contacto Comercial
-              </Button>
-            </Link>
+            <div className="flex justify-center mt-6">
+              <Link href="/contacto">
+                <Button className="bg-orange-500 hover:bg-orange-600 text-white text-lg px-8 py-4 rounded-full shadow-lg">
+                  Contacto Comercial
+                </Button>
+              </Link>
+            </div>
           </div>
 
           <div className="flex justify-center items-center">

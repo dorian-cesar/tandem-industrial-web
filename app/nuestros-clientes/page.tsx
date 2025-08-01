@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { Users } from "lucide-react";
 
 export default function NuestrosClientesPage() {
@@ -45,11 +44,11 @@ export default function NuestrosClientesPage() {
           </p>
 
           {/* Clients Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-16">
+          <div className="flex flex-wrap justify-center gap-8 mb-16">
             {clients.map((client, index) => (
               <div
                 key={index}
-                className="flex items-center justify-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                className="flex items-center justify-center p-4 w-[45%] md:w-[22%] lg:w-[18%]"
               >
                 <Image
                   src={client.logo}
@@ -66,7 +65,7 @@ export default function NuestrosClientesPage() {
           <div className="text-center">
             <Link
               href="/contacto"
-              className="inline-block bg-orange-500 hover:bg-orange-600 text-white px-20 py-3 rounded-md text-sm font-medium transition-colors"
+              className="inline-block bg-orange-500 hover:bg-orange-600 text-white px-20 py-3 rounded-2xl text-md font-medium transition-colors"
             >
               Contacto Comercial
             </Link>

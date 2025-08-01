@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Users, MapPin, Bus, Award, ArrowRight, Play } from "lucide-react";
+import { Users, MapPin, Bus, Award, ArrowRight } from "lucide-react";
 import { motion, easeOut, easeInOut } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -124,11 +124,11 @@ export default function HomePage() {
   const clients = [
     "codelco2",
     "minralsAntofa",
-    "angloAmerica",
+    "angloAmerican",
     "asmar",
-    "latam-3",
+    "latam",
     "centinela",
-    "lasCondes",
+    "las_condes",
     "orbit_garant",
   ];
 
@@ -271,7 +271,6 @@ export default function HomePage() {
           }}
         />
       </section>
-
       {/* News Section */}
       <section className="py-16 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
         <div className="container mx-auto px-4">
@@ -313,7 +312,6 @@ export default function HomePage() {
           </motion.div>
         </div>
       </section>
-
       {/* Services Section */}
       <section className="py-20 bg-white dark:bg-gray-900 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-orange-50/30 dark:from-blue-900/20 dark:to-orange-900/10" />
@@ -384,7 +382,6 @@ export default function HomePage() {
           </motion.div>
         </div>
       </section>
-
       {/* Stats Section */}
       <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-800 dark:to-blue-900/20">
         <div className="container mx-auto px-4">
@@ -422,7 +419,6 @@ export default function HomePage() {
           </motion.div>
         </div>
       </section>
-
       {/* Fleet Section */}
       <section className="py-20 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-4">
@@ -500,7 +496,6 @@ export default function HomePage() {
           </motion.div>
         </div>
       </section>
-
       {/* Clients Section */}
       <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-800 dark:to-blue-900/20">
         <div className="container mx-auto px-4">
@@ -527,24 +522,33 @@ export default function HomePage() {
             {clients.map((client, index) => (
               <motion.div
                 key={index}
-                className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group"
+                className="transition-all duration-300 group"
                 variants={itemVariants}
-                whileHover={{ scale: 1.05, y: -5 }}
               >
                 <Image
                   src={`/img/${client}.png`}
                   alt={`Logo ${client}`}
                   width={120}
                   height={60}
-                  className="h-12 w-auto object-contain group-hover:scale-110 transition-transform duration-300"
+                  className="w-auto max-h-[40px] object-contain"
                 />
               </motion.div>
             ))}
           </motion.div>
+
+          <div className="mt-12 flex justify-center">
+            <Link
+              href="/nuestros-clientes"
+              className="inline-flex items-center gap-2 text-orange-600 font-semibold hover:scale-105 transition-transform duration-300"
+              aria-label="Ir a Nuestros Clientes"
+            >
+              Ver más
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+          </div>
         </div>
       </section>
-
-      {/* Bottom Image Section */}
+      ;{/* Bottom Image Section */}
       <section className="relative h-80 overflow-hidden">
         <Image
           src="/img/bannerfooter.png"

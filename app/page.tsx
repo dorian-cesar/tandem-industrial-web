@@ -112,8 +112,6 @@ export default function HomePage() {
     "centinela",
     "lasCondes",
     "orbit_garant",
-    // "SPENCE BHP",
-    // "GUANACO",
   ];
 
   // Counter animation effect
@@ -168,19 +166,24 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-[70vh] bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 dark:from-gray-900 dark:via-blue-900 dark:to-gray-800 overflow-hidden">
+      <section className="relative h-[50vh] bg-gradient-to-br from-blue-500 via-blue-800 to-blue-500 dark:from-gray-900 dark:via-blue-800 dark:to-gray-800 overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="/img/bannerIndex.png"
             alt="Bus Tandem en paisaje montañoso"
             fill
-            className="object-contain opacity-100"
+            className="object-contain"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-transparent" />
+          {/* Blur superior */}
+          <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-blue-800/60 to-transparent backdrop-blur-sm pointer-events-none z-10" />
+          {/* Blur inferior */}
+          <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-blue-800/60 to-transparent backdrop-blur-sm pointer-events-none z-10" />
+          {/* Overlay lateral */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/60 to-transparent" />
         </div>
 
         <motion.div
-          className="relative z-10 container mx-auto px-4 h-full flex items-center"
+          className="relative z-10 container mx-auto px-4 pb-[8rem] h-full flex items-center"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
@@ -226,15 +229,7 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
-            >
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
-              >
-                Conoce más sobre nosotros
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </motion.div>
+            ></motion.div>
           </div>
         </motion.div>
 
@@ -554,13 +549,15 @@ export default function HomePage() {
             <h3 className="text-2xl font-bold mb-4">
               ¿Listo para viajar con nosotros?
             </h3>
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
-            >
-              Contacta con nosotros
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
+            <Link href="/contacto" passHref>
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-10 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
+              >
+                Contacta con nosotros
+                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
           </div>
         </motion.div>
       </section>

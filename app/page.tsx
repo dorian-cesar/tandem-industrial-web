@@ -138,7 +138,7 @@ export default function HomePage() {
       stats.forEach((stat) => {
         let start = 0;
         const end = stat.number;
-        const duration = 2000;
+        const duration = 4000;
         const increment = end / (duration / 16);
 
         const timer = setInterval(() => {
@@ -365,7 +365,7 @@ export default function HomePage() {
                         className={`flex flex-col justify-between flex-grow bg-gradient-to-r ${service.gradient} text-white p-6 rounded-2xl relative overflow-hidden`}
                       >
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                        <h3 className="font-semibold text-sm mb-4 relative z-10">
+                        <h3 className="font-semibold mb-4 relative z-10">
                           {service.title}
                         </h3>
                         <Button
@@ -402,9 +402,7 @@ export default function HomePage() {
                 variants={itemVariants}
                 whileHover={{ scale: 1.1 }}
               >
-                <motion.div
-                  className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:shadow-lg transition-shadow duration-300"
-                >
+                <motion.div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:shadow-lg transition-shadow duration-300">
                   <stat.icon className="w-8 h-8 text-white" />
                 </motion.div>
 
@@ -451,10 +449,10 @@ export default function HomePage() {
             {fleet.map((vehicle, index) => (
               <motion.div key={index} variants={itemVariants}>
                 <Link href={vehicle.href}>
-                  <Card className="cursor-pointer hover:shadow-2xl transition-all duration-500 relative group border-0 shadow-lg overflow-hidden bg-white dark:bg-gray-800 dark:border-gray-700">
+                  <Card className="cursor-pointer hover:shadow-2xl transition-all duration-500 relative group border-0 shadow-[0_-4px_12px_rgba(0,0,0,0.15)] overflow-visible bg-white dark:bg-gray-800 dark:border-gray-700 rounded-xl">
                     {vehicle.badge && (
                       <motion.div
-                        className="absolute top-4 right-4 z-10 shadow-lg"
+                        className="absolute -top-3.5 right-4 z-20 bg-white/70 backdrop-blur-sm rounded-full p-1 shadow-lg"
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         transition={{ delay: index * 0.1 + 0.5 }}
@@ -462,20 +460,20 @@ export default function HomePage() {
                         <Image
                           src={vehicle.badge}
                           alt="Ícono de vehículo eléctrico"
-                          width={54}
-                          height={54}
-                          className="rounded-full bg-white p-1"
+                          width={32}
+                          height={32}
+                          className="w-9 h-9"
                         />
                       </motion.div>
                     )}
                     <CardContent className="p-0">
                       <div className="relative overflow-hidden">
                         <Image
-                          src={vehicle.image || "/placeholder.svg"}
+                          src={vehicle.image}
                           alt={vehicle.title}
                           width={300}
                           height={200}
-                          className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-700"
+                          className="w-full h-48 object-cover rounded-t-xl group-hover:scale-105 transition-transform duration-700"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       </div>

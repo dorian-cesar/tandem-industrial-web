@@ -1,15 +1,16 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { useState, useEffect } from "react"
-import { Menu, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { motion, AnimatePresence } from "framer-motion"
-import { ThemeToggle } from "@/components/theme-toggle"
+import Link from "next/link";
+import Image from "next/image";
+import { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { motion, AnimatePresence } from "framer-motion";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const navigation = [
     { name: "Conócenos", href: "/conocenos" },
@@ -17,15 +18,15 @@ export default function Header() {
     { name: "Nuestra Flota", href: "/nuestra-flota" },
     { name: "Nuestros Clientes", href: "/nuestros-clientes" },
     { name: "Contacto", href: "/contacto" },
-  ]
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <motion.header
@@ -41,36 +42,21 @@ export default function Header() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3 group">
-            <motion.div className="flex items-center" whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
-              <span className="text-3xl font-bold text-blue-600 dark:text-blue-400 italic">Tándem</span>
-              <motion.div
-                className="w-10 h-5 bg-gradient-to-r from-orange-500 to-orange-600 ml-2 transform skew-x-12 rounded-sm"
-                whileHover={{ skewX: 6 }}
-                transition={{ duration: 0.2 }}
+          <Link href="/" className="flex items-center group">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              <Image
+                src="/img/iconHeader.png"
+                alt="Logo Tandem"
+                width={320}
+                height={60}
+                className="object-contain pr-2 pl-2"
+                priority
               />
             </motion.div>
-            <motion.div
-              className="text-xs text-gray-500 dark:text-gray-400"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
-            >
-              <div className="bg-gradient-to-r from-gray-100 to-blue-50 px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700">
-                <span className="font-bold text-blue-600 dark:text-blue-400 text-lg">35</span>
-                <div className="text-xs leading-tight">
-                  <div className="text-gray-600 dark:text-gray-400">años</div>
-                  <div className="text-blue-600 dark:text-blue-400 font-semibold">movilidad</div>
-                  <div className="text-gray-600 dark:text-gray-400">sustentable</div>
-                </div>
-              </div>
-            </motion.div>
           </Link>
-
-          {/* Theme Toggle */}
-          <div className="hidden md:block">
-            <ThemeToggle />
-          </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-1">
@@ -92,8 +78,16 @@ export default function Header() {
             ))}
           </nav>
 
+          {/* Theme Toggle */}
+          <div className="hidden md:block">
+            <ThemeToggle />
+          </div>
+
           {/* Mobile menu button */}
-          <motion.div whileTap={{ scale: 0.95 }} className="md:hidden flex items-center space-x-2">
+          <motion.div
+            whileTap={{ scale: 0.95 }}
+            className="md:hidden flex items-center space-x-2"
+          >
             <ThemeToggle />
             <Button
               variant="ghost"
@@ -161,5 +155,5 @@ export default function Header() {
         </AnimatePresence>
       </div>
     </motion.header>
-  )
+  );
 }

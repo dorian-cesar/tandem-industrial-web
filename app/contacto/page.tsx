@@ -12,7 +12,7 @@ export default function ContactoPage() {
       {/* Hero Section */}
       <section className="relative h-64">
         <Image
-          src="/placeholder.svg?height=300&width=1200"
+          src="img/bannerContacto.png"
           alt="Equipo de trabajadores industriales"
           fill
           className="object-cover"

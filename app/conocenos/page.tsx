@@ -2,43 +2,30 @@
 
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
-import {
-  Users,
-  Target,
-  History,
-  Award,
-  Shield,
-  Lightbulb,
-  Leaf,
-} from "lucide-react";
+import { Users, Target, History } from "lucide-react";
 import { motion, easeOut } from "framer-motion";
 
 export default function ConocenosPage() {
   const values = [
     {
       title: "Preocupación y Respeto",
-      icon: Shield,
-      color: "bg-blue-600 dark:bg-blue-500",
+      img: "img/manoCorazon.png",
     },
     {
       title: "Seguridad y Salud",
-      icon: Shield,
-      color: "bg-blue-600 dark:bg-blue-500",
+      img: "img/frecuenciCorazon.png",
     },
     {
       title: "Excelencia Operacional",
-      icon: Award,
-      color: "bg-blue-600 dark:bg-blue-500",
+      img: "img/medalla.png",
     },
     {
       title: "Sustentabilidad",
-      icon: Leaf,
-      color: "bg-blue-600 dark:bg-blue-500",
+      img: "img/manoPlanta.png",
     },
     {
       title: "Innovación",
-      icon: Lightbulb,
-      color: "bg-blue-600 dark:bg-blue-500",
+      img: "img/bombilla.png",
     },
   ];
 
@@ -205,13 +192,14 @@ export default function ConocenosPage() {
           transition={{ duration: 0.8 }}
         >
           <div className="flex items-center gap-3 mb-8">
-            <motion.div
-              className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center"
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              transition={{ duration: 0.2 }}
-            >
-              <Award className="w-6 h-6 text-white" />
-            </motion.div>
+            <div className="w-12 h-12 bg-gradient-to-br rounded-xl flex items-center justify-center">
+              <Image
+                src="img/manosSaludar.png"
+                alt="Icono de Valores"
+                width={36}
+                height={32}
+              />
+            </div>
             <h2 className="text-3xl font-bold text-blue-600 dark:text-blue-400">
               Nuestros Valores
             </h2>
@@ -229,10 +217,15 @@ export default function ConocenosPage() {
                 <Card className="text-center hover:shadow-xl transition-all duration-300 group bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                   <CardContent className="p-6">
                     <motion.div
-                      className={`${value.color} w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}
+                      className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}
                       whileHover={{ rotate: 5 }}
                     >
-                      <value.icon className="w-8 h-8 text-white" />
+                      <Image
+                        src={value.img}
+                        alt={value.title}
+                        width={32}
+                        height={36}
+                      />
                     </motion.div>
                     <h3 className="font-semibold text-sm text-gray-800 dark:text-gray-200">
                       {value.title}

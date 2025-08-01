@@ -1,30 +1,30 @@
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Users } from "lucide-react"
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Users } from "lucide-react";
 
 export default function NuestrosClientesPage() {
   const clients = [
-    { name: "CENTINELA", logo: "/placeholder.svg?height=80&width=160" },
-    { name: "ZALDIVAR", logo: "/placeholder.svg?height=80&width=160" },
-    { name: "CODELCO SALVADOR", logo: "/placeholder.svg?height=80&width=160" },
-    { name: "CODELCO VENTANAS", logo: "/placeholder.svg?height=80&width=160" },
-    { name: "ANGLOAMERICAN", logo: "/placeholder.svg?height=80&width=160" },
-    { name: "SPENCE BHP", logo: "/placeholder.svg?height=80&width=160" },
-    { name: "GUANACO", logo: "/placeholder.svg?height=80&width=160" },
-    { name: "TECK", logo: "/placeholder.svg?height=80&width=160" },
-    { name: "QB2", logo: "/placeholder.svg?height=80&width=160" },
-    { name: "ARRIGONI", logo: "/placeholder.svg?height=80&width=160" },
-    { name: "LOMAS BAYAS", logo: "/placeholder.svg?height=80&width=160" },
-    { name: "LATAM", logo: "/placeholder.svg?height=80&width=160" },
-    { name: "SODEXO", logo: "/placeholder.svg?height=80&width=160" },
-    { name: "RESITER", logo: "/placeholder.svg?height=80&width=160" },
-    { name: "BOART LONGYEAR", logo: "/placeholder.svg?height=80&width=160" },
-    { name: "ASMAR", logo: "/placeholder.svg?height=80&width=160" },
-    { name: "LOS ANDES", logo: "/placeholder.svg?height=80&width=160" },
-    { name: "TEST", logo: "/placeholder.svg?height=80&width=160" },
-    { name: "ORBIT GARANT", logo: "/placeholder.svg?height=80&width=160" },
-    { name: "BREDEN MASTER", logo: "/placeholder.svg?height=80&width=160" },
-  ]
+    { name: "CENTINELA", logo: "img/centinela.png" },
+    { name: "ZALDIVAR", logo: "img/zaldivar.png" },
+    { name: "CODELCO SALVADOR", logo: "img/codelcoSalvador.png" },
+    { name: "CODELCO VENTANAS", logo: "img/codelcoVentanas.png" },
+    { name: "ANGLOAMERICAN", logo: "img/angloAmerican.png" },
+    { name: "SPENCE BHP", logo: "img/spence.png" },
+    { name: "GUANACO", logo: "img/guanaco.png" },
+    { name: "TECK QB2", logo: "img/teck_qb2.png" },
+    { name: "ARRIGONI", logo: "img/arrigoni.png" },
+    { name: "LOMAS BAYAS", logo: "img/lomas_bayas.png" },
+    { name: "LATAM", logo: "img/latam.png" },
+    { name: "SODEXO", logo: "img/sodexo.png" },
+    { name: "RESITER", logo: "img/resiter.png" },
+    { name: "BOART LONGYEAR", logo: "img/boart_longyear.png" },
+    { name: "ASMAR", logo: "img/asmar.png" },
+    { name: "LAS CONDES", logo: "img/las_condes.png" },
+    { name: "ESO", logo: "img/eso.png" },
+    { name: "ORBIT GARANT", logo: "img/orbit_garant2.png" },
+    { name: "BREDEN MASTER", logo: "img/breden_master.png" },
+  ];
 
   return (
     <div className="min-h-screen">
@@ -33,12 +33,15 @@ export default function NuestrosClientesPage() {
         <div className="container mx-auto px-4">
           <div className="flex items-center gap-3 mb-6">
             <Users className="w-8 h-8 text-orange-500" />
-            <h1 className="text-2xl font-bold text-blue-600">Nuestros Clientes</h1>
+            <h1 className="text-2xl font-bold text-blue-600">
+              Nuestros Clientes
+            </h1>
           </div>
 
           <p className="text-gray-700 mb-12 max-w-4xl">
-            Nuestra amplia cartera de clientes refleja el compromiso constante con la excelencia en el servicio. Te
-            invitamos a conocer la experiencia Tandem.
+            Nuestra amplia cartera de clientes refleja el compromiso constante
+            con la excelencia en el servicio. Te invitamos a conocer la
+            experiencia Tandem.
           </p>
 
           {/* Clients Grid */}
@@ -61,10 +64,15 @@ export default function NuestrosClientesPage() {
 
           {/* CTA Button */}
           <div className="text-center">
-            <Button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3">Contacto Comercial</Button>
+            <Link
+              href="/contacto"
+              className="inline-block bg-orange-500 hover:bg-orange-600 text-white px-20 py-3 rounded-md text-sm font-medium transition-colors"
+            >
+              Contacto Comercial
+            </Link>
           </div>
         </div>
       </section>
     </div>
-  )
+  );
 }

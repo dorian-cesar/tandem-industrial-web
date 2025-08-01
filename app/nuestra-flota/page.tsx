@@ -59,11 +59,11 @@ export default function NuestraFlotaPage() {
           </p>
 
           {/* Fleet Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {fleet.map((vehicle, index) => (
               <Card
                 key={index}
-                className="cursor-pointer hover:shadow-lg transition-all duration-300 relative"
+                className="hover:shadow-lg transition-all duration-300 relative"
               >
                 {vehicle.badge && (
                   <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm z-10 flex items-center gap-1">
@@ -76,16 +76,16 @@ export default function NuestraFlotaPage() {
                     src={vehicle.image}
                     alt={vehicle.title}
                     width={400}
-                    height={300}
-                    className="w-full h-64 object-cover rounded-t-lg"
+                    height={250}
+                    className="w-full h-40 object-cover rounded-t-lg"
                   />
-                  <div className="p-6">
+                  <div className="p-4">
                     <h3 className="text-xl font-bold text-blue-600 mb-2">
                       {vehicle.title}
                     </h3>
                     <p className="text-gray-600 mb-4">{vehicle.description}</p>
 
-                    <ul className="space-y-2 mb-6">
+                    <ul className="space-y-2">
                       {vehicle.features.map((feature, featureIndex) => (
                         <li
                           key={featureIndex}
@@ -96,10 +96,6 @@ export default function NuestraFlotaPage() {
                         </li>
                       ))}
                     </ul>
-
-                    <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white">
-                      Conoce más
-                    </Button>
                   </div>
                 </CardContent>
               </Card>

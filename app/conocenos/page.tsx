@@ -54,14 +54,15 @@ export default function ConocenosPage() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
       {/* Hero Section */}
-      <section className="relative h-64">
+      <section className="relative h-80">
         <Image
           src="/img/bannersuperior.png"
           alt="Conductoras de Tandem"
-          fill
-          className="object-cover"
+          width={1920}
+          height={480}
+          className="w-full h-full object-cover"
+          priority={true}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-700/60 dark:from-gray-900/90 dark:to-blue-900/70" />
       </section>
 
       <div className="container mx-auto px-4 py-12">
@@ -73,11 +74,7 @@ export default function ConocenosPage() {
           transition={{ duration: 0.8 }}
         >
           <div className="flex items-center gap-3 mb-6">
-            <motion.div
-              className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center"
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              transition={{ duration: 0.2 }}
-            >
+            <motion.div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center">
               <Users className="w-6 h-6 text-white" />
             </motion.div>
             <h2 className="text-3xl font-bold text-blue-600 dark:text-blue-400">
@@ -113,11 +110,7 @@ export default function ConocenosPage() {
           transition={{ duration: 0.8 }}
         >
           <div className="flex items-center gap-3 mb-6">
-            <motion.div
-              className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center"
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              transition={{ duration: 0.2 }}
-            >
+            <motion.div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center">
               <Target className="w-6 h-6 text-white" />
             </motion.div>
             <h2 className="text-3xl font-bold text-blue-600 dark:text-blue-400">
@@ -125,11 +118,7 @@ export default function ConocenosPage() {
             </h2>
           </div>
 
-          <motion.div
-            className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/20 p-8 rounded-2xl border border-blue-200 dark:border-blue-700/50"
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.3 }}
-          >
+          <motion.div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/20 p-8 rounded-2xl border border-blue-200 dark:border-blue-700/50">
             <p className="text-blue-700 dark:text-blue-300 text-center font-medium text-lg leading-relaxed">
               Proteger la propuesta de valor de nuestros clientes, orientando
               nuestros esfuerzos en la entrega de un servicio de transporte de
@@ -148,11 +137,7 @@ export default function ConocenosPage() {
           transition={{ duration: 0.8 }}
         >
           <div className="flex items-center gap-3 mb-6">
-            <motion.div
-              className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center"
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              transition={{ duration: 0.2 }}
-            >
+            <motion.div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center">
               <History className="w-6 h-6 text-white" />
             </motion.div>
             <h2 className="text-3xl font-bold text-blue-600 dark:text-blue-400">
@@ -218,13 +203,13 @@ export default function ConocenosPage() {
                   <CardContent className="p-6">
                     <motion.div
                       className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}
-                      whileHover={{ rotate: 5 }}
                     >
                       <Image
                         src={value.img}
                         alt={value.title}
                         width={32}
                         height={36}
+                        className="w-full h-full object-contain"
                       />
                     </motion.div>
                     <h3 className="font-semibold text-sm text-gray-800 dark:text-gray-200">

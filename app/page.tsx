@@ -191,6 +191,7 @@ export default function HomePage() {
             alt="Bus Tandem en paisaje montañoso"
             fill
             className="object-contain"
+            priority={true}
           />
           {/* Blur superior */}
           <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-blue-800/60 to-transparent backdrop-blur-sm pointer-events-none z-10" />
@@ -549,11 +550,13 @@ export default function HomePage() {
         </div>
       </section>
       ;{/* Bottom Image Section */}
-      <section className="relative h-80 overflow-hidden">
+      {/* cambiar h-80 en mobile */}
+      <section className="relative h-70 overflow-hidden">
         <Image
           src="/img/bannerfooter.png"
           alt="Bus en paisaje desértico"
-          fill
+          width={2400}
+          height={880}
           className="object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 to-transparent" />

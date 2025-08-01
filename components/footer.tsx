@@ -47,12 +47,8 @@ export default function Footer() {
         >
           {/* Contact Info */}
           <motion.div className="space-y-8" variants={itemVariants}>
-            <motion.div
-              className="flex items-start space-x-4 group"
-              whileHover={{ x: 5 }}
-              transition={{ duration: 0.2 }}
-            >
-              <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+            <motion.div className="flex items-start space-x-4 group">
+              <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center flex-shrink-0">
                 <MapPin className="w-6 h-6" />
               </div>
               <div>
@@ -63,12 +59,8 @@ export default function Footer() {
               </div>
             </motion.div>
 
-            <motion.div
-              className="flex items-center space-x-4 group"
-              whileHover={{ x: 5 }}
-              transition={{ duration: 0.2 }}
-            >
-              <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+            <motion.div className="flex items-center space-x-4 group">
+              <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center flex-shrink-0">
                 <Phone className="w-6 h-6" />
               </div>
               <p className="text-lg font-medium">+562 2520 5119</p>
@@ -76,12 +68,8 @@ export default function Footer() {
 
             <div className="w-full h-px bg-gradient-to-r from-transparent via-blue-400 to-transparent" />
 
-            <motion.div
-              className="flex items-start space-x-4 group"
-              whileHover={{ x: 5 }}
-              transition={{ duration: 0.2 }}
-            >
-              <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+            <motion.div className="flex items-start space-x-4 group">
+              <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center flex-shrink-0">
                 <MapPin className="w-6 h-6" />
               </div>
               <div>
@@ -92,12 +80,8 @@ export default function Footer() {
               </div>
             </motion.div>
 
-            <motion.div
-              className="flex items-center space-x-4 group"
-              whileHover={{ x: 5 }}
-              transition={{ duration: 0.2 }}
-            >
-              <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+            <motion.div className="flex items-center space-x-4 group">
+              <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center flex-shrink-0">
                 <Phone className="w-6 h-6" />
               </div>
               <p className="text-lg font-medium">+55 2211 5954</p>
@@ -135,11 +119,7 @@ export default function Footer() {
 
           {/* Logo and Social */}
           <motion.div className="space-y-8" variants={itemVariants}>
-            <motion.div
-              className="flex items-center group"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
-            >
+            <motion.div className="flex items-center group">
               <Image
                 src="img/logo-tandem-footer.png"
                 alt="Tándem logo"
@@ -149,7 +129,10 @@ export default function Footer() {
               />
             </motion.div>
 
-            <p className="text-blue-200 leading-relaxed" style={{ marginBlockStart: "10px" }}>
+            <p
+              className="text-blue-200 leading-relaxed"
+              style={{ marginBlockStart: "10px" }}
+            >
               Mantente actualizado acerca de nuestras iniciativas o contáctanos
               si quieres saber más de nosotros, síguenos en:
             </p>
@@ -199,7 +182,10 @@ export default function Footer() {
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
         >
-          <p>&copy; 2025 Tandem Industrial. Todos los derechos reservados.</p>
+          <p>
+            &copy; {new Date().getFullYear()} Tandem Industrial. Todos los
+            derechos reservados.
+          </p>
         </motion.div>
       </div>
     </footer>

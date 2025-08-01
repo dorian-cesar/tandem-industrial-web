@@ -44,7 +44,7 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center group">
             <motion.div
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.03 }}
               transition={{ duration: 0.2 }}
             >
               <Image

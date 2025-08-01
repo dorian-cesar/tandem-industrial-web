@@ -28,7 +28,7 @@ export default function HomePage() {
       ],
       href: "/nuestros-servicios",
       active: false,
-      gradient: "from-blue-600 to-blue-700",
+      gradient: "from-blue-600 to-blue-600",
     },
     {
       title: "Servicio de transporte Industrial",
@@ -39,7 +39,7 @@ export default function HomePage() {
       ],
       href: "/nuestros-servicios/servicio-transporte-industrial",
       active: false,
-      gradient: "from-blue-600 to-blue-700",
+      gradient: "from-blue-600 to-blue-600",
     },
     {
       title: "Servicio de transporte particular",
@@ -51,7 +51,7 @@ export default function HomePage() {
       ],
       href: "/nuestros-servicios/servicio-transporte-particular",
       active: false,
-      gradient: "from-blue-600 to-blue-700",
+      gradient: "from-blue-600 to-blue-600",
     },
     {
       title: "Servicio de Radio Taxi",
@@ -63,7 +63,7 @@ export default function HomePage() {
       ],
       href: "/nuestros-servicios/servicio-radio-taxi",
       active: false,
-      gradient: "from-blue-600 to-blue-700",
+      gradient: "from-blue-600 to-blue-600",
     },
   ];
 
@@ -400,11 +400,10 @@ export default function HomePage() {
                 key={index}
                 className="flex flex-col items-center group"
                 variants={itemVariants}
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.1 }}
               >
                 <motion.div
                   className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:shadow-lg transition-shadow duration-300"
-                  whileHover={{ rotate: 5 }}
                 >
                   <stat.icon className="w-8 h-8 text-white" />
                 </motion.div>
@@ -476,12 +475,12 @@ export default function HomePage() {
                           alt={vehicle.title}
                           width={300}
                           height={200}
-                          className="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-700"
+                          className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-700"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       </div>
                       <div className="p-6">
-                        <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 rounded-xl text-center relative overflow-hidden">
+                        <div className="bg-gradient-to-r from-blue-600 to-blue-600 text-white p-4 rounded-xl text-center relative overflow-hidden">
                           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                           <h3 className="font-semibold mb-3 relative z-10">
                             {vehicle.title}

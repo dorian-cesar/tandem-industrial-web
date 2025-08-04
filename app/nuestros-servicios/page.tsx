@@ -73,7 +73,7 @@ export default function NuestrosServiciosPage() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen dark:bg-gray-900">
       {/* Hero Section */}
       <section className="relative h-100">
         <Image
@@ -97,7 +97,7 @@ export default function NuestrosServiciosPage() {
             </h1>
           </div>
 
-          <p className="text-gray-700">
+          <p className="text-gray-700 dark:text-gray-300">
             Con más de cuarenta años de experiencia, nos hemos especializado en
             satisfacer las demandas de clientes institucionales, incluyendo
             empresas de renombre e instituciones gubernamentales.
@@ -108,7 +108,7 @@ export default function NuestrosServiciosPage() {
         <div className="grid md:grid-cols-4 gap-6 mb-12">
           {services.map((service, index) => (
             <motion.div key={index} variants={itemVariants}>
-              <Link href={service.href}>
+              <Link href={service.href} scroll={false}>
                 <Card
                   className={`h-full flex flex-col justify-between cursor-pointer hover:shadow-2xl transition-all duration-500 group shadow-lg overflow-hidden bg-white dark:bg-gray-800 dark:border-gray-700 ${
                     pathname === service.href
@@ -159,7 +159,7 @@ export default function NuestrosServiciosPage() {
               Servicio de Transporte Minero
             </h2>
 
-            <p className="text-gray-700">
+            <p className="text-gray-700 dark:text-gray-300">
               Descubre una solución integral para tus necesidades de transporte
               en el sector minero. Nos especializamos en servicios de transporte
               para faenas mineras, ofreciendo soluciones confiables y
@@ -170,7 +170,7 @@ export default function NuestrosServiciosPage() {
               <h3 className="font-semibold text-blue-600 mb-2">
                 Servicio Externo:
               </h3>
-              <p className="text-gray-700 mb-4">
+              <p className="text-gray-700 dark:text-gray-300 mb-4">
                 Transportamos pasajeros de empresas mineras y contratistas desde
                 distintas comunas hasta las faenas mineras. Ofrecemos una
                 variedad de opciones, incluyendo buses, taxi buses y minibuses,
@@ -181,7 +181,7 @@ export default function NuestrosServiciosPage() {
 
             <div>
               <h3 className="font-semibold text-blue-600 mb-2">Internos:</h3>
-              <p className="text-gray-700 mb-4">
+              <p className="text-gray-700 dark:text-gray-300 mb-4">
                 Facilitamos el transporte de pasajeros dentro de las faenas
                 mineras para empresas mineras y contratistas. Nuestros buses,
                 taxi buses y minibuses están completamente acreditados para
@@ -193,7 +193,7 @@ export default function NuestrosServiciosPage() {
               <h3 className="font-semibold text-blue-600 mb-2">
                 Interurbanos:
               </h3>
-              <p className="text-gray-700 mb-6">
+              <p className="text-gray-700 dark:text-gray-300 mb-6">
                 Conectamos ciudades mediante nuestro servicio de transporte para
                 empresas mineras y contratistas. Nuestra flota incluye buses de
                 doble piso y un piso para garantizar comodidad y eficiencia en

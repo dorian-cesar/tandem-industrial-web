@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Bus, Zap } from "lucide-react";
 
@@ -45,14 +44,14 @@ export default function NuestraFlotaPage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-white py-16">
+      <section className="bg-white dark:bg-gray-900 py-16">
         <div className="container mx-auto px-4">
           <div className="flex items-center gap-3 mb-6">
             <Bus className="w-8 h-8 text-orange-500" />
             <h1 className="text-2xl font-bold text-blue-600">Nuestra Flota</h1>
           </div>
 
-          <p className="text-gray-700 mb-12 max-w-4xl">
+          <p className="text-gray-700 dark:text-gray-300 mb-12 max-w-4xl">
             Conoce nuestra moderna flota de vehículos, diseñada para brindar el
             mejor servicio de transporte con tecnología de vanguardia y
             compromiso con la sustentabilidad.
@@ -63,7 +62,7 @@ export default function NuestraFlotaPage() {
             {fleet.map((vehicle, index) => (
               <Card
                 key={index}
-                className="hover:shadow-lg transition-all duration-300 relative"
+                className="hover:shadow-lg transition-all duration-300 relative dark:bg-slate-700"
               >
                 {vehicle.badge && (
                   <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm z-10 flex items-center gap-1">
@@ -83,13 +82,13 @@ export default function NuestraFlotaPage() {
                     <h3 className="text-xl font-bold text-blue-600 mb-2">
                       {vehicle.title}
                     </h3>
-                    <p className="text-gray-600 mb-4">{vehicle.description}</p>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">{vehicle.description}</p>
 
                     <ul className="space-y-2">
                       {vehicle.features.map((feature, featureIndex) => (
                         <li
                           key={featureIndex}
-                          className="flex items-center text-sm text-gray-700"
+                          className="flex items-center text-sm text-gray-700 dark:text-gray-300 "
                         >
                           <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
                           {feature}
@@ -103,7 +102,7 @@ export default function NuestraFlotaPage() {
           </div>
 
           {/* Stats Section */}
-          <div className="mt-16 bg-blue-50 rounded-lg p-8">
+          <div className="mt-16 bg-blue-50 dark:bg-slate-700 rounded-lg p-8">
             <h2 className="text-2xl font-bold text-blue-600 text-center mb-8">
               Nuestra Flota en Números
             </h2>
@@ -113,25 +112,25 @@ export default function NuestraFlotaPage() {
                 <div className="text-3xl font-bold text-orange-500 mb-2">
                   300+
                 </div>
-                <p className="text-gray-600">Vehículos en operación</p>
+                <p className="text-gray-600 dark:text-gray-300">Vehículos en operación</p>
               </div>
               <div>
                 <div className="text-3xl font-bold text-orange-500 mb-2">
                   95%
                 </div>
-                <p className="text-gray-600">Disponibilidad operacional</p>
+                <p className="text-gray-600 dark:text-gray-300">Disponibilidad operacional</p>
               </div>
               <div>
                 <div className="text-3xl font-bold text-orange-500 mb-2">
                   2030
                 </div>
-                <p className="text-gray-600">Meta flota 100% eléctrica</p>
+                <p className="text-gray-600 dark:text-gray-300">Meta flota 100% eléctrica</p>
               </div>
               <div>
                 <div className="text-3xl font-bold text-orange-500 mb-2">
                   35
                 </div>
-                <p className="text-gray-600">Años de experiencia</p>
+                <p className="text-gray-600 dark:text-gray-300">Años de experiencia</p>
               </div>
             </div>
           </div>
@@ -141,7 +140,7 @@ export default function NuestraFlotaPage() {
             <h2 className="text-2xl font-bold text-blue-600 mb-4">
               ¿Necesitas un servicio de transporte?
             </h2>
-            <p className="text-gray-700 mb-8">
+            <p className="text-gray-700 dark:text-gray-300 mb-8">
               Contáctanos para conocer más sobre nuestros servicios y cómo
               podemos ayudarte.
             </p>

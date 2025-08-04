@@ -97,7 +97,7 @@ export default function TransporteParticularPage() {
             </h1>
           </div>
 
-          <p className="text-gray-700">
+          <p className="text-gray-700 dark:text-gray-300">
             Con más de cuarenta años de experiencia, nos hemos especializado en
             satisfacer las demandas de clientes institucionales, incluyendo
             empresas de renombre e instituciones gubernamentales.
@@ -108,7 +108,7 @@ export default function TransporteParticularPage() {
         <div className="grid md:grid-cols-4 gap-6 mb-12">
           {services.map((service, index) => (
             <motion.div key={index} variants={itemVariants}>
-              <Link href={service.href}>
+              <Link href={service.href} scroll={false}>
                 <Card
                   className={`h-full flex flex-col justify-between cursor-pointer hover:shadow-2xl transition-all duration-500 group shadow-lg overflow-hidden bg-white dark:bg-gray-800 dark:border-gray-700 ${
                     pathname === service.href
@@ -159,20 +159,20 @@ export default function TransporteParticularPage() {
               Servicio de Transporte Particular
             </h2>
 
-            <p className="text-gray-700">
+            <p className="text-gray-700 dark:text-gray-300">
               Desde un paseo de curso hasta la glamorosa fiesta de gala de los
               Años medios, pasando por cualquier otra ocasión especial, estamos
               aquí para asegurar que llegues a tu destino con estilo y
               seguridad.
             </p>
 
-            <p className="text-gray-700">
+            <p className="text-gray-700 dark:text-gray-300">
               Nuestros servicios personalizados se adaptan a una amplia gama de
               necesidades, desde excursiones turísticas hasta eventos escolares,
               universitarios, empresariales y celebraciones especiales.
             </p>
 
-            <p className="text-gray-700">
+            <p className="text-gray-700 dark:text-gray-300">
               No importa la hora ni la ocasión, nuestro servicio está disponible
               las 24 horas del día para atender tus necesidades de transporte.
               Confía en nosotros para hacer que cada viaje sea memorable y sin

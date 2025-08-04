@@ -184,7 +184,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-[50vh] bg-gradient-to-br from-blue-500 via-blue-800 to-blue-500 dark:from-gray-900 dark:via-blue-800 dark:to-gray-800 overflow-hidden">
+      <section className="relative h-[80vh] md:h-[50vh] bg-gradient-to-br from-blue-500 via-blue-800 to-blue-500 dark:from-gray-900 dark:via-blue-800 dark:to-gray-800 overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="/img/bannerIndex.png"
@@ -412,7 +412,7 @@ export default function HomePage() {
                     ].toLocaleString()}
                   </span>
                 </div>
-                <p className="text-sm text-gray-600 font-medium">
+                <p className="text-sm text-gray-600 dark:text-white font-medium">
                   {stat.label}
                 </p>
               </motion.div>
@@ -498,7 +498,7 @@ export default function HomePage() {
         </div>
       </section>
       {/* Clients Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-800 dark:to-blue-900/20">
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50 dark:bg-gray-400 dark:to-blue-200/20">
         <div className="container mx-auto px-4">
           <motion.h2
             className="text-3xl md:text-4xl font-bold text-center text-blue-600 mb-16"
@@ -549,9 +549,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      ;{/* Bottom Image Section */}
+      {/* Bottom Image Section */}
       {/* cambiar h-80 en mobile */}
-      <section className="relative h-70 overflow-hidden">
+      <section className="relative h-[130px] md:h-[265px] overflow-hidden">
         <Image
           src="/img/bannerfooter.png"
           alt="Bus en paisaje desértico"

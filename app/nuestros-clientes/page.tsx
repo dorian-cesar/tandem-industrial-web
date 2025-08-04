@@ -26,9 +26,9 @@ export default function NuestrosClientesPage() {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="">
       {/* Hero Section */}
-      <section className="bg-white py-16">
+      <section className="bg-white dark:bg-slate-300 py-16">
         <div className="container mx-auto px-4">
           <div className="flex items-center gap-3 mb-6">
             <Users className="w-8 h-8 text-orange-500" />

@@ -8,7 +8,7 @@ import { Handshake } from "lucide-react";
 
 export default function ContactoPage() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen dark:bg-gray-900">
       {/* Hero Section */}
       <section className="relative h-100">
         <Image
@@ -29,7 +29,7 @@ export default function ContactoPage() {
             <h1 className="text-2xl font-bold text-blue-600">Contacto</h1>
           </div>
 
-          <p className="text-blue-600">
+          <p className="text-blue-600 dark:text-gray-300">
             Complete el siguiente formulario y nos comunicaremos con usted lo
             antes posible para abordar cómo podemos colaborar y satisfacer sus
             necesidades.
@@ -38,35 +38,35 @@ export default function ContactoPage() {
 
         {/* Contact Form */}
         <div className="max-w-2xl mx-auto">
-          <Card className="bg-blue-50">
+          <Card className="bg-blue-50 dark:bg-gray-800">
             <CardContent className="p-8">
               <form className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <Label
                       htmlFor="nombre"
-                      className="text-blue-600 font-medium"
+                      className="text-blue-600 dark:text-gray-300 font-medium"
                     >
                       Nombre(s):
                     </Label>
                     <Input
                       id="nombre"
                       placeholder="Ingresa tu nombre"
-                      className="mt-1"
+                      className="mt-1 bg-white text-gray-900 dark:bg-gray-200 dark:text-slate-900"
                     />
                   </div>
 
                   <div>
                     <Label
                       htmlFor="apellido"
-                      className="text-blue-600 font-medium"
+                      className="text-blue-600 dark:text-gray-300 font-medium"
                     >
                       Apellido(s):
                     </Label>
                     <Input
                       id="apellido"
                       placeholder="Ingresa tu Apellido"
-                      className="mt-1"
+                      className="mt-1 bg-white text-gray-900 dark:bg-gray-200 dark:text-slate-900"
                     />
                   </div>
                 </div>
@@ -74,54 +74,57 @@ export default function ContactoPage() {
                 <div>
                   <Label
                     htmlFor="empresa"
-                    className="text-blue-600 font-medium"
+                    className="text-blue-600 dark:text-gray-300 font-medium"
                   >
                     Empresa:
                   </Label>
                   <Input
                     id="empresa"
                     placeholder="Ingresa Nombre de la Empresa"
-                    className="mt-1"
+                    className="mt-1 bg-white text-gray-900 dark:bg-gray-200 dark:text-slate-900"
                   />
                 </div>
 
                 <div>
                   <Label
                     htmlFor="celular"
-                    className="text-blue-600 font-medium"
+                    className="text-blue-600 dark:text-gray-300 font-medium"
                   >
                     Celular:
                   </Label>
                   <Input
                     id="celular"
                     placeholder="ej. 9 12345678"
-                    className="mt-1"
+                    className="mt-1 bg-white text-gray-900 dark:bg-gray-200 dark:text-slate-900"
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="email" className="text-blue-600 font-medium">
+                  <Label
+                    htmlFor="email"
+                    className="text-blue-600 dark:text-gray-300 font-medium"
+                  >
                     Correo Electrónico:
                   </Label>
                   <Input
                     id="email"
                     type="email"
                     placeholder="Ej: example@example.com"
-                    className="mt-1"
+                    className="mt-1 bg-white text-gray-900 dark:bg-gray-200 dark:text-slate-900"
                   />
                 </div>
 
                 <div>
                   <Label
                     htmlFor="mensaje"
-                    className="text-blue-600 font-medium"
+                    className="text-blue-600 dark:text-gray-300 font-medium"
                   >
                     Mensaje:
                   </Label>
                   <Textarea
                     id="mensaje"
                     rows={6}
-                    className="mt-1"
+                    className="mt-1 bg-white text-gray-900 dark:bg-gray-200 dark:text-slate-900"
                     placeholder="Escribe tu mensaje aquí..."
                   />
                 </div>

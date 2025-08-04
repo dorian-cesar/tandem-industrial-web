@@ -97,7 +97,7 @@ export default function RadioTaxiPage() {
             </h1>
           </div>
 
-          <p className="text-gray-700">
+          <p className="text-gray-700 dark:text-gray-300">
             Con más de cuarenta años de experiencia, nos hemos especializado en
             satisfacer las demandas de clientes institucionales, incluyendo
             empresas de renombre e instituciones gubernamentales.
@@ -108,7 +108,7 @@ export default function RadioTaxiPage() {
         <div className="grid md:grid-cols-4 gap-6 mb-12">
           {services.map((service, index) => (
             <motion.div key={index} variants={itemVariants}>
-              <Link href={service.href}>
+              <Link href={service.href} scroll={false}>
                 <Card
                   className={`h-full flex flex-col justify-between cursor-pointer hover:shadow-2xl transition-all duration-500 group shadow-lg overflow-hidden bg-white dark:bg-gray-800 dark:border-gray-700 ${
                     pathname === service.href
@@ -159,7 +159,7 @@ export default function RadioTaxiPage() {
               Servicio de Radio Taxi
             </h2>
 
-            <p className="text-gray-700">
+            <p className="text-gray-700 dark:text-gray-300">
               Cuando surge una necesidad temporal, ya sea en ocasiones
               especiales o en situaciones específicas, es fundamental contar con
               un servicio confiable que esté ahí para ti. Nuestro servicio de
@@ -167,7 +167,7 @@ export default function RadioTaxiPage() {
               brindándote la tranquilidad y conveniencia que necesitas.
             </p>
 
-            <p className="text-gray-700">
+            <p className="text-gray-700 dark:text-gray-300">
               Además, ofrecemos servicios de transporte ejecutivo tanto para
               empresas como para personas individuales. Sea cual sea tu
               necesidad, nuestro equipo está listo para ofrecerte un servicio
@@ -175,7 +175,7 @@ export default function RadioTaxiPage() {
               tu destino de manera segura y cómoda.
             </p>
 
-            <p className="text-gray-700">
+            <p className="text-gray-700 dark:text-gray-300">
               Confía en nosotros para satisfacer tus necesidades de transporte
               con profesionalismo y eficiencia.
             </p>

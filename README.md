@@ -23,10 +23,10 @@ Tandem Industrial es parte del Grupo de Empresas Pullman, líder en transporte p
 ## Scripts
 
 ```sh
-pnpm install      # Instala dependencias
-pnpm dev          # Inicia el servidor de desarrollo
-pnpm build        # Compila el proyecto para producción
-pnpm start        # Inicia el servidor en producción
+npm install      # Instala dependencias
+npm dev          # Inicia el servidor de desarrollo
+npm build        # Compila el proyecto para producción
+npm start        # Inicia el servidor en producción
 ```
 
 ## Contacto

@@ -3,14 +3,16 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence, easeInOut } from "framer-motion";
+import { motion, AnimatePresence, easeInOut, easeOut } from "framer-motion";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   const navigation = [
     { name: "Conócenos", href: "/conocenos" },
@@ -37,7 +39,7 @@ export default function Header() {
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: 0.6, ease: easeOut }}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
@@ -60,22 +62,33 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-1">
-            {navigation.map((item, index) => (
-              <motion.div
-                key={item.name}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 + 0.4 }}
-              >
-                <Link
-                  href={item.href}
-                  className="relative px-4 py-2 text-blue-600 dark:text-blue-400 hover:text-orange-500 dark:hover:text-orange-400 font-medium transition-colors duration-300 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 group"
+            {navigation.map((item, index) => {
+              const isActive = pathname === item.href;
+              return (
+                <motion.div
+                  key={item.name}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 + 0.4 }}
                 >
-                  {item.name}
-                  <motion.div className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-orange-600 group-hover:w-full group-hover:left-0 transition-all duration-300" />
-                </Link>
-              </motion.div>
-            ))}
+                  <Link
+                    href={item.href}
+                    className={`relative px-4 py-2 font-medium transition-colors duration-300 rounded-lg group ${
+                      isActive
+                        ? "text-orange-600 dark:text-orange-400 bg-blue-50 dark:bg-blue-900/20"
+                        : "text-blue-600 dark:text-blue-400 hover:text-orange-500 dark:hover:text-orange-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"
+                    }`}
+                  >
+                    {item.name}
+                    <span
+                      className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-orange-500 to-orange-600 transition-all duration-300 ${
+                        isActive ? "w-full" : "w-0 group-hover:w-full"
+                      }`}
+                    />
+                  </Link>
+                </motion.div>
+              );
+            })}
           </nav>
 
           {/* Theme Toggle */}
@@ -133,22 +146,29 @@ export default function Header() {
               transition={{ duration: 0.3, ease: easeInOut }}
             >
               <nav className="flex flex-col p-4 space-y-2">
-                {navigation.map((item, index) => (
-                  <motion.div
-                    key={item.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <Link
-                      href={item.href}
-                      className="block px-4 py-3 text-blue-600 dark:text-blue-400 hover:text-orange-500 dark:hover:text-orange-400 font-medium transition-all duration-300 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:translate-x-2"
-                      onClick={() => setIsMenuOpen(false)}
+                {navigation.map((item, index) => {
+                  const isActive = pathname === item.href;
+                  return (
+                    <motion.div
+                      key={item.name}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
                     >
-                      {item.name}
-                    </Link>
-                  </motion.div>
-                ))}
+                      <Link
+                        href={item.href}
+                        onClick={() => setIsMenuOpen(false)}
+                        className={`block px-4 py-3 font-medium transition-all duration-300 rounded-lg ${
+                          isActive
+                            ? "text-orange-600 dark:text-orange-400 bg-blue-50 dark:bg-blue-900/20"
+                            : "text-blue-600 dark:text-blue-400 hover:text-orange-500 dark:hover:text-orange-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:translate-x-2"
+                        }`}
+                      >
+                        {item.name}
+                      </Link>
+                    </motion.div>
+                  );
+                })}
               </nav>
             </motion.div>
           )}

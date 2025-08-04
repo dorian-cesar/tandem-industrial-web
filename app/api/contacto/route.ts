@@ -24,7 +24,7 @@ export async function POST(req: Request) {
     await transporter.sendMail({
       from: `"Formulario Web" <${process.env.EMAIL_FROM}>`,
       to: process.env.EMAIL_TO,
-      subject: "📩 Nuevo contacto desde el formulario web",
+      subject: "Nuevo contacto desde el formulario",
       text: `
         Nombre: ${nombre} ${apellido}
         Empresa: ${empresa}
@@ -36,7 +36,7 @@ export async function POST(req: Request) {
           `,
               html: `
             <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-              <h2 style="color: #2563eb;">Nuevo contacto desde el formulario web</h2>
+              <h2 style="color: #2563eb;">Formulario Web - Tandem Industrial</h2>
               <table style="width: 100%; border-collapse: collapse;">
                 <tbody>
                   <tr>

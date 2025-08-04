@@ -121,7 +121,10 @@ export default function Footer() {
                 href="/politica"
                 className="flex items-center space-x-4 hover:text-orange-300 transition-colors duration-300 group p-4 rounded-xl hover:bg-white/10"
               >
-                <span className="text-lg font-medium">Pólitica de Calidad</span>
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-2xl">🏅</span>
+                </div>
+                <span className="text-lg font-medium">Política de Calidad</span>
               </Link>
             </motion.div>
           </motion.div>

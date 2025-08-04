@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { motion, easeOut } from "framer-motion";
+import { motion, easeOut, stagger } from "framer-motion";
 import { Bus, ArrowDown } from "lucide-react";
 import { usePathname } from "next/navigation";
 
@@ -60,8 +60,18 @@ export default function NuestrosServiciosPage() {
     },
   ];
 
+  // Contenedor con stagger children
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.15,
+      },
+    },
+  };
+
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 30, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
@@ -105,12 +115,27 @@ export default function NuestrosServiciosPage() {
         </div>
 
         {/* Services Navigation */}
-        <div className="grid md:grid-cols-4 gap-6 mb-12">
+        <motion.div
+          className="grid md:grid-cols-4 gap-6 mb-12"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {services.map((service, index) => (
-            <motion.div key={index} variants={itemVariants}>
+            <motion.div
+              key={index}
+              variants={itemVariants}
+              whileHover={{
+                scale: 1.03,
+                boxShadow: "0 20px 30px rgba(0, 0, 0, 0.2)",
+                transition: { duration: 0.3 },
+              }}
+              whileTap={{ scale: 0.95 }}
+              className="rounded-lg"
+            >
               <Link href={service.href} scroll={false}>
                 <Card
-                  className={`h-full flex flex-col justify-between cursor-pointer hover:shadow-2xl transition-all duration-500 group shadow-lg overflow-hidden bg-white dark:bg-gray-800 dark:border-gray-700 ${
+                  className={`h-full flex flex-col justify-between cursor-pointer transition-all duration-500 group shadow-lg overflow-hidden bg-white dark:bg-gray-800 dark:border-gray-700 ${
                     pathname === service.href
                       ? "border-2 border-blue-500"
                       : "border-0"
@@ -137,23 +162,33 @@ export default function NuestrosServiciosPage() {
                       <h3 className="font-semibold mb-4 relative z-10">
                         {service.title}
                       </h3>
-                      <Button
-                        size="sm"
-                        className="mt-auto bg-orange-500 hover:bg-orange-600 text-xs font-semibold px-10 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 relative z-10 group/btn w-max mx-auto"
+                      <motion.div
+                        whileHover={{ x: 5 }}
+                        className="mt-auto w-max mx-auto relative z-10"
                       >
-                        Conoce más
-                        <ArrowDown className="ml-2 w-3 h-3 group-hover/btn:translate-x-1 transition-transform" />
-                      </Button>
+                        <Button
+                          size="sm"
+                          className="bg-orange-500 hover:bg-orange-600 text-xs font-semibold px-10 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group/btn"
+                        >
+                          Conoce más
+                          <ArrowDown className="ml-2 w-3 h-3 group-hover/btn:translate-x-1 transition-transform" />
+                        </Button>
+                      </motion.div>
                     </div>
                   </CardContent>
                 </Card>
               </Link>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Content */}
-        <div className="grid md:grid-cols-2 gap-12">
+        <motion.div
+          className="grid md:grid-cols-2 gap-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: easeOut }}
+        >
           <div className="space-y-6">
             <h2 className="text-xl font-bold text-blue-600">
               Servicio de Transporte Minero
@@ -214,7 +249,12 @@ export default function NuestrosServiciosPage() {
             </div>
           </div>
 
-          <div className="flex justify-center items-center">
+          <motion.div
+            className="flex justify-center items-center"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, ease: easeOut, delay: 0.3 }}
+          >
             <Image
               src="/img/foto-bus-tandem.png"
               alt="Bus Tandem en faena minera"
@@ -222,8 +262,8 @@ export default function NuestrosServiciosPage() {
               height={400}
               className="rounded-lg shadow-lg"
             />
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </div>
   );

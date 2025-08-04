@@ -1,15 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
-import { Handshake } from "lucide-react";
-import { Loader2 } from "lucide-react";
+import { Handshake, Loader2, AlertCircle, CheckCircle } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function ContactoPage() {
   const [formData, setFormData] = useState({
@@ -31,7 +30,6 @@ export default function ContactoPage() {
         setError("");
         setSuccess("");
       }, 5000);
-
       return () => clearTimeout(timer);
     }
   }, [error, success]);
@@ -40,7 +38,6 @@ export default function ContactoPage() {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { id, value } = e.target;
-
     if (id === "celular") {
       const filtered = value.replace(/[^0-9+\s]/g, "");
       setFormData({ ...formData, [id]: filtered });
@@ -103,6 +100,12 @@ export default function ContactoPage() {
     }
   };
 
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
+    exit: { opacity: 0, y: -10, transition: { duration: 0.3 } },
+  };
+
   return (
     <div className="min-h-screen dark:bg-gray-900">
       {/* Hero Section */}
@@ -132,129 +135,168 @@ export default function ContactoPage() {
           </p>
         </div>
 
-        {/* Contact Form */}
+        {/* Contact Form with animation */}
         <div className="max-w-2xl mx-auto">
-          <Card className="bg-blue-50 dark:bg-gray-800">
-            <CardContent className="p-8">
-              <form className="space-y-6" onSubmit={handleSubmit}>
-                <div className="grid md:grid-cols-2 gap-6">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            viewport={{ once: true }}
+          >
+            <Card className="bg-blue-50 dark:bg-gray-800 shadow-lg">
+              <CardContent className="p-8">
+                <form className="space-y-6" onSubmit={handleSubmit}>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <Label
+                        htmlFor="nombre"
+                        className="text-blue-600 dark:text-gray-300 font-medium"
+                      >
+                        Nombre(s): *
+                      </Label>
+                      <Input
+                        id="nombre"
+                        value={formData.nombre}
+                        onChange={handleChange}
+                        placeholder="Ingresa tu nombre"
+                        className="mt-1 bg-white text-gray-900 placeholder:text-slate-400 dark:bg-gray-200 dark:text-slate-900 dark:placeholder:text-slate-600"
+                      />
+                    </div>
+
+                    <div>
+                      <Label
+                        htmlFor="apellido"
+                        className="text-blue-600 dark:text-gray-300 font-medium"
+                      >
+                        Apellido(s): *
+                      </Label>
+                      <Input
+                        id="apellido"
+                        value={formData.apellido}
+                        onChange={handleChange}
+                        placeholder="Ingresa tu Apellido"
+                        className="mt-1 bg-white text-gray-900 placeholder:text-slate-400 dark:bg-gray-200 dark:text-slate-900 dark:placeholder:text-slate-600"
+                      />
+                    </div>
+                  </div>
+
                   <div>
                     <Label
-                      htmlFor="nombre"
+                      htmlFor="empresa"
                       className="text-blue-600 dark:text-gray-300 font-medium"
                     >
-                      Nombre(s): *
+                      Empresa: *
                     </Label>
                     <Input
-                      id="nombre"
-                      value={formData.nombre}
+                      id="empresa"
+                      value={formData.empresa}
                       onChange={handleChange}
-                      placeholder="Ingresa tu nombre"
+                      placeholder="Ingresa Nombre de la Empresa"
                       className="mt-1 bg-white text-gray-900 placeholder:text-slate-400 dark:bg-gray-200 dark:text-slate-900 dark:placeholder:text-slate-600"
                     />
                   </div>
 
                   <div>
                     <Label
-                      htmlFor="apellido"
+                      htmlFor="celular"
                       className="text-blue-600 dark:text-gray-300 font-medium"
                     >
-                      Apellido(s): *
+                      Celular: *
                     </Label>
                     <Input
-                      id="apellido"
-                      value={formData.apellido}
+                      id="celular"
+                      value={formData.celular}
                       onChange={handleChange}
-                      placeholder="Ingresa tu Apellido"
+                      placeholder="ej. +56912345678"
                       className="mt-1 bg-white text-gray-900 placeholder:text-slate-400 dark:bg-gray-200 dark:text-slate-900 dark:placeholder:text-slate-600"
                     />
                   </div>
-                </div>
 
-                <div>
-                  <Label
-                    htmlFor="empresa"
-                    className="text-blue-600 dark:text-gray-300 font-medium"
-                  >
-                    Empresa: *
-                  </Label>
-                  <Input
-                    id="empresa"
-                    value={formData.empresa}
-                    onChange={handleChange}
-                    placeholder="Ingresa Nombre de la Empresa"
-                    className="mt-1 bg-white text-gray-900 placeholder:text-slate-400 dark:bg-gray-200 dark:text-slate-900 dark:placeholder:text-slate-600"
-                  />
-                </div>
+                  <div>
+                    <Label
+                      htmlFor="email"
+                      className="text-blue-600 dark:text-gray-300 font-medium"
+                    >
+                      Correo Electrónico: *
+                    </Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="Ej: ejemplo@ejemplo.com"
+                      className="mt-1 bg-white text-gray-900 placeholder:text-slate-400 dark:bg-gray-200 dark:text-slate-900 dark:placeholder:text-slate-600"
+                    />
+                  </div>
 
-                <div>
-                  <Label
-                    htmlFor="celular"
-                    className="text-blue-600 dark:text-gray-300 font-medium"
-                  >
-                    Celular: *
-                  </Label>
-                  <Input
-                    id="celular"
-                    value={formData.celular}
-                    onChange={handleChange}
-                    placeholder="ej. +56912345678"
-                    className="mt-1 bg-white text-gray-900 placeholder:text-slate-400 dark:bg-gray-200 dark:text-slate-900 dark:placeholder:text-slate-600"
-                  />
-                </div>
+                  <div>
+                    <Label
+                      htmlFor="mensaje"
+                      className="text-blue-600 dark:text-gray-300 font-medium"
+                    >
+                      Mensaje: *
+                    </Label>
+                    <Textarea
+                      id="mensaje"
+                      rows={6}
+                      value={formData.mensaje}
+                      onChange={handleChange}
+                      placeholder="Escribe tu mensaje aquí..."
+                      className="mt-1 bg-white text-gray-900 placeholder:text-slate-400 dark:bg-gray-200 dark:text-slate-900 dark:placeholder:text-slate-600"
+                    />
+                  </div>
 
-                <div>
-                  <Label
-                    htmlFor="email"
-                    className="text-blue-600 dark:text-gray-300 font-medium"
-                  >
-                    Correo Electrónico: *
-                  </Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="Ej: ejemplo@ejemplo.com"
-                    className="mt-1 bg-white text-gray-900 placeholder:text-slate-400 dark:bg-gray-200 dark:text-slate-900 dark:placeholder:text-slate-600"
-                  />
-                </div>
-
-                <div>
-                  <Label
-                    htmlFor="mensaje"
-                    className="text-blue-600 dark:text-gray-300 font-medium"
-                  >
-                    Mensaje: *
-                  </Label>
-                  <Textarea
-                    id="mensaje"
-                    rows={6}
-                    value={formData.mensaje}
-                    onChange={handleChange}
-                    placeholder="Escribe tu mensaje aquí..."
-                    className="mt-1 bg-white text-gray-900 placeholder:text-slate-400 dark:bg-gray-200 dark:text-slate-900 dark:placeholder:text-slate-600"
-                  />
-                </div>
-
-                {error && <p className="text-red-600">{error}</p>}
-                {success && <p className="text-green-600">{success}</p>}
-
-                <div className="flex justify-center">
-                  <Button
-                    type="submit"
-                    disabled={loading}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 flex items-center justify-center gap-2"
-                  >
-                    {loading && (
-                      <Loader2 className="animate-spin h-5 w-5 text-white" />
+                  {/* Animated messages */}
+                  <AnimatePresence mode="wait">
+                    {error && (
+                      <motion.div
+                        key="error"
+                        variants={fadeInUp}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                        className="flex items-center gap-2 text-red-600"
+                      >
+                        <AlertCircle className="h-5 w-5" />
+                        <p>{error}</p>
+                      </motion.div>
                     )}
-                    Enviar formulario
-                  </Button>
-                </div>
-              </form>
-            </CardContent>
-          </Card>
+                    {success && (
+                      <motion.div
+                        key="success"
+                        variants={fadeInUp}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                        className="flex items-center gap-2 text-green-600"
+                      >
+                        <CheckCircle className="h-5 w-5" />
+                        <p>{success}</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  <div className="flex justify-center">
+                    <motion.div
+                      whileHover={{ scale: 1.01 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      <Button
+                        type="submit"
+                        disabled={loading}
+                        className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 flex items-center justify-center gap-2"
+                      >
+                        {loading && (
+                          <Loader2 className="animate-spin h-5 w-5 text-white" />
+                        )}
+                        Enviar formulario
+                      </Button>
+                    </motion.div>
+                  </div>
+                </form>
+              </CardContent>
+            </Card>
+          </motion.div>
         </div>
       </div>
     </div>

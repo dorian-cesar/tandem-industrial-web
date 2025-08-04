@@ -1,7 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Bus, Zap } from "lucide-react";
+import { motion, easeOut } from "framer-motion";
 
 export default function NuestraFlotaPage() {
   const fleet = [
@@ -41,6 +44,32 @@ export default function NuestraFlotaPage() {
     },
   ];
 
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { duration: 0.6, ease: easeOut },
+    },
+  };
+
+  const statsVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.7, ease: easeOut },
+    },
+  };
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -58,85 +87,103 @@ export default function NuestraFlotaPage() {
           </p>
 
           {/* Fleet Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
             {fleet.map((vehicle, index) => (
-              <Card
+              <motion.div
                 key={index}
-                className="hover:shadow-lg transition-all duration-300 relative dark:bg-slate-800"
+                variants={cardVariants}
+                className="rounded-lg"
               >
-                {vehicle.badge && (
-                  <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm z-10 flex items-center gap-1">
-                    <Zap className="w-4 h-4" />
-                    {vehicle.badge}
-                  </div>
-                )}
-                <CardContent className="p-0">
-                  <Image
-                    src={vehicle.image}
-                    alt={vehicle.title}
-                    width={400}
-                    height={250}
-                    className="w-full h-40 object-cover rounded-t-lg"
-                  />
-                  <div className="p-4">
-                    <h3 className="text-xl font-bold text-blue-600 mb-2">
-                      {vehicle.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">{vehicle.description}</p>
+                <Card className="relative dark:bg-slate-800 transition-shadow duration-300 flex flex-col h-full hover:shadow-lg hover:shadow-blue-200/30 dark:hover:shadow-slate-500/20">
+                  {vehicle.badge && (
+                    <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm z-10 flex items-center gap-1">
+                      <Zap className="w-4 h-4" />
+                      {vehicle.badge}
+                    </div>
+                  )}
+                  <CardContent className="p-0 flex flex-col flex-grow">
+                    <Image
+                      src={vehicle.image}
+                      alt={vehicle.title}
+                      width={400}
+                      height={250}
+                      className="w-full h-40 object-cover rounded-t-lg flex-shrink-0"
+                    />
+                    <div className="p-4 flex flex-col flex-grow">
+                      <h3 className="text-xl font-bold text-blue-600 mb-2">
+                        {vehicle.title}
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-300 mb-4 flex-grow">
+                        {vehicle.description}
+                      </p>
 
-                    <ul className="space-y-2">
-                      {vehicle.features.map((feature, featureIndex) => (
-                        <li
-                          key={featureIndex}
-                          className="flex items-center text-sm text-gray-700 dark:text-gray-300 "
-                        >
-                          <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </CardContent>
-              </Card>
+                      <ul className="space-y-2">
+                        {vehicle.features.map((feature, featureIndex) => (
+                          <li
+                            key={featureIndex}
+                            className="flex items-center text-sm text-gray-700 dark:text-gray-300"
+                          >
+                            <div className="w-2 h-2 bg-orange-500 rounded-full mr-3" />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* Stats Section */}
-          <div className="mt-16 bg-blue-50 dark:bg-slate-700 rounded-lg p-8">
+          <motion.div
+            className="mt-16 bg-blue-50 dark:bg-slate-700 rounded-lg p-8"
+            variants={statsVariants}
+            initial="hidden"
+            animate="visible"
+          >
             <h2 className="text-2xl font-bold text-blue-600 text-center mb-8">
               Nuestra Flota en Números
             </h2>
 
             <div className="grid md:grid-cols-4 gap-8 text-center">
-              <div>
-                <div className="text-3xl font-bold text-orange-500 mb-2">
-                  300+
-                </div>
-                <p className="text-gray-600 dark:text-gray-300">Vehículos en operación</p>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-orange-500 mb-2">
-                  95%
-                </div>
-                <p className="text-gray-600 dark:text-gray-300">Disponibilidad operacional</p>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-orange-500 mb-2">
-                  2030
-                </div>
-                <p className="text-gray-600 dark:text-gray-300">Meta flota 100% eléctrica</p>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-orange-500 mb-2">
-                  35
-                </div>
-                <p className="text-gray-600 dark:text-gray-300">Años de experiencia</p>
-              </div>
+              {[
+                { number: "300+", label: "Vehículos en operación" },
+                { number: "95%", label: "Disponibilidad operacional" },
+                { number: "2030", label: "Meta flota 100% eléctrica" },
+                { number: "35", label: "Años de experiencia" },
+              ].map(({ number, label }, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    delay: 0.2 * idx,
+                    duration: 0.5,
+                    ease: easeOut,
+                  }}
+                >
+                  <div className="text-3xl font-bold text-orange-500 mb-2">
+                    {number}
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-300">{label}</p>
+                </motion.div>
+              ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* CTA Section */}
-          <div className="mt-16 text-center">
+          <motion.div
+            className="mt-16 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: easeOut }}
+          >
             <h2 className="text-2xl font-bold text-blue-600 mb-4">
               ¿Necesitas un servicio de transporte?
             </h2>
@@ -150,7 +197,7 @@ export default function NuestraFlotaPage() {
             >
               Contacto Comercial
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

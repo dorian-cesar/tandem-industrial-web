@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Users } from "lucide-react";
+import { motion, easeOut } from "framer-motion";
 
 export default function NuestrosClientesPage() {
   const clients = [
@@ -25,6 +28,21 @@ export default function NuestrosClientesPage() {
     { name: "BREDEN MASTER", logo: "img/breden_master.png" },
   ];
 
+  const containerVariants = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.07,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: easeOut } },
+  };
+
   return (
     <div className="">
       {/* Hero Section */}
@@ -43,12 +61,19 @@ export default function NuestrosClientesPage() {
             experiencia Tandem.
           </p>
 
-          {/* Clients Grid */}
-          <div className="flex flex-wrap justify-center gap-8 mb-16">
+          {/* Clients Grid with animation */}
+          <motion.div
+            className="flex flex-wrap justify-center gap-8 mb-16"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             {clients.map((client, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="flex items-center justify-center p-4 w-[45%] md:w-[22%] lg:w-[18%]"
+                variants={itemVariants}
+                className="flex items-center justify-center p-4 w-[45%] md:w-[22%] lg:w-[18%] transition-transform duration-300 hover:scale-[1.03]"
               >
                 <Image
                   src={client.logo}
@@ -57,9 +82,9 @@ export default function NuestrosClientesPage() {
                   height={80}
                   className="max-h-16 w-auto object-contain"
                 />
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* CTA Button */}
           <div className="text-center">

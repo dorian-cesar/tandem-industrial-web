@@ -73,7 +73,7 @@ export default function TransporteIndustrialPage() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen dark:bg-gray-900">
       {/* Hero Section */}
       <section className="relative h-100">
         <Image

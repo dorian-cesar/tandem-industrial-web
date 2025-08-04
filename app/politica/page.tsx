@@ -1,14 +1,23 @@
-import { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Política Integrada | Tandem",
-  description:
-    "Compromisos de Tandem en calidad, seguridad, salud ocupacional, medio ambiente y seguridad vial.",
-};
+import { Metadata } from "next";
+import { motion } from "framer-motion";
+
+// export const metadata: Metadata = {
+//   title: "Política Integrada | Tandem",
+//   description:
+//     "Compromisos de Tandem en calidad, seguridad, salud ocupacional, medio ambiente y seguridad vial.",
+// };
 
 export default function PoliticaIntegradaPage() {
   return (
-    <main className="max-w-4xl mx-auto px-4 py-16 bg-background text-foreground">
+    <motion.main
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 20 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="max-w-4xl mx-auto px-4 py-16 bg-background text-foreground"
+    >
       <h1 className="text-3xl md:text-4xl font-bold text-center mb-10">
         POLÍTICA INTEGRADA DE CALIDAD, SEGURIDAD, SALUD OCUPACIONAL, MEDIO
         AMBIENTE Y SEGURIDAD VIAL
@@ -83,6 +92,6 @@ export default function PoliticaIntegradaPage() {
           Gerente División Industrial
         </p>
       </div>
-    </main>
+    </motion.main>
   );
 }

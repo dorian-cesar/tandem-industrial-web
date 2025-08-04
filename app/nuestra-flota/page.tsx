@@ -62,7 +62,7 @@ export default function NuestraFlotaPage() {
             {fleet.map((vehicle, index) => (
               <Card
                 key={index}
-                className="hover:shadow-lg transition-all duration-300 relative dark:bg-slate-700"
+                className="hover:shadow-lg transition-all duration-300 relative dark:bg-slate-800"
               >
                 {vehicle.badge && (
                   <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm z-10 flex items-center gap-1">

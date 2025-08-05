@@ -7,9 +7,31 @@ import { Card, CardContent } from "@/components/ui/card";
 import { motion, easeOut, stagger } from "framer-motion";
 import { Bus, ArrowDown } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { useRef, useState, useEffect } from "react";
 
 export default function NuestrosServiciosPage() {
   const pathname = usePathname();
+  const contentRef = useRef<SVGSVGElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Scroll a contenido en mobile
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkIfMobile();
+    window.addEventListener("resize", checkIfMobile);
+    return () => window.removeEventListener("resize", checkIfMobile);
+  }, []);
+
+  const handleCardClick = () => {
+    if (isMobile && contentRef.current) {
+      contentRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
 
   const services = [
     {
@@ -60,7 +82,6 @@ export default function NuestrosServiciosPage() {
     },
   ];
 
-  // Contenedor con stagger children
   const containerVariants = {
     hidden: {},
     visible: {
@@ -135,6 +156,7 @@ export default function NuestrosServiciosPage() {
             >
               <Link href={service.href} scroll={false}>
                 <Card
+                  onClick={handleCardClick}
                   className={`h-full flex flex-col justify-between cursor-pointer transition-all duration-500 group shadow-lg overflow-hidden bg-white dark:bg-gray-800 dark:border-gray-700 ${
                     pathname === service.href
                       ? "border-2 border-blue-500"
@@ -171,7 +193,10 @@ export default function NuestrosServiciosPage() {
                           className="bg-orange-500 hover:bg-orange-600 text-xs font-semibold px-10 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group/btn"
                         >
                           Conoce más
-                          <ArrowDown className="ml-2 w-3 h-3 group-hover/btn:translate-x-1 transition-transform" />
+                          <ArrowDown
+                            className="ml-2 w-3 h-3 group-hover/btn:translate-x-1 transition-transform"
+                            ref={contentRef}
+                          />
                         </Button>
                       </motion.div>
                     </div>

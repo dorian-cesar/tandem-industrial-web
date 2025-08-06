@@ -260,7 +260,7 @@ export async function POST(req: Request) {
         </head>
         <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f8fafc; margin: 0; padding: 20px;">
           <div style="max-width: 500px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); overflow: hidden;">
-            <div style="background: #218a34; padding: 30px 20px; text-align: center;">
+            <div style="background: #49a35a; padding: 30px 20px; text-align: center;">
               <h1 style="color: #ffffff; margin: 0; font-size: 24px;">✅ ¡Mensaje Recibido!</h1>
             </div>
             <div style="padding: 30px 20px; text-align: center;">

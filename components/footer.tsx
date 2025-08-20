@@ -106,7 +106,7 @@ export default function Footer() {
 
             <motion.div whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
               <Link
-                href="/contacto"
+                href="/canal-denuncias"
                 className="flex items-center space-x-4 hover:text-orange-300 transition-colors duration-300 group p-4 rounded-xl hover:bg-white/10"
               >
                 <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">

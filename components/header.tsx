@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Megaphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence, easeInOut, easeOut } from "framer-motion";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -91,9 +91,31 @@ export default function Header() {
             })}
           </nav>
 
-          {/* Theme Toggle */}
-          <div className="hidden md:block">
-            <ThemeToggle />
+          {/* Desktop Theme Toggle + Canal de Denuncias */}
+          <div className="hidden md:flex items-center space-x-2">
+            {/* Canal de Denuncias icon */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.3 }}
+            >
+              <Link
+                href="/canal-denuncias"
+                className="flex items-center justify-center text-orange-600 hover:text-orange-700 transition-colors mr-3"
+                aria-label="Canal de Denuncias"
+              >
+                <Megaphone className="w-5 h-5" />
+              </Link>
+            </motion.div>
+
+            {/* Theme Toggle */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.3 }}
+            >
+              <ThemeToggle />
+            </motion.div>
           </div>
 
           {/* Mobile menu button */}
@@ -170,6 +192,29 @@ export default function Header() {
                   );
                 })}
               </nav>
+
+              {/* Canal de Denuncias */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{
+                  delay: navigation.length * 0.1 + 0.1,
+                  duration: 0.3,
+                }}
+                className="p-4 mt-2 border-t border-gray-200 dark:border-gray-700"
+              >
+                <Link
+                  href="/canal-denuncias"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl 
+               bg-orange-600 text-white font-medium 
+               hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-600 
+               transition-colors"
+                >
+                  <Megaphone className="h-5 w-5" />
+                  Canal de Denuncias
+                </Link>
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>

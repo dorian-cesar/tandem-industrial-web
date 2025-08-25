@@ -185,7 +185,7 @@ export default function TransporteParticularPage() {
                         {service.title}
                       </h3>
                       <motion.div
-                        whileHover={{ x: 5 }}
+                        whileHover={{ y: -2 }}
                         className="mt-auto w-max mx-auto relative z-10"
                       >
                         <Button

@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { Megaphone, Loader2, AlertCircle, CheckCircle } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, easeOut } from "framer-motion";
 
 export default function CanalDenunciasPage() {
   const [mensaje, setMensaje] = useState("");
@@ -41,7 +41,6 @@ export default function CanalDenunciasPage() {
       const res = await fetch("/api/denuncias", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        // solo se envía el mensaje
         body: JSON.stringify({ mensaje }),
       });
 
@@ -75,10 +74,10 @@ export default function CanalDenunciasPage() {
       <section className="relative h-60 flex items-center justify-center">
         <Image
           src="/img/logo-tandem.jpg"
-          alt="Canal de denuncias"
+          alt="Logo Tandem"
           width={180}
           height={180}
-          className="rounded-full object-cover border-4 border-white shadow-lg mt-6"
+          className="rounded-full object-cover border-4 border-white shadow-lg mt-8"
           priority={true}
         />
       </section>
@@ -104,7 +103,7 @@ export default function CanalDenunciasPage() {
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.6, ease: easeOut }}
             viewport={{ once: true }}
           >
             <Card className="bg-blue-50 dark:bg-gray-800 shadow-lg">

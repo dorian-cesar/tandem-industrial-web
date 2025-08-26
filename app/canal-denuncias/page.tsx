@@ -2,34 +2,29 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { Megaphone, Loader2, AlertCircle, CheckCircle } from "lucide-react";
 import { motion, AnimatePresence, easeOut } from "framer-motion";
+import jsPDF from "jspdf";
 
 export default function CanalDenunciasPage() {
   const [mensaje, setMensaje] = useState("");
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const [success, setSuccess] = useState<JSX.Element | null>(null);
+  const [ticketData, setTicketData] = useState<{
+    ticketId: string;
+    password: string;
+  } | null>(null);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (error || success) {
-      const timer = setTimeout(() => {
-        setError("");
-        setSuccess("");
-      }, 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [error, success]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    setSuccess("");
+    setSuccess(null);
     setLoading(true);
 
     if (!mensaje.trim()) {
@@ -50,23 +45,100 @@ export default function CanalDenunciasPage() {
         throw new Error(data.error || "Error al enviar la denuncia.");
       }
 
-      // Enviar denuncia de manera anónima y mostrar número de ticket con password generada
-      // const data = await res.json();
-      // setSuccess(
-      //   `Denuncia enviada. Guarda tu ticket: ${data.ticketId} y contraseña: ${data.password}`
-      // );
+      const data = await res.json();
+      setTicketData({ ticketId: data.ticketId, password: data.password });
 
-      setSuccess("Tu denuncia fue enviada de manera anónima.");
+      setSuccess(
+        <div className="space-y-2">
+          <p>
+            <strong>Denuncia enviada correctamente.</strong>
+          </p>
+          <p>
+            Guarda tu ticket: <strong>{data.ticketId}</strong>
+          </p>
+          <p>
+            Contraseña generada: <strong>{data.password}</strong>
+          </p>
+          <p>
+            Puedes usar estos datos para consultar el estado de tu denuncia.
+          </p>
+        </div>
+      );
+
       setMensaje("");
     } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError("No se pudo enviar la denuncia.");
-      }
+      if (err instanceof Error) setError(err.message);
+      else setError("No se pudo enviar la denuncia.");
     } finally {
       setLoading(false);
     }
+  };
+
+  const descargarPDF = async () => {
+    if (!ticketData) return;
+
+    const doc = new jsPDF();
+
+    // Convertir imagen a base64
+    const res = await fetch("/img/logo-tandem.jpg");
+    const blob = await res.blob();
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      const base64data = reader.result as string;
+
+      // Agregar logo
+      doc.addImage(base64data, "JPEG", 15, 10, 40, 40);
+
+      // Título
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(18);
+      doc.setTextColor("#1E3A8A");
+      doc.text("Canal de Denuncias - Tandem Industrial", 60, 25);
+
+      // Separador
+      doc.setDrawColor("#1E3A8A");
+      doc.setLineWidth(0.5);
+      doc.line(15, 55, 195, 55);
+
+      // Ticket info
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(14);
+      doc.setTextColor("#111827");
+      doc.text(`Número de Ticket:`, 15, 70);
+      doc.setFont("helvetica", "normal");
+      doc.text(ticketData.ticketId, 65, 70);
+
+      doc.setFont("helvetica", "bold");
+      doc.text(`Contraseña:`, 15, 80);
+      doc.setFont("helvetica", "normal");
+      doc.text(ticketData.password, 65, 80);
+
+      // Mensaje de nota
+      doc.setFont("helvetica", "italic");
+      doc.setTextColor("#374151");
+      doc.setFontSize(12);
+      doc.text(
+        "Guarda estos datos de forma segura. Solo tú podrás consultar el estado de tu denuncia.",
+        15,
+        100,
+        { maxWidth: 180 }
+      );
+
+      // Footer
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(10);
+      doc.setTextColor("#6B7280");
+      doc.text(
+        `Documento generado el ${new Date().toLocaleString("es-ES")}`,
+        15,
+        280
+      );
+
+      doc.save(`Denuncia_${ticketData.ticketId}.pdf`);
+    };
+
+    reader.readAsDataURL(blob);
   };
 
   const fadeInUp = {
@@ -98,14 +170,12 @@ export default function CanalDenunciasPage() {
               Canal de Denuncias Anónimo
             </h1>
           </div>
-
           <p className="text-blue-600 dark:text-gray-300">
             Este canal es completamente anónimo. Por favor, describe con el
             mayor detalle posible tu denuncia. Tu identidad no será registrada.
           </p>
         </div>
 
-        {/* Formulario */}
         <div className="max-w-2xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -129,11 +199,11 @@ export default function CanalDenunciasPage() {
                       value={mensaje}
                       onChange={(e) => setMensaje(e.target.value)}
                       placeholder="Escribe tu denuncia aquí..."
+                      disabled={!!ticketData}
                       className="mt-1 bg-white text-gray-900 placeholder:text-slate-400 dark:bg-gray-200 dark:text-slate-900 dark:placeholder:text-slate-600"
                     />
                   </div>
 
-                  {/* Mensajes de estado */}
                   <AnimatePresence mode="wait">
                     {error && (
                       <motion.div
@@ -155,10 +225,20 @@ export default function CanalDenunciasPage() {
                         initial="hidden"
                         animate="visible"
                         exit="exit"
-                        className="flex items-center gap-2 text-green-600"
+                        className="flex flex-col gap-2 text-green-600"
                       >
                         <CheckCircle className="h-5 w-5" />
-                        <p>{success}</p>
+                        {success}
+
+                        {ticketData && (
+                          <Button
+                            type="button"
+                            onClick={descargarPDF}
+                            className="mt-2 bg-gray-800 hover:bg-gray-900 text-white px-6 py-2"
+                          >
+                            Descargar PDF
+                          </Button>
+                        )}
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -170,8 +250,10 @@ export default function CanalDenunciasPage() {
                     >
                       <Button
                         type="submit"
-                        disabled={loading}
-                        className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-3 flex items-center justify-center gap-2"
+                        disabled={loading || !!ticketData}
+                        className={`bg-orange-600 hover:bg-orange-700 text-white px-8 py-3 flex items-center justify-center gap-2 ${
+                          !!ticketData ? "cursor-not-allowed opacity-60" : ""
+                        }`}
                       >
                         {loading && (
                           <Loader2 className="animate-spin h-5 w-5 text-white" />

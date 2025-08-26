@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import crypto from "crypto";
+// import dbConnect from "@/lib/dbConnect";
+// import Denuncia from "@/models/Denuncia";
 
 // Sanitizar entrada
 function sanitizeInput(input: string): string {
@@ -7,7 +10,11 @@ function sanitizeInput(input: string): string {
 }
 
 // Template email para denuncia
-function createDenunciaTemplate(data: { mensaje: string }): string {
+function createDenunciaTemplate(data: {
+  mensaje: string;
+  ticketId: string;
+  password: string;
+}): string {
   return `
     <!DOCTYPE html>
     <html lang="es">
@@ -24,7 +31,10 @@ function createDenunciaTemplate(data: { mensaje: string }): string {
         <div style="padding:30px;">
           <h2 style="font-size:18px;color:#111827;margin-top:0;">📌 Detalles</h2>
           <div style="margin-top:20px;background:#f3f4f6;padding:15px;border-radius:6px;">
-            <p style="margin:0;white-space:pre-line;">${data.mensaje}</p>
+          <p style="margin-top:10px;"><strong>Ticket ID:</strong> ${
+            data.ticketId
+          }</p>
+            <p style="margin:0;white-space:pre-line;"><strong>Mensaje:</strong> ${data.mensaje}</p>
           </div>
         </div>
         <div style="background:#f9fafb;padding:15px;text-align:center;font-size:12px;color:#6b7280;border-top:1px solid #e5e7eb;">
@@ -36,12 +46,20 @@ function createDenunciaTemplate(data: { mensaje: string }): string {
   `;
 }
 
+// Generar ticket y password
+function generateTicketId() {
+  return "T-" + Math.floor(100000 + Math.random() * 900000); // ej: T-123456
+}
+
+function generatePassword() {
+  return crypto.randomBytes(4).toString("hex"); // ej: a1b2c3d4
+}
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
     const { mensaje } = body;
 
-    // Validar campo requerido
     if (!mensaje || mensaje.trim() === "") {
       return NextResponse.json(
         { error: "El mensaje es obligatorio" },
@@ -49,7 +67,6 @@ export async function POST(req: Request) {
       );
     }
 
-    // Sanitizar
     const sanitizedData = {
       mensaje: sanitizeInput(mensaje),
     };
@@ -60,6 +77,20 @@ export async function POST(req: Request) {
         { status: 400 }
       );
     }
+
+    // // Conectar DB
+    // await dbConnect();
+
+    // Generar ticket y password
+    const ticketId = generateTicketId();
+    const password = generatePassword();
+
+    // // Guardar en MongoDB
+    // const denuncia = await Denuncia.create({
+    //   mensaje: sanitizedData.mensaje,
+    //   ticketId,
+    //   password,
+    // });
 
     // Configurar transporter
     const transporter = nodemailer.createTransport({
@@ -72,27 +103,33 @@ export async function POST(req: Request) {
 
     await transporter.verify();
 
-    // Enviar correo al equipo interno
+    // Enviar correo al equipo
     await transporter.sendMail({
       from: `"Canal de Denuncias" <${process.env.EMAIL_FROM}>`,
       to: process.env.EMAIL_TO,
       subject: `🚨 Nuevo reporte anónimo en Canal de Denuncias`,
       text: `
-        NUEVO REPORTE ANÓNIMO
-        =====================
+            NUEVO REPORTE ANÓNIMO
+            =====================
 
-        Mensaje:
-        ${sanitizedData.mensaje}
+            Mensaje:
+            ${sanitizedData.mensaje}
 
-        ---
-        Recibido el: ${new Date().toLocaleString("es-ES")}
+            Ticket ID: ${ticketId}
+            Password: ${password}
+
+            Recibido el: ${new Date().toLocaleString("es-ES")}
       `,
-      html: createDenunciaTemplate(sanitizedData),
+      html: createDenunciaTemplate({ ...sanitizedData, ticketId, password }),
     });
 
     return NextResponse.json({
       success: true,
-      message: "Reporte enviado correctamente (anónimo)",
+      message: "Reporte registrado correctamente (anónimo)",
+      // ticketId: denuncia.ticketId,
+      // password: denuncia.password,
+      ticketId: ticketId,
+      password: password,
     });
   } catch (error) {
     console.error("Error al enviar denuncia:", error);
@@ -102,46 +139,3 @@ export async function POST(req: Request) {
     );
   }
 }
-
-// import { NextResponse } from "next/server";
-// import crypto from "crypto";
-// import dbConnect from "@/lib/dbConnect";
-// import Denuncia from "@/models/Denuncia";
-
-// function generateTicketId() {
-//   return "T-" + Math.floor(100000 + Math.random() * 900000); // ej: T-123456
-// }
-
-// function generatePassword() {
-//   return crypto.randomBytes(4).toString("hex"); // ej: a1b2c3d4
-// }
-
-// export async function POST(req: Request) {
-//   try {
-//     await dbConnect();
-//     const { mensaje } = await req.json();
-
-//     if (!mensaje || mensaje.trim() === "") {
-//       return NextResponse.json({ error: "El mensaje es obligatorio" }, { status: 400 });
-//     }
-
-//     const ticketId = generateTicketId();
-//     const password = generatePassword();
-
-//     const denuncia = await Denuncia.create({
-//       ticketId,
-//       password,
-//       mensaje
-//     });
-
-//     return NextResponse.json({
-//       success: true,
-//       message: "Denuncia registrada",
-//       ticketId: denuncia.ticketId,
-//       password: denuncia.password
-//     });
-//   } catch (error) {
-//     console.error("Error:", error);
-//     return NextResponse.json({ error: "Error interno" }, { status: 500 });
-//   }
-// }

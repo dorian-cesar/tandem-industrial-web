@@ -102,3 +102,46 @@ export async function POST(req: Request) {
     );
   }
 }
+
+// import { NextResponse } from "next/server";
+// import crypto from "crypto";
+// import dbConnect from "@/lib/dbConnect";
+// import Denuncia from "@/models/Denuncia";
+
+// function generateTicketId() {
+//   return "T-" + Math.floor(100000 + Math.random() * 900000); // ej: T-123456
+// }
+
+// function generatePassword() {
+//   return crypto.randomBytes(4).toString("hex"); // ej: a1b2c3d4
+// }
+
+// export async function POST(req: Request) {
+//   try {
+//     await dbConnect();
+//     const { mensaje } = await req.json();
+
+//     if (!mensaje || mensaje.trim() === "") {
+//       return NextResponse.json({ error: "El mensaje es obligatorio" }, { status: 400 });
+//     }
+
+//     const ticketId = generateTicketId();
+//     const password = generatePassword();
+
+//     const denuncia = await Denuncia.create({
+//       ticketId,
+//       password,
+//       mensaje
+//     });
+
+//     return NextResponse.json({
+//       success: true,
+//       message: "Denuncia registrada",
+//       ticketId: denuncia.ticketId,
+//       password: denuncia.password
+//     });
+//   } catch (error) {
+//     console.error("Error:", error);
+//     return NextResponse.json({ error: "Error interno" }, { status: 500 });
+//   }
+// }

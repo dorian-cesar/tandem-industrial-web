@@ -1,19 +1,23 @@
-// import { NextResponse } from "next/server";
-// import dbConnect from "@/lib/dbConnect";
-// import Denuncia from "@/models/Denuncia";
+import { NextResponse } from "next/server";
+import prisma from "@/lib/dbConnect";
 
-// export async function POST(req: Request) {
-//   await dbConnect();
-//   const { ticketId, password } = await req.json();
+export async function POST(req: Request) {
+  const { ticketId, password } = await req.json();
 
-//   const denuncia = await Denuncia.findOne({ ticketId, password });
-//   if (!denuncia) {
-//     return NextResponse.json({ error: "Ticket o contraseña inválidos" }, { status: 404 });
-//   }
+  const denuncia = await prisma.denuncia.findFirst({
+    where: { ticketId, password },
+  });
 
-//   return NextResponse.json({
-//     ticketId: denuncia.ticketId,
-//     estado: denuncia.estado,
-//     respuesta: denuncia.respuesta
-//   });
-// }
+  if (!denuncia) {
+    return NextResponse.json(
+      { error: "Ticket o contraseña inválidos" },
+      { status: 404 }
+    );
+  }
+
+  return NextResponse.json({
+    ticketId: denuncia.ticketId,
+    estado: denuncia.estado,
+    respuesta: denuncia.respuesta,
+  });
+}

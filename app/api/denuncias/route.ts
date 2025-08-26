@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import crypto from "crypto";
-// import dbConnect from "@/lib/dbConnect";
-// import Denuncia from "@/models/Denuncia";
+import prisma from "@/lib/dbConnect";
 
 // Sanitizar entrada
 function sanitizeInput(input: string): string {
@@ -34,7 +33,9 @@ function createDenunciaTemplate(data: {
           <p style="margin-top:10px;"><strong>Ticket ID:</strong> ${
             data.ticketId
           }</p>
-            <p style="margin:0;white-space:pre-line;"><strong>Mensaje:</strong> ${data.mensaje}</p>
+            <p style="margin:0;white-space:pre-line;"><strong>Mensaje:</strong> ${
+              data.mensaje
+            }</p>
           </div>
         </div>
         <div style="background:#f9fafb;padding:15px;text-align:center;font-size:12px;color:#6b7280;border-top:1px solid #e5e7eb;">
@@ -67,9 +68,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const sanitizedData = {
-      mensaje: sanitizeInput(mensaje),
-    };
+    const sanitizedData = { mensaje: sanitizeInput(mensaje) };
 
     if (sanitizedData.mensaje.length > 3000) {
       return NextResponse.json(
@@ -78,21 +77,20 @@ export async function POST(req: Request) {
       );
     }
 
-    // // Conectar DB
-    // await dbConnect();
-
     // Generar ticket y password
     const ticketId = generateTicketId();
     const password = generatePassword();
 
-    // // Guardar en MongoDB
-    // const denuncia = await Denuncia.create({
-    //   mensaje: sanitizedData.mensaje,
-    //   ticketId,
-    //   password,
-    // });
+    // Guardar en MySQL con Prisma
+    const denuncia = await prisma.denuncia.create({
+      data: {
+        mensaje: sanitizedData.mensaje,
+        ticketId,
+        password,
+      },
+    });
 
-    // Configurar transporter
+    // Enviar correo
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -101,35 +99,18 @@ export async function POST(req: Request) {
       },
     });
 
-    await transporter.verify();
-
-    // Enviar correo al equipo
     await transporter.sendMail({
       from: `"Canal de Denuncias" <${process.env.EMAIL_FROM}>`,
       to: process.env.EMAIL_TO,
       subject: `🚨 Nuevo reporte anónimo en Canal de Denuncias`,
-      text: `
-            NUEVO REPORTE ANÓNIMO
-            =====================
-
-            Mensaje:
-            ${sanitizedData.mensaje}
-
-            Ticket ID: ${ticketId}
-            Password: ${password}
-
-            Recibido el: ${new Date().toLocaleString("es-ES")}
-      `,
       html: createDenunciaTemplate({ ...sanitizedData, ticketId, password }),
     });
 
     return NextResponse.json({
       success: true,
       message: "Reporte registrado correctamente (anónimo)",
-      // ticketId: denuncia.ticketId,
-      // password: denuncia.password,
-      ticketId: ticketId,
-      password: password,
+      ticketId: denuncia.ticketId,
+      password: denuncia.password,
     });
   } catch (error) {
     console.error("Error al enviar denuncia:", error);

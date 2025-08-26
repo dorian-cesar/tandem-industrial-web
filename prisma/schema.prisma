@@ -1,0 +1,18 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Denuncia {
+  id        Int      @id @default(autoincrement())
+  ticketId  String   @unique
+  password  String
+  mensaje   String
+  estado    String   @default("pendiente")
+  respuesta String   @default("")
+  createdAt DateTime @default(now())
+}

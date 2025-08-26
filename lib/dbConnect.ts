@@ -1,27 +1,14 @@
-// import mongoose from "mongoose";
+import { PrismaClient } from "@prisma/client";
 
-// const MONGODB_URI = process.env.MONGODB_URI as string;
+let prisma: PrismaClient;
 
-// if (!MONGODB_URI) {
-//   throw new Error("⚠️ Please define the MONGODB_URI environment variable inside .env.local");
-// }
+if (process.env.NODE_ENV === "production") {
+  prisma = new PrismaClient();
+} else {
+  if (!(global as any).prisma) {
+    (global as any).prisma = new PrismaClient();
+  }
+  prisma = (global as any).prisma;
+}
 
-// let cached = (global as any).mongoose;
-
-// if (!cached) {
-//   cached = (global as any).mongoose = { conn: null, promise: null };
-// }
-
-// async function dbConnect() {
-//   if (cached.conn) {
-//     return cached.conn;
-//   }
-
-//   if (!cached.promise) {
-//     cached.promise = mongoose.connect(MONGODB_URI).then((mongoose) => mongoose);
-//   }
-//   cached.conn = await cached.promise;
-//   return cached.conn;
-// }
-
-// export default dbConnect;
+export default prisma;

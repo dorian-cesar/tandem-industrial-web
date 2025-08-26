@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
@@ -48,6 +49,12 @@ export default function CanalDenunciasPage() {
         const data = await res.json();
         throw new Error(data.error || "Error al enviar la denuncia.");
       }
+
+      // Enviar denuncia de manera anónima y mostrar número de ticket con password generada
+      // const data = await res.json();
+      // setSuccess(
+      //   `Denuncia enviada. Guarda tu ticket: ${data.ticketId} y contraseña: ${data.password}`
+      // );
 
       setSuccess("Tu denuncia fue enviada de manera anónima.");
       setMensaje("");
@@ -176,6 +183,26 @@ export default function CanalDenunciasPage() {
                 </form>
               </CardContent>
             </Card>
+
+            {/* Botón para consultar denuncias */}
+            <div className="flex flex-col items-center mt-6">
+              <h2 className="text-md font-semibold mb-3 text-blue-600 dark:text-gray-300 mt-3">
+                ¿Quieres revisar el estado de tu denuncia?
+              </h2>
+              <motion.div
+                whileHover={{ scale: 1.01 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Link href="/canal-denuncias/ver-estado">
+                  <Button
+                    type="button"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 mt-1"
+                  >
+                    Consultar denuncia
+                  </Button>
+                </Link>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>

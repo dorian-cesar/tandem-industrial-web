@@ -46,7 +46,7 @@ function createEmailTemplate(data: {
         <div style="padding: 40px 30px;">
 
           <!-- Contact Info Card -->
-          <div style="background-color: #f8fafc; border-radius: 12px; padding: 25px; margin-bottom: 30px; border-left: 4px solid #1e3a8a;">
+          <div style="background-color: #f8fafc; border-radius: 12px; padding: 25px; margin-bottom: 30px;">
             <h2 style="color: #1e293b; margin: 0 0 20px 0; font-size: 20px; font-weight: 600;">
               👤 Información de Contacto
             </h2>
@@ -119,7 +119,7 @@ function createEmailTemplate(data: {
             <h3 style="color: #1e293b; margin: 0 0 15px 0; font-size: 18px; font-weight: 600;">
               💬 Mensaje
             </h3>
-            <div style="background-color: #f1f5f9; padding: 20px; border-radius: 8px; border-left: 3px solid #1e3a8a;">
+            <div style="background-color: #f1f5f9; padding: 20px; border-radius: 8px;">
               <p style="color: #334155; line-height: 1.6; margin: 0; white-space: pre-wrap; font-size: 15px;">
                 ${data.mensaje}
               </p>

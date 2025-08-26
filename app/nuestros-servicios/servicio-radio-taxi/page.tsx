@@ -246,7 +246,7 @@ export default function RadioTaxiPage() {
 
             <div className="flex justify-center mt-6">
               <Link href="/contacto">
-                <Button className="bg-orange-500 hover:bg-orange-600 text-white text-lg px-8 py-4 rounded-full shadow-lg">
+                <Button className="bg-orange-500 hover:bg-orange-600 text-white text-lg px-8 py-4 rounded-full shadow-lg mt-2">
                   Contacto Comercial
                 </Button>
               </Link>

@@ -37,8 +37,12 @@ export default function ListaDenunciasPage() {
     const fetchTickets = async () => {
       setLoading(true);
       try {
-        const res = await fetch("/api/denuncias/lista-denuncias");
+        const res = await fetch("/api/denuncias/lista-denuncias", {
+          cache: "no-store",
+        });
+
         if (!res.ok) throw new Error("Error al obtener denuncias");
+
         const data: Denuncia[] = await res.json();
         setTickets(data);
         setOriginalTickets(data);
@@ -52,6 +56,7 @@ export default function ListaDenunciasPage() {
         setLoading(false);
       }
     };
+
     fetchTickets();
   }, []);
 

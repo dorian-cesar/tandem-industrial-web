@@ -2,22 +2,32 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/dbConnect";
 
 export async function GET(
-  req: NextRequest,
+  req: Request,
   { params }: { params: { id: string } }
 ) {
   try {
     const id = Number(params.id);
-    if (isNaN(id))
+    if (isNaN(id)) {
       return NextResponse.json({ error: "ID inválido" }, { status: 400 });
+    }
 
-    const ticket = await prisma.denuncia.findUnique({ where: { id } });
-    if (!ticket)
+    const ticket = await prisma.denuncia.findUnique({
+      where: { id },
+    });
+
+    if (!ticket) {
       return NextResponse.json(
         { error: "Ticket no encontrado" },
         { status: 404 }
       );
+    }
 
-    return NextResponse.json(ticket);
+    return NextResponse.json(ticket, {
+      headers: {
+        "Cache-Control":
+          "no-store, no-cache, must-revalidate, proxy-revalidate",
+      },
+    });
   } catch (error) {
     console.error(error);
     return NextResponse.json(

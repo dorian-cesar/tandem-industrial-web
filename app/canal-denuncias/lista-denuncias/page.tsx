@@ -299,8 +299,10 @@ export default function ListaDenunciasPage() {
                             className="hover:bg-blue-50 dark:hover:bg-gray-700 transition"
                           >
                             <td className="p-3 border-b">{t.ticketId}</td>
-                            <td className="p-3 border-b max-w-xs break-words">
-                              {t.mensaje}
+                            <td className="p-3 border-b max-w-xs">
+                              <div className="max-h-24 overflow-y-auto break-words">
+                                {t.mensaje}
+                              </div>
                             </td>
                             {/* Estado con badge + select centrado */}
                             <td className="p-3 border-b whitespace-nowrap text-center">

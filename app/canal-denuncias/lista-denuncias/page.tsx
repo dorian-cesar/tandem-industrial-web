@@ -25,22 +25,23 @@ export default function ListaDenunciasPage() {
   const [loading, setLoading] = useState(true);
   const [savingId, setSavingId] = useState<number | null>(null);
   const [deletingId, setDeletingId] = useState<number | null>(null);
+  const [searchText, setSearchText] = useState("");
+  const [filterEstado, setFilterEstado] = useState("");
+  const [originalTickets, setOriginalTickets] = useState<Denuncia[]>([]);
 
   // Paginación
   const [currentPage, setCurrentPage] = useState(1);
   const ticketsPerPage = 5;
-  const indexOfLastTicket = currentPage * ticketsPerPage;
-  const indexOfFirstTicket = indexOfLastTicket - ticketsPerPage;
-  const currentTickets = tickets.slice(indexOfFirstTicket, indexOfLastTicket);
-  const totalPages = Math.ceil(tickets.length / ticketsPerPage);
 
   useEffect(() => {
     const fetchTickets = async () => {
+      setLoading(true);
       try {
         const res = await fetch("/api/denuncias/lista-denuncias");
         if (!res.ok) throw new Error("Error al obtener denuncias");
-        const data = await res.json();
+        const data: Denuncia[] = await res.json();
         setTickets(data);
+        setOriginalTickets(data);
       } catch (err) {
         MySwal.fire({
           icon: "error",
@@ -53,6 +54,47 @@ export default function ListaDenunciasPage() {
     };
     fetchTickets();
   }, []);
+
+  // Data simulada
+  //   useEffect(() => {
+  //     const fetchTickets = async () => {
+  //       setLoading(true);
+  //       try {
+  //         const mockTickets: Denuncia[] = Array.from({ length: 30 }, (_, i) => {
+  //           const estados = ["Pendiente", "En proceso", "Resuelto"];
+  //           return {
+  //             id: i + 1,
+  //             ticketId: `T-${1000 + i}`,
+  //             estado: estados[i % 3],
+  //             mensaje: `Mensaje de prueba número ${i + 1}`,
+  //             respuesta: `Respuesta de prueba número ${i + 1}`,
+  //             createdAt: new Date(Date.now() - i * 1000 * 60 * 60).toISOString(),
+  //           };
+  //         });
+  //         await new Promise((r) => setTimeout(r, 500));
+  //         setTickets(mockTickets);
+  //         setOriginalTickets(mockTickets);
+  //       } catch (err) {
+  //         MySwal.fire({
+  //           icon: "error",
+  //           title: "Error",
+  //           text: "No se pudieron cargar los tickets",
+  //         });
+  //       } finally {
+  //         setLoading(false);
+  //       }
+  //     };
+  //     fetchTickets();
+  //   }, []);
+
+  const hasChanged = (ticket: Denuncia) => {
+    const original = originalTickets.find((t) => t.id === ticket.id);
+    if (!original) return false;
+    return (
+      ticket.estado !== original.estado ||
+      ticket.respuesta !== original.respuesta
+    );
+  };
 
   const handleUpdate = async (
     id: number,
@@ -70,7 +112,9 @@ export default function ListaDenunciasPage() {
       setTickets((prev) =>
         prev.map((t) => (t.id === id ? { ...t, ...updated } : t))
       );
-
+      setOriginalTickets((prev) =>
+        prev.map((t) => (t.id === id ? { ...t, ...updated } : t))
+      );
       MySwal.fire({
         toast: true,
         position: "top-end",
@@ -102,18 +146,14 @@ export default function ListaDenunciasPage() {
       confirmButtonText: "Sí, eliminar",
       cancelButtonText: "Cancelar",
     });
-
     if (!result.isConfirmed) return;
-
     setDeletingId(id);
     try {
       const res = await fetch(`/api/denuncias/lista-denuncias/${id}`, {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("Error al eliminar ticket");
-
       setTickets((prev) => prev.filter((t) => t.id !== id));
-
       MySwal.fire({
         toast: true,
         position: "top-end",
@@ -134,8 +174,39 @@ export default function ListaDenunciasPage() {
     }
   };
 
+  // Filtrar tickets
+  const filteredTickets = tickets.filter(
+    (t) =>
+      (t.ticketId.toLowerCase().includes(searchText.toLowerCase()) ||
+        t.mensaje.toLowerCase().includes(searchText.toLowerCase())) &&
+      (filterEstado === "" || t.estado === filterEstado)
+  );
+
+  // Paginación
+  const indexOfLastTicket = currentPage * ticketsPerPage;
+  const indexOfFirstTicket = indexOfLastTicket - ticketsPerPage;
+  const currentTickets = filteredTickets.slice(
+    indexOfFirstTicket,
+    indexOfLastTicket
+  );
+  const totalPages = Math.ceil(filteredTickets.length / ticketsPerPage);
+
+  const getBadgeColor = (estado: string) => {
+    switch (estado) {
+      case "Pendiente":
+        return "bg-yellow-200 text-yellow-800 dark:bg-yellow-700 dark:text-yellow-100";
+      case "En proceso":
+        return "bg-blue-200 text-blue-800 dark:bg-blue-700 dark:text-blue-100";
+      case "Resuelto":
+        return "bg-green-200 text-green-800 dark:bg-green-700 dark:text-green-100";
+      default:
+        return "";
+    }
+  };
+
   return (
     <div className="min-h-screen dark:bg-gray-900">
+      {/* Logo */}
       <section className="relative h-50 flex items-center justify-center">
         <Image
           src="/img/logo-tandem.jpg"
@@ -148,6 +219,7 @@ export default function ListaDenunciasPage() {
       </section>
 
       <div className="container mx-auto px-4 pb-12 pt-4">
+        {/* Título */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-4">
             <Megaphone className="w-8 h-8 text-red-500" />
@@ -159,6 +231,35 @@ export default function ListaDenunciasPage() {
             Aquí puedes visualizar, actualizar el estado y la respuesta de cada
             ticket de denuncia.
           </p>
+        </div>
+
+        {/* Filtros de búsqueda */}
+        <div className="mb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <input
+              type="text"
+              placeholder="Buscar ticket o mensaje..."
+              value={searchText}
+              onChange={(e) => {
+                setSearchText(e.target.value);
+                setCurrentPage(1); // Reset pag 1 al filtrar
+              }}
+              className="p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            />
+            <select
+              value={filterEstado}
+              onChange={(e) => {
+                setFilterEstado(e.target.value);
+                setCurrentPage(1); // Reset pag 1 al filtrar
+              }}
+              className="p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            >
+              <option value="">Todos los estados</option>
+              <option value="Pendiente">Pendiente</option>
+              <option value="En proceso">En proceso</option>
+              <option value="Resuelto">Resuelto</option>
+            </select>
+          </div>
         </div>
 
         <motion.div
@@ -173,7 +274,7 @@ export default function ListaDenunciasPage() {
                 <div className="flex justify-center py-12">
                   <Loader2 className="animate-spin h-8 w-8 text-blue-600" />
                 </div>
-              ) : tickets.length === 0 ? (
+              ) : filteredTickets.length === 0 ? (
                 <p className="text-center text-gray-600 dark:text-gray-300">
                   No hay denuncias registradas.
                 </p>
@@ -201,24 +302,34 @@ export default function ListaDenunciasPage() {
                             <td className="p-3 border-b max-w-xs break-words">
                               {t.mensaje}
                             </td>
-                            <td className="p-3 border-b">
-                              <select
-                                value={t.estado}
-                                onChange={(e) =>
-                                  setTickets((prev) =>
-                                    prev.map((x) =>
-                                      x.id === t.id
-                                        ? { ...x, estado: e.target.value }
-                                        : x
+                            {/* Estado con badge + select centrado */}
+                            <td className="p-3 border-b whitespace-nowrap text-center">
+                              <div className="flex flex-col md:flex-row items-center justify-center gap-2">
+                                <span
+                                  className={`px-2 py-1 rounded-full text-sm font-semibold ${getBadgeColor(
+                                    t.estado
+                                  )}`}
+                                >
+                                  {t.estado}
+                                </span>
+                                <select
+                                  value={t.estado}
+                                  onChange={(e) =>
+                                    setTickets((prev) =>
+                                      prev.map((x) =>
+                                        x.id === t.id
+                                          ? { ...x, estado: e.target.value }
+                                          : x
+                                      )
                                     )
-                                  )
-                                }
-                                className="bg-white dark:bg-gray-700 p-1 rounded border border-gray-300 dark:border-gray-600"
-                              >
-                                <option value="Pendiente">Pendiente</option>
-                                <option value="En proceso">En proceso</option>
-                                <option value="Resuelto">Resuelto</option>
-                              </select>
+                                  }
+                                  className="ml-0 md:ml-2 bg-white dark:bg-gray-700 p-1 rounded border border-gray-300 dark:border-gray-600"
+                                >
+                                  <option value="Pendiente">Pendiente</option>
+                                  <option value="En proceso">En proceso</option>
+                                  <option value="Resuelto">Resuelto</option>
+                                </select>
+                              </div>
                             </td>
                             <td className="p-3 border-b">
                               <textarea
@@ -240,7 +351,7 @@ export default function ListaDenunciasPage() {
                               {new Date(t.createdAt).toLocaleString("es-CL")}
                             </td>
                             <td className="p-3 border-b">
-                              <div className="flex flex-col md:flex-row gap-2">
+                              <div className="flex flex-col md:flex-row gap-2 justify-center">
                                 <Button
                                   size="sm"
                                   onClick={() =>
@@ -249,7 +360,7 @@ export default function ListaDenunciasPage() {
                                       respuesta: t.respuesta,
                                     })
                                   }
-                                  disabled={savingId === t.id}
+                                  disabled={savingId === t.id || !hasChanged(t)}
                                   className="bg-green-600 hover:bg-green-700 text-white flex items-center gap-1 px-3 py-1"
                                 >
                                   {savingId === t.id ? (

@@ -16,6 +16,32 @@ export default function ConsultaTicketPage() {
   const [error, setError] = useState("");
   const [resultado, setResultado] = useState<any>(null);
 
+  const getBadgeColor = (estado: string) => {
+    switch (estado) {
+      case "Pendiente":
+        return "bg-yellow-200 text-yellow-800 dark:bg-yellow-700 dark:text-yellow-100";
+      case "En proceso":
+        return "bg-blue-200 text-blue-800 dark:bg-blue-700 dark:text-blue-100";
+      case "Resuelto":
+        return "bg-green-200 text-green-800 dark:bg-green-700 dark:text-green-100";
+      default:
+        return "";
+    }
+  };
+
+  const getBadgeBorderColor = (estado: string) => {
+    switch (estado) {
+      case "Pendiente":
+        return "border-yellow-400 dark:border-yellow-600";
+      case "En proceso":
+        return "border-blue-400 dark:border-blue-600";
+      case "Resuelto":
+        return "border-green-400 dark:border-green-600";
+      default:
+        return "border-gray-300";
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
@@ -177,7 +203,14 @@ export default function ConsultaTicketPage() {
                     Estado del Ticket {resultado.ticketId}
                   </h2>
                   <p>
-                    <strong>Estado:</strong> {resultado.estado}
+                    <strong>Estado:</strong>{" "}
+                    <span
+                      className={`px-2 py-1 rounded-full text-sm font-semibold border ${getBadgeColor(
+                        resultado.estado
+                      )} ${getBadgeBorderColor(resultado.estado)}`}
+                    >
+                      {resultado.estado}
+                    </span>
                   </p>
                   <p>
                     <strong>Respuesta:</strong>{" "}

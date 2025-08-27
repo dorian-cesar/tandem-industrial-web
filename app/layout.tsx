@@ -15,8 +15,10 @@ const barlow = Barlow_Semi_Condensed({
 
 export const metadata: Metadata = {
   title: "Tandem Industrial - Transporte de Pasajeros",
-  description:
-    "35 años de experiencia en transporte de pasajeros. Movilidad sustentable.",
+  description: "35 años de experiencia en transporte de pasajeros. Movilidad sustentable.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({

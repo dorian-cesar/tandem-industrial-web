@@ -36,6 +36,7 @@ export default function ListaDenunciasPage() {
   const [searchText, setSearchText] = useState("");
   const [filterEstado, setFilterEstado] = useState("");
   const [originalTickets, setOriginalTickets] = useState<Denuncia[]>([]);
+  const [openDialogId, setOpenDialogId] = useState<number | null>(null);
 
   // Paginación
   const [currentPage, setCurrentPage] = useState(1);
@@ -128,6 +129,7 @@ export default function ListaDenunciasPage() {
       setOriginalTickets((prev) =>
         prev.map((t) => (t.id === id ? { ...t, ...updated } : t))
       );
+      setOpenDialogId(null);
       MySwal.fire({
         toast: true,
         position: "top-end",
@@ -347,7 +349,12 @@ export default function ListaDenunciasPage() {
                               </div>
                             </td>
                             <td className="p-3 border-b text-center">
-                              <Dialog>
+                              <Dialog
+                                open={openDialogId === t.id}
+                                onOpenChange={(open) =>
+                                  setOpenDialogId(open ? t.id : null)
+                                }
+                              >
                                 <DialogTrigger asChild>
                                   <Button
                                     size="sm"

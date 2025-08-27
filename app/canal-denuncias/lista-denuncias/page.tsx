@@ -242,7 +242,7 @@ export default function ListaDenunciasPage() {
               value={searchText}
               onChange={(e) => {
                 setSearchText(e.target.value);
-                setCurrentPage(1); // Reset pag 1 al filtrar
+                setCurrentPage(1);
               }}
               className="p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             />
@@ -250,7 +250,7 @@ export default function ListaDenunciasPage() {
               value={filterEstado}
               onChange={(e) => {
                 setFilterEstado(e.target.value);
-                setCurrentPage(1); // Reset pag 1 al filtrar
+                setCurrentPage(1);
               }}
               className="p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             >

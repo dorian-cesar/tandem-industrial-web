@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/dbConnect";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(
   req: Request,
   { params }: { params: { id: string } }
@@ -11,9 +13,7 @@ export async function GET(
       return NextResponse.json({ error: "ID inválido" }, { status: 400 });
     }
 
-    const ticket = await prisma.denuncia.findUnique({
-      where: { id },
-    });
+    const ticket = await prisma.denuncia.findUnique({ where: { id } });
 
     if (!ticket) {
       return NextResponse.json(

@@ -550,7 +550,6 @@ export default function HomePage() {
         </div>
       </section>
       {/* Bottom Image Section */}
-      {/* cambiar h-80 en mobile */}
       <section className="relative h-[130px] md:h-[265px] overflow-hidden">
         <Image
           src="/img/bannerfooter.png"

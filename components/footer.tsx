@@ -133,7 +133,7 @@ export default function Footer() {
           <motion.div className="space-y-8" variants={itemVariants}>
             <motion.div className="flex items-center group">
               <Image
-                src="img/logo-tandem-footer.png"
+                src="/img/logo-tandem-footer.png"
                 alt="Tándem logo"
                 width={300}
                 height={60}

@@ -12,7 +12,7 @@ model Denuncia {
   ticketId  String   @unique
   password  String
   mensaje   String
-  estado    String   @default("pendiente")
+  estado    String   @default("Pendiente")
   respuesta String   @default("")
   createdAt DateTime @default(now())
 }

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import crypto from "crypto";
 import prisma from "@/lib/dbConnect";
+import { v4 as uuidv4 } from "uuid";
 
 // Sanitizar entrada
 function sanitizeInput(input: string): string {
@@ -47,13 +48,12 @@ function createDenunciaTemplate(data: {
   `;
 }
 
-// Generar ticket y password
 function generateTicketId() {
-  return "T-" + Math.floor(100000 + Math.random() * 900000); // ej: T-123456
+  return "T-" + uuidv4().split("-")[0]; 
 }
 
 function generatePassword() {
-  return crypto.randomBytes(4).toString("hex"); // ej: a1b2c3d4
+  return crypto.randomBytes(4).toString("hex");
 }
 
 export async function POST(req: Request) {
@@ -70,9 +70,9 @@ export async function POST(req: Request) {
 
     const sanitizedData = { mensaje: sanitizeInput(mensaje) };
 
-    if (sanitizedData.mensaje.length > 3000) {
+    if (sanitizedData.mensaje.length > 3500) {
       return NextResponse.json(
-        { error: "El mensaje es demasiado largo (máx. 3000 caracteres)" },
+        { error: "El mensaje es demasiado largo (máx. 3500 caracteres)" },
         { status: 400 }
       );
     }
@@ -85,6 +85,7 @@ export async function POST(req: Request) {
     const denuncia = await prisma.denuncia.create({
       data: {
         mensaje: sanitizedData.mensaje,
+        estado: "Pendiente",
         ticketId,
         password,
       },
@@ -111,6 +112,7 @@ export async function POST(req: Request) {
       message: "Reporte registrado correctamente (anónimo)",
       ticketId: denuncia.ticketId,
       password: denuncia.password,
+      estado: denuncia.estado,
     });
   } catch (error) {
     console.error("Error al enviar denuncia:", error);

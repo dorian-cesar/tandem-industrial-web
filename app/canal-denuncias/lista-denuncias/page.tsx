@@ -8,6 +8,14 @@ import { motion, easeOut } from "framer-motion";
 import Image from "next/image";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const MySwal = withReactContent(Swal);
 
@@ -31,7 +39,7 @@ export default function ListaDenunciasPage() {
 
   // Paginación
   const [currentPage, setCurrentPage] = useState(1);
-  const ticketsPerPage = 5;
+  const ticketsPerPage = 10;
 
   useEffect(() => {
     const fetchTickets = async () => {
@@ -338,21 +346,62 @@ export default function ListaDenunciasPage() {
                                 </select>
                               </div>
                             </td>
-                            <td className="p-3 border-b">
-                              <textarea
-                                value={t.respuesta}
-                                onChange={(e) =>
-                                  setTickets((prev) =>
-                                    prev.map((x) =>
-                                      x.id === t.id
-                                        ? { ...x, respuesta: e.target.value }
-                                        : x
-                                    )
-                                  )
-                                }
-                                className="w-full bg-white dark:bg-gray-700 p-1 rounded border border-gray-300 dark:border-gray-600"
-                                rows={3}
-                              />
+                            <td className="p-3 border-b text-center">
+                              <Dialog>
+                                <DialogTrigger asChild>
+                                  <Button
+                                    size="sm"
+                                    className="bg-orange-400 hover:bg-orange-500 text-white"
+                                  >
+                                    Editar respuesta
+                                  </Button>
+                                </DialogTrigger>
+                                <DialogContent className="sm:max-w-lg">
+                                  <DialogHeader>
+                                    <DialogTitle>
+                                      Editar respuesta del ticket {t.ticketId}
+                                    </DialogTitle>
+                                  </DialogHeader>
+                                  <textarea
+                                    value={t.respuesta}
+                                    onChange={(e) =>
+                                      setTickets((prev) =>
+                                        prev.map((x) =>
+                                          x.id === t.id
+                                            ? {
+                                                ...x,
+                                                respuesta: e.target.value,
+                                              }
+                                            : x
+                                        )
+                                      )
+                                    }
+                                    className="w-full bg-white dark:bg-gray-700 p-2 rounded border border-gray-300 dark:border-gray-600"
+                                    rows={5}
+                                  />
+                                  <DialogFooter>
+                                    <Button
+                                      onClick={() =>
+                                        handleUpdate(t.id, {
+                                          estado: t.estado,
+                                          respuesta: t.respuesta,
+                                        })
+                                      }
+                                      disabled={
+                                        savingId === t.id || !hasChanged(t)
+                                      }
+                                      className="bg-green-600 hover:bg-green-700 text-white"
+                                    >
+                                      {savingId === t.id ? (
+                                        <Loader2 className="animate-spin h-4 w-4" />
+                                      ) : (
+                                        <Check className="h-4 w-4 mr-1" />
+                                      )}
+                                      Guardar
+                                    </Button>
+                                  </DialogFooter>
+                                </DialogContent>
+                              </Dialog>
                             </td>
                             <td className="p-3 border-b whitespace-nowrap">
                               {new Date(t.createdAt).toLocaleString("es-CL")}

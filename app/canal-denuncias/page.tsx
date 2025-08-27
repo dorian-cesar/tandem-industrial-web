@@ -18,6 +18,7 @@ export default function CanalDenunciasPage() {
   const [ticketData, setTicketData] = useState<{
     ticketId: string;
     password: string;
+    mensaje?: string;
   } | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -46,7 +47,11 @@ export default function CanalDenunciasPage() {
       }
 
       const data = await res.json();
-      setTicketData({ ticketId: data.ticketId, password: data.password });
+      setTicketData({
+        ticketId: data.ticketId,
+        password: data.password,
+        mensaje: mensaje,
+      });
 
       setSuccess(
         <div className="space-y-2">
@@ -105,25 +110,32 @@ export default function CanalDenunciasPage() {
       doc.setFont("helvetica", "bold");
       doc.setFontSize(14);
       doc.setTextColor("#111827");
-      doc.text(`Número de Ticket:`, 15, 70);
+      doc.text("Número de Ticket:", 15, 70);
       doc.setFont("helvetica", "normal");
       doc.text(ticketData.ticketId, 65, 70);
 
       doc.setFont("helvetica", "bold");
-      doc.text(`Contraseña:`, 15, 80);
+      doc.text("Contraseña:", 15, 80);
       doc.setFont("helvetica", "normal");
       doc.text(ticketData.password, 65, 80);
 
-      // Mensaje de nota
-      doc.setFont("helvetica", "italic");
-      doc.setTextColor("#374151");
-      doc.setFontSize(12);
+      // Nota
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(9);
+      doc.setTextColor("#424d5e");
       doc.text(
         "Guarda estos datos de forma segura. Solo tú podrás consultar el estado de tu denuncia.",
         15,
         100,
         { maxWidth: 180 }
       );
+
+      // Mensaje de la denuncia
+      doc.setFont("helvetica", "italic");
+      doc.setFontSize(12);
+      doc.setTextColor("#111827");
+      doc.text("Mensaje de tu denuncia:", 15, 120);
+      doc.text(ticketData.mensaje || "", 15, 130, { maxWidth: 180 });
 
       // Footer
       doc.setFont("helvetica", "normal");

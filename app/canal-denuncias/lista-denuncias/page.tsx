@@ -189,6 +189,26 @@ export default function ListaDenunciasPage() {
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      const res = await fetch("/api/users/logout", { method: "POST" });
+      if (!res.ok) throw new Error("Error al cerrar sesión");
+
+      // Limpiar storage por seguridad
+      localStorage.removeItem("user");
+      sessionStorage.removeItem("user");
+
+      // Redirigir al login
+      window.location.href = "/login";
+    } catch (err) {
+      MySwal.fire({
+        icon: "error",
+        title: "Error",
+        text: "No se pudo cerrar sesión",
+      });
+    }
+  };
+
   // Filtrar tickets
   const filteredTickets = tickets.filter(
     (t) =>
@@ -248,7 +268,7 @@ export default function ListaDenunciasPage() {
           </p>
         </div>
 
-        {/* Filtros de búsqueda */}
+        {/* Filtros de búsqueda + Logout */}
         <div className="mb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
           <div className="flex items-center gap-2">
             <input
@@ -275,6 +295,14 @@ export default function ListaDenunciasPage() {
               <option value="Resuelto">Resuelto</option>
             </select>
           </div>
+
+          {/* Botón de logout */}
+          <Button
+            onClick={handleLogout}
+            className="bg-red-600 hover:bg-red-700 text-white px-4 py-2"
+          >
+            Logout
+          </Button>
         </div>
 
         <motion.div

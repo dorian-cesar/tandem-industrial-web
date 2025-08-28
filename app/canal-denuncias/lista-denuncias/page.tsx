@@ -392,7 +392,7 @@ export default function ListaDenunciasPage() {
                                     Editar respuesta
                                   </Button>
                                 </DialogTrigger>
-                                <DialogContent className="sm:max-w-lg">
+                                <DialogContent className="sm:max-w-lg bg-blue-100 dark:bg-gray-800">
                                   <DialogHeader>
                                     <DialogTitle>
                                       Editar respuesta del ticket {t.ticketId}
@@ -412,7 +412,7 @@ export default function ListaDenunciasPage() {
                                         )
                                       )
                                     }
-                                    className="w-full bg-white dark:bg-gray-700 p-2 rounded border border-gray-300 dark:border-gray-600"
+                                    className="w-full bg-blue-50 dark:bg-gray-700 p-2 rounded border border-gray-300 dark:border-gray-600"
                                     rows={5}
                                   />
                                   <DialogFooter>

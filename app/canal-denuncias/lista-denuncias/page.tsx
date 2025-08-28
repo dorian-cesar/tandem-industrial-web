@@ -209,9 +209,9 @@ export default function ListaDenunciasPage() {
   const getBadgeColor = (estado: string) => {
     switch (estado) {
       case "Pendiente":
-        return "bg-yellow-200 text-yellow-800 dark:bg-yellow-700 dark:text-yellow-100";
+        return "bg-blue-200 text-blue-800 dark:bg-blue-200 dark:text-blue-600";
       case "En proceso":
-        return "bg-blue-200 text-blue-800 dark:bg-blue-700 dark:text-blue-100";
+        return "bg-blue-800 text-white dark:bg-blue-700 dark:text-blue-100";
       case "Resuelto":
         return "bg-green-200 text-green-800 dark:bg-green-700 dark:text-green-100";
       default:
@@ -358,7 +358,7 @@ export default function ListaDenunciasPage() {
                                 <DialogTrigger asChild>
                                   <Button
                                     size="sm"
-                                    className="bg-orange-400 hover:bg-orange-500 text-white"
+                                    className="bg-orange-500 hover:bg-orange-600 text-white"
                                   >
                                     Editar respuesta
                                   </Button>

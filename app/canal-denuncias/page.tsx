@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -21,6 +21,7 @@ export default function CanalDenunciasPage() {
     mensaje?: string;
   } | null>(null);
   const [loading, setLoading] = useState(false);
+  const [showSecretButton, setShowSecretButton] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -78,6 +79,29 @@ export default function CanalDenunciasPage() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    let pressedKeys: Set<string> = new Set();
+    const handleKeyDown = (e: KeyboardEvent) => {
+      pressedKeys.add(e.key.toLowerCase());
+      if (
+        pressedKeys.has("shift") &&
+        pressedKeys.has("d") &&
+        pressedKeys.has("l")
+      ) {
+        setShowSecretButton(true);
+      }
+    };
+    const handleKeyUp = (e: KeyboardEvent) => {
+      pressedKeys.delete(e.key.toLowerCase());
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+    };
+  }, []);
 
   const descargarPDF = async () => {
     if (!ticketData) return;
@@ -300,6 +324,15 @@ export default function CanalDenunciasPage() {
           </motion.div>
         </div>
       </div>
+      {showSecretButton && (
+        <div className="flex justify-end mt-8">
+          <Link href="/canal-denuncias/lista-denuncias">
+            <Button type="button" className="opacity-0 pointer-events-auto">
+              Denuncias
+            </Button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

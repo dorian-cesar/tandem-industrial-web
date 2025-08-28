@@ -134,7 +134,7 @@ export default function CanalDenunciasPage() {
       doc.setFont("helvetica", "italic");
       doc.setFontSize(12);
       doc.setTextColor("#111827");
-      doc.text("Mensaje de tu denuncia:", 15, 120);
+      doc.text("Mensaje de la denuncia:", 15, 120);
       doc.text(ticketData.mensaje || "", 15, 130, { maxWidth: 180 });
 
       // Footer

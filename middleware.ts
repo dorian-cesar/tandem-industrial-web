@@ -15,7 +15,7 @@ export async function middleware(req: NextRequest) {
 
   console.log("Token encontrado:", token ? "Sí" : "No");
 
-  // ✅ RUTAS PÚBLICAS - Acceso libre sin verificación
+  // RUTAS PÚBLICAS - Acceso libre sin verificación
   if (
     req.nextUrl.pathname.startsWith("/login") ||
     req.nextUrl.pathname.startsWith("/canal-denuncias/ver-estado") ||
@@ -40,7 +40,7 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  // ✅ RUTAS PROTEGIDAS - Requieren autenticación
+  // RUTAS PROTEGIDAS - Requieren autenticación
   if (!token) {
     console.log("No hay token, redirigiendo a login");
     return NextResponse.redirect(new URL("/login", req.url));

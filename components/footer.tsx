@@ -89,7 +89,7 @@ export default function Footer() {
           </motion.div>
 
           {/* Links */}
-          <motion.div className="space-y-6" variants={itemVariants}>
+          <motion.div className="space-y-2" variants={itemVariants}>
             <motion.div whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
               <Link
                 href="/contacto"
@@ -113,6 +113,18 @@ export default function Footer() {
                   <span className="text-2xl">📢</span>
                 </div>
                 <span className="text-lg font-medium">Canal de denuncias</span>
+              </Link>
+            </motion.div>
+
+            <motion.div whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+              <Link
+                href="/certificados"
+                className="flex items-center space-x-4 hover:text-orange-300 transition-colors duration-300 group p-4 rounded-xl hover:bg-white/10"
+              >
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-2xl">📄</span>
+                </div>
+                <span className="text-lg font-medium">Certificados</span>
               </Link>
             </motion.div>
 

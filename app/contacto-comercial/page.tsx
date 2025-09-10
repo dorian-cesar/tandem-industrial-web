@@ -69,7 +69,7 @@ export default function ContactoPage() {
     }
 
     try {
-      const res = await fetch("/api/contacto", {
+      const res = await fetch("/api/contacto-comercial", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -125,7 +125,7 @@ export default function ContactoPage() {
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-4">
             <Handshake className="w-8 h-8 text-orange-500" />
-            <h1 className="text-2xl font-bold text-blue-600">Contacto</h1>
+            <h1 className="text-2xl font-bold text-blue-600">Contacto Comercial</h1>
           </div>
 
           <p className="text-blue-600 dark:text-gray-300">

@@ -89,7 +89,7 @@ export default function NuestrosClientesPage() {
           {/* CTA Button */}
           <div className="text-center">
             <Link
-              href="/contacto"
+              href="/contacto-comercial"
               className="inline-block bg-orange-500 hover:bg-orange-600 text-white px-20 py-3 rounded-2xl text-md font-medium transition-colors"
             >
               Contacto Comercial

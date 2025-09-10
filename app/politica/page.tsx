@@ -79,14 +79,20 @@ export default function PoliticaIntegradaPage() {
         </li>
       </ul>
 
-      <p className="mb-12">
+      <p className="mb-8">
         En <strong>TANDEM S.A.</strong>, trabajamos con convicción para ofrecer
         un servicio de excelencia, con responsabilidad social, conciencia
         ambiental y un compromiso real con la vida y la seguridad de todas las
         personas que transportamos.
       </p>
 
-      <div className="text-right">
+      <div className="text-right overflow-hidden relative">
+        <img
+          src="/img/firma.png"
+          alt="Firma de Enrique Araneda"
+          className="w-60 inline-block relative"
+          style={{ transform: "translateX(55px)" }}
+        />
         <p className="font-semibold">Enrique Araneda González</p>
         <p className="text-sm text-muted-foreground">
           Gerente División Industrial

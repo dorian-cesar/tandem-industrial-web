@@ -55,7 +55,7 @@ export default function NuestrosClientesPage() {
             </h1>
           </div>
 
-          <p className="text-gray-700 mb-12 max-w-4xl">
+          <p className="text-gray-700 mb-12">
             Nuestra amplia cartera de clientes refleja el compromiso constante
             con la excelencia en el servicio. Te invitamos a conocer la
             experiencia Tandem.

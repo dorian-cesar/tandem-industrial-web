@@ -80,7 +80,7 @@ export default function NuestraFlotaPage() {
             <h1 className="text-2xl font-bold text-blue-600">Nuestra Flota</h1>
           </div>
 
-          <p className="text-gray-700 dark:text-gray-300 mb-12 max-w-4xl">
+          <p className="text-gray-700 dark:text-gray-300 mb-12">
             Conoce nuestra moderna flota de vehículos, diseñada para brindar el
             mejor servicio de transporte con tecnología de vanguardia y
             compromiso con la sustentabilidad.

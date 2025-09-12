@@ -9,22 +9,26 @@ export default function CertificadosPage() {
   const certificados = [
     {
       title: "ISO 9001",
-      description: "Gestión de calidad certificada.",
+      description:
+        "Sistema de gestión de calidad certificado, orientado a la mejora continua y satisfacción de nuestros clientes.",
       file: "/pdf/certificado-iso9001.pdf",
     },
     {
       title: "ISO 14001",
-      description: "Compromiso con la gestión ambiental.",
+      description:
+        "Certificación en gestión ambiental, que garantiza prácticas responsables con el medio ambiente y cumplimiento normativo.",
       file: "/pdf/certificado-iso14001.pdf",
     },
     {
       title: "ISO 45001",
-      description: "Seguridad y salud ocupacional.",
+      description:
+        "Certificación en seguridad y salud ocupacional, que protege a nuestros trabajadores y promueve ambientes laborales seguros.",
       file: "/pdf/certificado-iso45001.pdf",
     },
     {
       title: "ISO 39001",
-      description: "Gestión de seguridad vial.",
+      description:
+        "Sistema de gestión de la seguridad vial, orientado a reducir riesgos de accidentes de tránsito y mejorar la movilidad segura.",
       file: "/pdf/certificado-iso39001.pdf",
     },
   ];

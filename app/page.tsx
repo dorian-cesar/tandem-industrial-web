@@ -7,6 +7,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Users, MapPin, Bus, Award, ArrowRight } from "lucide-react";
 import { motion, easeOut, easeInOut } from "framer-motion";
 import { useEffect, useState } from "react";
+import {
+  ConventionalBusIcon,
+  ElectricBusIcon,
+  MiniVanIcon,
+  ExecutiveCarIcon,
+} from "@/components/vehicle-icons";
 
 export default function HomePage() {
   const [counters, setCounters] = useState({
@@ -99,23 +105,23 @@ export default function HomePage() {
   const fleet = [
     {
       title: "Buses Convencionales",
-      image: "/img/busConve.png",
+      icon: ConventionalBusIcon,
       href: "/nuestra-flota",
     },
     {
       title: "Buses Eléctricos",
-      image: "/img/busElectrico.png",
+      icon: ElectricBusIcon,
       href: "/nuestra-flota",
       badge: "/img/btnVerde.png",
     },
     {
       title: "Mini Buses y Van",
-      image: "/img/miniVanBuses.png",
+      icon: MiniVanIcon,
       href: "/nuestra-flota",
     },
     {
       title: "Vehículos menores",
-      image: "/img/vehiMenores.png",
+      icon: ExecutiveCarIcon,
       href: "/nuestra-flota",
       badge: "/img/btnVerde.png",
     },
@@ -149,7 +155,7 @@ export default function HomePage() {
           }
           setCounters((prev) => ({
             ...prev,
-            [stat.key]: Math.floor(start),
+            [stat.key as keyof typeof counters]: Math.floor(start),
           }));
         }, 16);
       });
@@ -351,7 +357,7 @@ export default function HomePage() {
                         {service.images.map((img, idx) => (
                           <Image
                             key={idx}
-                            src={img.src}
+                            src={img.src || "/placeholder.svg"}
                             alt={service.title}
                             width={img.width}
                             height={img.height}
@@ -443,57 +449,54 @@ export default function HomePage() {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            {fleet.map((vehicle, index) => (
-              <motion.div key={index} variants={itemVariants}>
-                <Link href={vehicle.href}>
-                  <Card className="cursor-pointer hover:shadow-2xl transition-all duration-500 relative group border-0 shadow-[0_-4px_12px_rgba(0,0,0,0.15)] overflow-visible bg-white dark:bg-gray-800 dark:border-gray-700 rounded-xl">
-                    {vehicle.badge && (
-                      <motion.div
-                        className="absolute -top-3.5 right-4 z-20 bg-white/70 backdrop-blur-sm rounded-full p-1 shadow-lg"
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ delay: index * 0.1 + 0.5 }}
-                      >
-                        <Image
-                          src={vehicle.badge}
-                          alt="Ícono de vehículo eléctrico"
-                          width={32}
-                          height={32}
-                          className="w-9 h-9"
-                        />
-                      </motion.div>
-                    )}
-                    <CardContent className="p-0">
-                      <div className="relative overflow-hidden">
-                        <Image
-                          src={vehicle.image}
-                          alt={vehicle.title}
-                          width={300}
-                          height={200}
-                          className="w-full h-48 object-cover rounded-t-xl group-hover:scale-105 transition-transform duration-700"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      </div>
-                      <div className="p-6">
-                        <div className="bg-gradient-to-r from-blue-600 to-blue-600 text-white p-4 rounded-xl text-center relative overflow-hidden">
-                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                          <h3 className="font-semibold mb-3 relative z-10">
-                            {vehicle.title}
-                          </h3>
-                          <Button
-                            size="sm"
-                            className="bg-orange-500 hover:bg-orange-600 font-semibold px-6 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 relative z-10 group/btn"
-                          >
-                            Conoce más
-                            <ArrowRight className="ml-2 w-3 h-3 group-hover/btn:translate-x-1 transition-transform" />
-                          </Button>
+            {fleet.map((vehicle, index) => {
+              const VehicleIcon = vehicle.icon;
+              return (
+                <motion.div key={index} variants={itemVariants}>
+                  <Link href={vehicle.href}>
+                    <Card className="cursor-pointer hover:shadow-2xl transition-all duration-500 relative group border-0 shadow-[0_-4px_12px_rgba(0,0,0,0.15)] overflow-visible bg-white dark:bg-gray-800 dark:border-gray-700 rounded-xl">
+                      {vehicle.badge && (
+                        <motion.div
+                          className="absolute -top-3.5 right-4 z-20 bg-white/70 backdrop-blur-sm rounded-full p-1 shadow-lg"
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ delay: index * 0.1 + 0.5 }}
+                        >
+                          <Image
+                            src={vehicle.badge || "/placeholder.svg"}
+                            alt="Ícono de vehículo eléctrico"
+                            width={32}
+                            height={32}
+                            className="w-9 h-9"
+                          />
+                        </motion.div>
+                      )}
+                      <CardContent className="p-0">
+                        <div className="relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-t-xl h-64 flex items-center justify-center group-hover:scale-105 transition-transform duration-700">
+                          <VehicleIcon className="w-full h-full p-4" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              </motion.div>
-            ))}
+                        <div className="p-6">
+                          <div className="bg-gradient-to-r from-blue-600 to-blue-600 text-white p-4 rounded-xl text-center relative overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                            <h3 className="font-semibold mb-3 relative z-10">
+                              {vehicle.title}
+                            </h3>
+                            <Button
+                              size="sm"
+                              className="bg-orange-500 hover:bg-orange-600 font-semibold px-6 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 relative z-10 group/btn"
+                            >
+                              Conoce más
+                              <ArrowRight className="ml-2 w-3 h-3 group-hover/btn:translate-x-1 transition-transform" />
+                            </Button>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </section>

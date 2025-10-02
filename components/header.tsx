@@ -50,11 +50,11 @@ export default function Header() {
               transition={{ duration: 0.2 }}
             >
               <Image
-                src="/img/iconHeader.png"
+                src="/img/logo-tandem-2026.png"
                 alt="Logo Tandem"
-                width={320}
+                width={220}
                 height={60}
-                className="object-contain pr-2 pl-2"
+                className="object-contain pr-2 pl-10"
                 priority
               />
             </motion.div>

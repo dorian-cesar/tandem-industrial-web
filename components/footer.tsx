@@ -147,7 +147,7 @@ export default function Footer() {
               <Image
                 src="/img/logo-blanco-tandem-2026.png"
                 alt="Tándem logo"
-                width={230}
+                width={220}
                 height={60}
                 className="object-contain"
               />

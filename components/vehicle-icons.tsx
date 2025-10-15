@@ -6,9 +6,9 @@ interface VehicleIconProps {
 
 export function ConventionalBusIcon({ className }: VehicleIconProps) {
   return (
-    <div className={className}>
+    <div className={`${className} scale-110`}>
       <Image
-        src="/img/flota-bus.png"
+        src="/img/flota-bus-tandem.png"
         alt="Bus Convencional"
         width={400}
         height={200}
@@ -20,9 +20,9 @@ export function ConventionalBusIcon({ className }: VehicleIconProps) {
 
 export function ElectricBusIcon({ className }: VehicleIconProps) {
   return (
-    <div className={className}>
+    <div className={`${className} scale-110`}>
       <Image
-        src="/img/flota-bus.png"
+        src="/img/flota-bus-tandem.png"
         alt="Bus Eléctrico"
         width={400}
         height={200}
@@ -34,7 +34,7 @@ export function ElectricBusIcon({ className }: VehicleIconProps) {
 
 export function MiniVanIcon({ className }: VehicleIconProps) {
   return (
-    <div className={className}>
+    <div className={`${className} scale-75`}>
       <Image
         src="/img/flota-van.png"
         alt="Mini Bus y Van"
@@ -48,7 +48,7 @@ export function MiniVanIcon({ className }: VehicleIconProps) {
 
 export function ExecutiveCarIcon({ className }: VehicleIconProps) {
   return (
-    <div className={className}>
+    <div className={`${className} scale-75`}>
       <Image
         src="/img/flota-auto.png"
         alt="Vehículos Menores"

@@ -36,7 +36,7 @@ export function MiniVanIcon({ className }: VehicleIconProps) {
   return (
     <div className={`${className} scale-75`}>
       <Image
-        src="/img/flota-van.png"
+        src="/img/flota-van-tandem.png"
         alt="Mini Bus y Van"
         width={380}
         height={200}
@@ -50,7 +50,7 @@ export function ExecutiveCarIcon({ className }: VehicleIconProps) {
   return (
     <div className={`${className} scale-75`}>
       <Image
-        src="/img/flota-auto.png"
+        src="/img/flota-auto-tandem.png"
         alt="Vehículos Menores"
         width={380}
         height={200}

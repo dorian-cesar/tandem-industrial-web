@@ -2,9 +2,10 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { jwtVerify } from "jose";
 
-const JWT_SECRET = process.env.JWT_SECRET;
-if (!JWT_SECRET) throw new Error("JWT_SECRET no está definido");
-const secretKey = new TextEncoder().encode(JWT_SECRET);
+const NEXT_PUBLIC_JWT_SECRET = process.env.NEXT_PUBLIC_JWT_SECRET;
+if (!NEXT_PUBLIC_JWT_SECRET)
+  throw new Error("NEXT_PUBLIC_JWT_SECRET no está definido");
+const secretKey = new TextEncoder().encode(NEXT_PUBLIC_JWT_SECRET);
 
 export async function middleware(req: NextRequest) {
   console.log("Middleware ejecutándose para:", req.nextUrl.pathname);

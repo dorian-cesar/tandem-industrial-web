@@ -164,16 +164,16 @@ export default function CanalDenunciasPage() {
       {/* Hero Section */}
       <section className="relative h-60 flex items-center justify-center">
         <Image
-          src="/img/logo-tandem.jpg"
+          src="/img/logo-tandem-2026.png"
           alt="Logo Tandem"
-          width={180}
-          height={180}
-          className="rounded-full object-cover border-4 border-white shadow-lg mt-8"
+          width={300}
+          height={300}
+          className="object-cover mt-5"
           priority={true}
         />
       </section>
 
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 pt-5 pb-12">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-4">

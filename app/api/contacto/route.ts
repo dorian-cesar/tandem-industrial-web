@@ -215,8 +215,8 @@ export async function POST(req: Request) {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.EMAIL_FROM,
-        pass: process.env.EMAIL_PASS,
+        user: process.env.NEXT_PUBLIC_EMAIL_FROM,
+        pass: process.env.NEXT_PUBLIC_EMAIL_PASS,
       },
     });
 
@@ -225,8 +225,8 @@ export async function POST(req: Request) {
 
     // Enviar email principal
     await transporter.sendMail({
-      from: `"Formulario Web - Tandem Industrial" <${process.env.EMAIL_FROM}>`,
-      to: process.env.EMAIL_TO,
+      from: `"Formulario Web - Tandem Industrial" <${process.env.NEXT_PUBLIC_EMAIL_FROM}>`,
+      to: process.env.NEXT_PUBLIC_EMAIL_TO,
       subject: `🔔 Nuevo contacto de ${sanitizedData.nombre} ${sanitizedData.apellido}`,
       text: `
         NUEVO CONTACTO DESDE EL FORMULARIO WEB
@@ -248,7 +248,7 @@ export async function POST(req: Request) {
 
     // Email de confirmación automática (opcional)
     await transporter.sendMail({
-      from: `"Tandem Industrial" <${process.env.EMAIL_FROM}>`,
+      from: `"Tandem Industrial" <${process.env.NEXT_PUBLIC_EMAIL_FROM}>`,
       to: sanitizedData.email,
       subject: "✅ Hemos recibido tu mensaje - Tandem Industrial",
       html: `

@@ -49,7 +49,7 @@ function createDenunciaTemplate(data: {
 }
 
 function generateTicketId() {
-  return "T-" + uuidv4().split("-")[0]; 
+  return "T-" + uuidv4().split("-")[0];
 }
 
 function generatePassword() {
@@ -95,14 +95,14 @@ export async function POST(req: Request) {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.EMAIL_FROM,
-        pass: process.env.EMAIL_PASS,
+        user: process.env.NEXT_PUBLIC_EMAIL_FROM,
+        pass: process.env.NEXT_PUBLIC_EMAIL_PASS,
       },
     });
 
     await transporter.sendMail({
-      from: `"Canal de Denuncias" <${process.env.EMAIL_FROM}>`,
-      to: process.env.EMAIL_TO,
+      from: `"Canal de Denuncias" <${process.env.NEXT_PUBLIC_EMAIL_FROM}>`,
+      to: process.env.NEXT_PUBLIC_EMAIL_TO,
       subject: `🚨 Nuevo reporte anónimo en Canal de Denuncias`,
       html: createDenunciaTemplate({ ...sanitizedData, ticketId, password }),
     });

@@ -2,8 +2,9 @@ import { NextResponse } from "next/server";
 import { SignJWT } from "jose";
 import prisma from "@/lib/dbConnect";
 
-const JWT_SECRET = process.env.JWT_SECRET;
-if (!JWT_SECRET) throw new Error("JWT_SECRET no está definido");
+const NEXT_PUBLIC_JWT_SECRET = process.env.NEXT_PUBLIC_JWT_SECRET;
+if (!NEXT_PUBLIC_JWT_SECRET)
+  throw new Error("NEXT_PUBLIC_JWT_SECRET no está definido");
 
 export async function POST(req: Request) {
   try {
@@ -26,7 +27,7 @@ export async function POST(req: Request) {
     }
 
     // Crear token JWT con jose
-    const secretKey = new TextEncoder().encode(JWT_SECRET);
+    const secretKey = new TextEncoder().encode(NEXT_PUBLIC_JWT_SECRET);
     const token = await new SignJWT({ id: user.id, email: user.email })
       .setProtectedHeader({ alg: "HS256" })
       .setExpirationTime("7d")

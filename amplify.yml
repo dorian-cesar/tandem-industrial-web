@@ -7,12 +7,11 @@ backend:
         - rm -rf .next
         - rm -rf node_modules/.prisma
         - rm -rf node_modules/@prisma
-        - npm ci
+        - npm install
         - npx prisma generate
 
     build:
       commands:
-        - echo "Starting Next.js build..."
         - npm run build
 
   artifacts:

@@ -1,0 +1,26 @@
+version: 1
+backend:
+  phases:
+    preBuild:
+      commands:
+        - rm -rf node_modules
+        - rm -rf .next
+        - rm -rf node_modules/.prisma
+        - rm -rf node_modules/@prisma
+        - npm ci
+        - npx prisma generate
+
+    build:
+      commands:
+        - echo "Starting Next.js build..."
+        - npm run build
+
+  artifacts:
+    baseDirectory: .next
+    files:
+      - "**/*"
+
+  cache:
+    paths:
+      - node_modules/**/*
+      - .next/cache/**/*

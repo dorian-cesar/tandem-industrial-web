@@ -244,12 +244,12 @@ export default function ListaDenunciasPage() {
       {/* Logo */}
       <section className="relative h-50 flex items-center justify-center">
         <Image
-          src="/img/logo-tandem.jpg"
+          src="/img/logo-tandem-2026.png"
           alt="Logo Tandem"
-          width={180}
-          height={180}
-          className="rounded-full object-cover border-4 border-white shadow-lg mt-8"
-          priority
+          width={300}
+          height={300}
+          className="object-cover mt-16 mb-5"
+          priority={true}
         />
       </section>
 
@@ -380,7 +380,7 @@ export default function ListaDenunciasPage() {
                             <td className="p-3 border-b text-center">
                               <Dialog
                                 open={openDialogId === t.id}
-                                onOpenChange={(open) =>
+                                onOpenChange={(open: boolean) =>
                                   setOpenDialogId(open ? t.id : null)
                                 }
                               >

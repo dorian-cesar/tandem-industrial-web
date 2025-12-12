@@ -84,12 +84,12 @@ export default function ConsultaTicketPage() {
       {/* Hero */}
       <section className="relative h-60 flex items-center justify-center">
         <Image
-          src="/img/logo-tandem.jpg"
+          src="/img/logo-tandem-2026.png"
           alt="Logo Tandem"
-          width={160}
-          height={160}
-          className="rounded-full object-cover border-4 border-white shadow-lg mt-8"
-          priority
+          width={300}
+          height={300}
+          className="object-cover mt-16"
+          priority={true}
         />
       </section>
 

@@ -35,6 +35,7 @@ import {
   Linkedin,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import "./cotizacion-waves.css";
 
 const vehicleTypes = [
   {
@@ -349,13 +350,20 @@ export default function ViajesATuMedidaPage() {
         </div>
       </section>
 
-      {/* Cotizador Dinámico */}
+      {/* Cotizador Dinámico con Wave Background */}
       <section
-        className="bg-background py-16 lg:py-24"
+        className="relative py-16 lg:py-24 min-h-screen flex items-center justify-center overflow-hidden"
         ref={cotizadorRef}
         id="cotizador-form"
       >
-        <div className="mx-auto max-w-7xl px-4">
+        {/* Wave Background */}
+        <div className="absolute left-0 w-full h-full bg-[#3d6aff] shadow-[inset_0_0_50px_rgba(0,0,0,0.5)] transition-all duration-500">
+          <span className="wave-span wave-1" />
+          <span className="wave-span wave-2" />
+          <span className="wave-span wave-3" />
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-7xl px-4 w-full">
           <motion.div
             className="text-center"
             initial={{ opacity: 0, y: 20 }}
@@ -363,7 +371,7 @@ export default function ViajesATuMedidaPage() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+            <h2 className="text-3xl font-bold tracking-tight md:text-4xl dark:text-black">
               Cotizador Dinámico
             </h2>
           </motion.div>

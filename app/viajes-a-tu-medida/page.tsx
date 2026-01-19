@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -30,6 +30,9 @@ import {
   CheckCircle2,
   ChevronRight,
   Phone,
+  Instagram,
+  Facebook,
+  Linkedin,
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -186,7 +189,6 @@ function getRecommendedVehicle(passengers: number) {
   return "Bus";
 }
 
-// Animaciones sutiles para página corporativa
 const fadeInUp = {
   initial: { y: 20, opacity: 0 },
   animate: { y: 0, opacity: 1 },
@@ -217,9 +219,23 @@ export default function ViajesATuMedidaPage() {
   const [subscriptionEmail, setSubscriptionEmail] = useState("");
   const [description, setDescription] = useState("");
 
+  const cotizadorRef = useRef<HTMLDivElement>(null);
+
   const recommendedVehicle = passengers
     ? getRecommendedVehicle(Number.parseInt(passengers))
     : null;
+
+  const scrollToCotizador = () => {
+    if (cotizadorRef.current) {
+      const elementPosition = cotizadorRef.current.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - 30;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  };
 
   return (
     <div>
@@ -323,6 +339,7 @@ export default function ViajesATuMedidaPage() {
               <Button
                 size="lg"
                 className="mt-10 h-14 px-8 text-lg bg-gradient-to-r from-orange-500 to-orange-600 text-white hover:from-orange-600 hover:to-orange-700 shadow-lg shadow-orange-500/30"
+                onClick={scrollToCotizador}
               >
                 Solicitar Cotización
                 <ChevronRight className="ml-2 h-6 w-6" />
@@ -333,7 +350,11 @@ export default function ViajesATuMedidaPage() {
       </section>
 
       {/* Cotizador Dinámico */}
-      <section className="bg-background py-16 lg:py-24">
+      <section
+        className="bg-background py-16 lg:py-24"
+        ref={cotizadorRef}
+        id="cotizador-form"
+      >
         <div className="mx-auto max-w-7xl px-4">
           <motion.div
             className="text-center"
@@ -435,7 +456,7 @@ export default function ViajesATuMedidaPage() {
                     <Input
                       id="email"
                       type="email"
-                      placeholder="tu@email.com"
+                      placeholder="ejemplo@email.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                     />
@@ -469,7 +490,7 @@ export default function ViajesATuMedidaPage() {
                   </Label>
                   <textarea
                     id="description"
-                    className="w-full min-h-[120px] rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="w-full min-h-[80px] rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     placeholder="Describe aquí los detalles adicionales como: necesidades especiales, horarios específicos, paradas intermedias, equipaje especial, requerimientos específicos del vehículo, etc."
                     rows={4}
                     value={description}
@@ -760,6 +781,7 @@ export default function ViajesATuMedidaPage() {
               size="lg"
               variant="secondary"
               className="bg-orange-500 hover:bg-orange-600 text-white"
+              onClick={scrollToCotizador}
             >
               Solicita ahora tu cotización personalizada
               <ChevronRight className="ml-2 h-5 w-5" />
@@ -770,7 +792,7 @@ export default function ViajesATuMedidaPage() {
 
       {/* Suscripción */}
       <section className="bg-primary py-16 lg:py-24">
-        <div className="mx-auto max-w-4xl px-4">
+        <div className="mx-auto max-w-7xl px-4">
           <motion.div
             className="rounded-2xl bg-card p-8 shadow-lg lg:p-12"
             initial={{ opacity: 0, y: 30 }}
@@ -779,11 +801,11 @@ export default function ViajesATuMedidaPage() {
             transition={{ duration: 0.6 }}
           >
             <div className="text-center">
-              <h2 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+              <h2 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl lg:text-4xl">
                 Tienes un compromiso importante y necesitas transporte confiable
                 e inmediato?
               </h2>
-              <p className="mt-4 text-muted-foreground">
+              <p className="mx-auto mt-4 max-w-4xl text-muted-foreground lg:text-lg">
                 Ya sea un evento corporativo, un viaje de estudios o cualquier
                 otra actividad, tenemos la solución perfecta para ti. Cotiza con
                 nosotros y descubre cómo podemos hacer que tu traslado sea
@@ -792,47 +814,111 @@ export default function ViajesATuMedidaPage() {
             </div>
 
             <div className="mt-10 border-t pt-10">
-              <h3 className="text-center text-xl font-semibold text-foreground">
+              <h3 className="text-center text-xl font-semibold text-foreground md:text-2xl">
                 Suscríbete y lleva tu transporte al siguiente nivel
               </h3>
-              <p className="mt-2 text-center text-sm text-muted-foreground">
+              <p className="mx-auto mt-2 max-w-3xl text-center text-sm text-muted-foreground md:text-base">
                 Recibe ofertas exclusivas, consejos para planificar viajes,
                 análisis de tendencias, atención personalizada y recordatorios
                 importantes.
               </p>
 
-              <div className="mx-auto mt-6 flex max-w-md gap-3">
+              <div className="mx-auto mt-6 flex max-w-lg gap-3 lg:max-w-xl">
                 <div className="flex-1">
                   <Input
                     type="email"
                     placeholder="Tu correo electrónico"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full"
+                    value={subscriptionEmail}
+                    onChange={(e) => setSubscriptionEmail(e.target.value)}
+                    className="w-full h-12 text-base"
                   />
                 </div>
-                <Button className="bg-orange-500 hover:bg-orange-600 text-white">
-                  <Send className="h-4 w-4" />
+                <Button className="bg-orange-500 hover:bg-orange-600 text-white h-12 px-6">
+                  <Send className="h-5 w-5 mr-2" />
                   Suscribirse
                 </Button>
               </div>
             </div>
 
-            <div className="mt-10 grid gap-4 border-t pt-10 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-10 grid gap-6 border-t pt-10 sm:grid-cols-2 lg:grid-cols-4">
               {[
-                "Ofertas exclusivas",
-                "Consejos de viaje",
-                "Atención personalizada",
-                "Recordatorios importantes",
-              ].map((item, index) => (
+                {
+                  title: "Ofertas exclusivas",
+                  description: "Descuentos especiales para suscriptores",
+                },
+                {
+                  title: "Consejos de viaje",
+                  description: "Mejores prácticas y recomendaciones",
+                },
+                {
+                  title: "Atención personalizada",
+                  description: "Asesoramiento directo de expertos",
+                },
+                {
+                  title: "Recordatorios importantes",
+                  description: "No pierdas fechas clave",
+                },
+              ].map((item) => (
                 <div
-                  key={item}
-                  className="flex items-center gap-2 text-sm text-muted-foreground"
+                  key={item.title}
+                  className="flex flex-col items-start gap-2 p-4 rounded-lg bg-primary/5 hover:bg-primary/10 transition-colors"
                 >
-                  <CheckCircle2 className="h-5 w-5 text-primary" />
-                  {item}
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                    <span className="font-medium text-foreground">
+                      {item.title}
+                    </span>
+                  </div>
+                  <p className="text-xs text-muted-foreground pl-7">
+                    {item.description}
+                  </p>
                 </div>
               ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Redes Sociales */}
+      <section className="bg-primary pb-16 lg:pb-24">
+        <div className="mx-auto max-w-7xl px-4">
+          <motion.div
+            className="flex flex-col items-center justify-center gap-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <p className="text-sm font-medium text-white">
+              Síguenos en nuestras redes sociales de Tándem Servicios
+            </p>
+            <div className="flex gap-6">
+              <a
+                href="https://www.instagram.com/tandem_servicios/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-orange-500 transition-colors duration-300"
+              >
+                <Instagram className="h-6 w-6" />
+              </a>
+
+              <a
+                href="https://www.facebook.com/tandemserv/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-orange-500 transition-colors duration-300"
+              >
+                <Facebook className="h-6 w-6" />
+              </a>
+
+              <a
+                href="https://www.linkedin.com/company/110718015/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-orange-500 transition-colors duration-300"
+              >
+                <Linkedin className="h-6 w-6" />
+              </a>
             </div>
           </motion.div>
         </div>

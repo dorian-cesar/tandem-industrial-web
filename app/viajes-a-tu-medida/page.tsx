@@ -300,7 +300,7 @@ export default function ViajesATuMedidaPage() {
 
         {/* Hero Content */}
         <div className="relative flex min-h-[80vh] items-center bg-primary">
-          <div className="absolute inset-0 bg-[url('/images/hero-transport.jpg')] bg-cover bg-center opacity-20" />
+          <div className="absolute inset-0 bg-[url('/images/hero-transport.jpg')] bg-cover bg-center opacity-10" />
           <div className="relative mx-auto w-full max-w-7xl px-4 py-12 text-center">
             <motion.h1
               className="text-balance text-5xl font-bold tracking-tight text-primary-foreground md:text-6xl lg:text-7xl"

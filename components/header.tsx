@@ -19,6 +19,7 @@ export default function Header() {
     { name: "Nuestros Servicios", href: "/nuestros-servicios" },
     { name: "Nuestra Flota", href: "/nuestra-flota" },
     { name: "Nuestros Clientes", href: "/nuestros-clientes" },
+    { name: "Viajes a tu medida", href: "/viajes-a-tu-medida" },
     { name: "Contacto", href: "/contacto" },
   ];
 

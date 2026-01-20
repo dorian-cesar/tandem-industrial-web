@@ -303,11 +303,11 @@ export default function ViajesATuMedidaPage() {
         </div>
 
         {/* Hero Content */}
-        <div className="relative flex min-h-[80vh] items-center bg-primary">
+        <div className="relative flex min-h-[80vh] items-center bg-primary dark:bg-slate-900">
           <div className="absolute inset-0 bg-[url('/images/hero-transport.jpg')] bg-cover bg-center opacity-10" />
           <div className="relative mx-auto w-full max-w-7xl px-4 py-12 text-center">
             <motion.h1
-              className="text-balance text-5xl font-bold tracking-tight text-primary-foreground md:text-6xl lg:text-7xl"
+              className="text-balance text-5xl font-bold tracking-tight text-white md:text-6xl lg:text-7xl"
               variants={fadeInUp}
               initial="initial"
               animate="animate"
@@ -315,7 +315,7 @@ export default function ViajesATuMedidaPage() {
               VIAJES A TU MEDIDA
             </motion.h1>
             <motion.p
-              className="mx-auto mt-6 max-w-2xl text-2xl font-medium text-primary-foreground/90"
+              className="mx-auto mt-6 max-w-2xl text-2xl font-medium text-white"
               variants={fadeIn}
               initial="initial"
               animate="animate"
@@ -324,7 +324,7 @@ export default function ViajesATuMedidaPage() {
               Cotiza e inicia tu viaje hoy
             </motion.p>
             <motion.p
-              className="mx-auto mt-6 max-w-3xl text-lg text-primary-foreground/80 lg:text-xl"
+              className="mx-auto mt-6 max-w-3xl text-lg text-white lg:text-xl"
               variants={fadeInUp}
               initial="initial"
               animate="animate"

@@ -137,7 +137,7 @@ export default function TransporteParticularPage() {
 
         {/* Services Navigation */}
         <motion.div
-          className="grid md:grid-cols-4 gap-6 mb-12"
+          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-12"
           variants={containerVariants}
           initial="hidden"
           animate="visible"

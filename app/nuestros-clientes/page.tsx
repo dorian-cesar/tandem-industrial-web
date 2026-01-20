@@ -44,7 +44,7 @@ export default function NuestrosClientesPage() {
   };
 
   return (
-    <div className="">
+    <div className="min-h-screen">
       {/* Hero Section */}
       <section className="bg-white dark:bg-slate-300 py-16">
         <div className="container mx-auto px-4">

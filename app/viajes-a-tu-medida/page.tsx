@@ -374,7 +374,7 @@ export default function ViajesATuMedidaPage() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl font-bold tracking-tight md:text-4xl dark:text-black">
+            <h2 className="text-3xl font-bold tracking-tight md:text-4xl dark:text-foreground">
               Cotizador Dinámico
             </h2>
           </motion.div>
@@ -547,7 +547,7 @@ export default function ViajesATuMedidaPage() {
       </section>
 
       {/* Tipos de Vehículo */}
-      <section className="bg-secondary py-16 lg:py-24">
+      <section className="bg-secondary py-16 lg:py-24 dark:bg-slate-800">
         <div className="mx-auto max-w-7xl px-4">
           <motion.h2
             className="text-center text-3xl font-bold tracking-tight text-foreground md:text-4xl"
@@ -648,7 +648,7 @@ export default function ViajesATuMedidaPage() {
       </section>
 
       {/* Tu transporte a la medida */}
-      <section className="bg-primary py-16 lg:py-24">
+      <section className="bg-primary py-16 lg:py-24 dark:bg-slate-800">
         <div className="mx-auto max-w-7xl px-4">
           <motion.div
             className="grid items-center gap-12 lg:grid-cols-2"
@@ -663,10 +663,10 @@ export default function ViajesATuMedidaPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl font-bold tracking-tight text-primary-foreground md:text-4xl">
+              <h2 className="text-3xl font-bold tracking-tight text-primary-foreground md:text-4xl dark:text-foreground">
                 Tu transporte a la medida, listo para operar
               </h2>
-              <p className="mt-6 text-lg text-primary-foreground/80">
+              <p className="mt-6 text-lg text-primary-foreground/80 dark:text-foreground">
                 Contamos con una flota versátil y lista para operar, diseñada
                 para adaptarse a cualquier tipo de actividad o volumen de
                 pasajeros. Ofrecemos soluciones de arriendo con disponibilidad
@@ -689,30 +689,30 @@ export default function ViajesATuMedidaPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <h3 className="text-xl font-semibold text-primary-foreground">
+              <h3 className="text-xl font-semibold text-primary-foreground dark:text-foreground">
                 Movilidad a tu medida y sin esperas
               </h3>
-              <p className="mt-4 text-primary-foreground/80">
+              <p className="mt-4 text-primary-foreground/80 dark:text-foreground">
                 Disponemos de una flota diversa lista para salir a ruta.
                 Garantizamos el vehículo ideal para cada necesidad con entrega
                 inmediata y total flexibilidad de itinerarios, paradas y
                 horarios.
               </p>
               <div className="mt-6">
-                <h4 className="font-semibold text-primary-foreground">
+                <h4 className="font-semibold text-primary-foreground dark:text-foreground">
                   Nuestra flota
                 </h4>
                 <ul className="mt-4 space-y-2">
                   {fleetList.map((item, index) => (
                     <motion.li
                       key={item}
-                      className="flex items-center gap-2 text-primary-foreground/90"
+                      className="flex items-center gap-2 text-primary-foreground/90 dark:text-foreground"
                       initial={{ opacity: 0, x: -10 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.1 }}
                     >
-                      <CheckCircle2 className="h-5 w-5 text-accent" />
+                      <CheckCircle2 className="h-5 w-5 text-accent dark:text-foreground" />
                       {item}
                     </motion.li>
                   ))}
@@ -767,7 +767,7 @@ export default function ViajesATuMedidaPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-accent py-16 lg:py-24">
+      <section className="bg-accent py-16 lg:py-24 dark:bg-slate-900">
         <motion.div
           className="mx-auto max-w-4xl px-4 text-center"
           initial={{ opacity: 0, y: 30 }}
@@ -802,7 +802,7 @@ export default function ViajesATuMedidaPage() {
       </section>
 
       {/* Suscripción */}
-      <section className="bg-primary py-16 lg:py-24">
+      <section className="bg-primary py-16 lg:py-24 dark:bg-slate-800">
         <div className="mx-auto max-w-7xl px-4">
           <motion.div
             className="rounded-2xl bg-card p-8 shadow-lg lg:p-12"
@@ -891,7 +891,7 @@ export default function ViajesATuMedidaPage() {
       </section>
 
       {/* Redes Sociales */}
-      <section className="bg-primary pb-16 lg:pb-24">
+      <section className="bg-primary pb-16 lg:pb-24 dark:bg-slate-800">
         <div className="mx-auto max-w-7xl px-4">
           <motion.div
             className="flex flex-col items-center justify-center gap-6"

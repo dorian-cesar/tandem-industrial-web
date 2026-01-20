@@ -33,3 +33,12 @@
   background: rgba(255, 255, 255, 0.5);
   animation: wave 30s linear infinite;
 }
+
+.dark .wave-1 {
+  background: rgba(30, 41, 59, 0.9);
+}
+
+.dark .wave-2,
+.dark .wave-3 {
+  background: rgba(30, 41, 59, 0.5);
+}

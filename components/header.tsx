@@ -62,7 +62,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-1">
+          <nav className="hidden xl:flex items-center space-x-1">
             {navigation.map((item, index) => {
               const isActive = pathname === item.href;
               return (
@@ -93,7 +93,7 @@ export default function Header() {
           </nav>
 
           {/* Desktop Theme Toggle + Canal de Denuncias */}
-          <div className="hidden md:flex items-center space-x-2">
+          <div className="hidden xl:flex items-center space-x-2">
             {/* Canal de Denuncias icon */}
             <motion.div
               initial={{ opacity: 0, y: -20 }}
@@ -122,7 +122,7 @@ export default function Header() {
           {/* Mobile menu button */}
           <motion.div
             whileTap={{ scale: 0.95 }}
-            className="md:hidden flex items-center space-x-2"
+            className="xl:hidden flex items-center space-x-2"
           >
             <ThemeToggle />
             <Button
@@ -162,7 +162,7 @@ export default function Header() {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
-              className="md:hidden absolute top-full left-0 right-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border-b border-gray-200 dark:border-gray-700 shadow-lg"
+              className="xl:hidden absolute top-full left-0 right-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border-b border-gray-200 dark:border-gray-700 shadow-lg"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}

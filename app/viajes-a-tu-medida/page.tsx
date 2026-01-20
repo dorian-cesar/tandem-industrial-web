@@ -44,6 +44,7 @@ const vehicleTypes = [
     capacity: "40-50+ pasajeros",
     icon: Bus,
     image: "/images/vehicle-bus.jpg",
+    imagePosition: "object-[50%_55%]",
   },
   {
     name: "Vans",
@@ -51,6 +52,7 @@ const vehicleTypes = [
     capacity: "15 pasajeros",
     icon: Car,
     image: "/images/vehicle-van.jpg",
+    imagePosition: "object-[50%_60%]",
   },
   {
     name: "Taxis Ejecutivos",
@@ -58,6 +60,7 @@ const vehicleTypes = [
     capacity: "1-4 pasajeros",
     icon: Car,
     image: "/images/vehicle-taxi.jpg",
+    imagePosition: "object-[50%_80%]",
   },
 ];
 
@@ -570,7 +573,7 @@ export default function ViajesATuMedidaPage() {
                     <img
                       src={vehicle.image || "/placeholder.svg"}
                       alt={vehicle.name}
-                      className="h-full w-full object-cover"
+                      className={`h-full w-full object-cover ${vehicle.imagePosition}`}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                     <div className="absolute bottom-4 left-4 right-4">

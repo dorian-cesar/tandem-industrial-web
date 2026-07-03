@@ -4,7 +4,8 @@ frontend:
     preBuild:
       commands:
         - npm install -g pnpm
-        - pnpm install --no-frozen-lockfile
+        - pnpm install --no-frozen-lockfile --ignore-scripts
+        - pnpm exec prisma generate
     build:
       commands:
         - pnpm run build

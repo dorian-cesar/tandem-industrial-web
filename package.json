@@ -81,5 +81,14 @@
     "autoprefixer": "^10.4.21",
     "postcss": "^8.4.38",
     "typescript": "^5"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@prisma/client",
+      "@prisma/engines",
+      "core-js",
+      "prisma",
+      "sharp"
+    ]
   }
 }

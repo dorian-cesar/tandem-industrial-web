@@ -114,10 +114,14 @@ export async function POST(req: Request) {
       password: denuncia.password,
       estado: denuncia.estado,
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error al enviar denuncia:", error);
     return NextResponse.json(
-      { error: "No se pudo enviar el reporte. Inténtalo de nuevo." },
+      { 
+        error: "No se pudo enviar el reporte. Inténtalo de nuevo.",
+        details: error?.message || String(error),
+        stack: error?.stack
+      },
       { status: 500 }
     );
   }

@@ -5,6 +5,10 @@ frontend:
       commands:
         - npm install -g pnpm
         - pnpm install --no-frozen-lockfile --ignore-scripts
+        - echo "DATABASE_URL=$DATABASE_URL" >> .env
+        - echo "NEXT_PUBLIC_EMAIL_FROM=$NEXT_PUBLIC_EMAIL_FROM" >> .env
+        - echo "NEXT_PUBLIC_EMAIL_PASS=$NEXT_PUBLIC_EMAIL_PASS" >> .env
+        - echo "NEXT_PUBLIC_EMAIL_TO=$NEXT_PUBLIC_EMAIL_TO" >> .env
         - pnpm exec prisma generate
     build:
       commands:
